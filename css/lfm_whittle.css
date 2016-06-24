@@ -1,0 +1,854 @@
+
+
+
+
+
+/*
+     FILE ARCHIVED ON 3:00:25 Jul 16, 2014 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 18:54:21 Oct 16, 2015.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/* ==========================================================================
+   Whittle page wrappers
+   ========================================================================== */
+
+/* Unique to whittle theme, replaces #page */
+.page-wrapper {
+    margin: 0 auto;
+    min-width: 1000px;
+}
+
+/* Unique to whittle theme, replaces #content */
+/* 1px top padding to prevent collapsing margins */
+.content {
+    max-width: 940px;
+    margin: 0 auto 24px;
+    padding: 1px 19px 18px;
+    background: #fff;
+    border-radius: 0 0 3px 3px;
+    border: 1px solid #ccc;
+    border-top: none;
+
+    /* CATA-421 - disable responsiveness :( */
+    min-width: 940px;
+
+    /* Defense against rogue clickable skins */
+    cursor: default !important;
+}
+
+/* Used for older JS to insert into and use. */
+#page.page-hack {
+    height: 0;
+}
+
+/* ==========================================================================
+   Baseline Whittle styles. Often namespaced with .theme-whittle.
+   ========================================================================== */
+
+/* Stronger button reset */
+button {
+    overflow: visible;
+    font-size: 1em;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    border: none;
+}
+
+/* Highlight abbreviations */
+.help-me {
+    border-bottom: 1px dotted;
+    cursor: help;
+}
+
+.theme-whittle {
+    line-height: 18px;
+}
+
+/*
+ * Example HTML:
+ *
+ * <h2>Title</h2>
+ * <h2><a href="#">Title with link</a></h2>
+ */
+.theme-whittle h2 {
+    font-size: 16px;
+    margin: 18px 0 18px;
+}
+
+/* Override horrible existing h2 styles, still needed in certain modules */
+.theme-whittle .h2Wrapper {
+    padding: 0;
+}
+
+.theme-whittle .h2Wrapper a:hover {
+    text-decoration: underline;
+}
+
+.theme-whittle h3 {
+    margin-bottom: 18px;
+}
+
+/* Links within headings should always match the heading colour */
+.theme-whittle h2 a,
+.theme-whittle h3 a {
+    color: inherit;
+}
+
+.content section,
+.content p,
+.content ul,
+.content ol,
+.ad-mpu.active {
+    margin-bottom: 18px;
+}
+
+.bulleted li,
+.bullet {
+    list-style: disc inside
+}
+
+.bulleted--outside li {
+    list-style-position: outside;
+    margin-left: 20px;
+}
+
+.relative {
+    position: relative;
+}
+
+
+
+/* ==========================================================================
+   Common patterns
+   ========================================================================== */
+
+/* ==========================================================================
+   Split Object
+   ========================================================================== */
+
+/* Absolutely positions left and right elements.
+ * Defaults to 50-50 split
+ * .split needs a defined width and height elsewhere */
+.split {
+    position: relative;
+    display: block;
+}
+
+.split-left,
+.split-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+}
+
+.split-left {
+    left: 0;
+}
+
+.split-right {
+    right: 0;
+}
+
+/* Split 60% 40%
+   ========================================================================== */
+
+.split--60-40 .split-left {
+    width: 60%;
+}
+
+.split--60-40 .split-right {
+    width: 40%;
+}
+
+
+/* ==========================================================================
+   Pagination
+   ========================================================================== */
+
+.whittle-pagination {
+    text-align: right;
+}
+
+.whittle-pagination a,
+.whittle-pagination span {
+    margin-left: 10px;
+}
+
+/* Specificity hack, extends .btn */
+.whittle-pagination .btn.whittle-pagination-selected {
+    font-weight: bold;
+
+    background: #d5d5d5;
+    background-image:      -o-linear-gradient(#d5d5d5, #e8e8e8);
+    background-image:     -ms-linear-gradient(#d5d5d5, #e8e8e8);
+    background-image:    -moz-linear-gradient(#d5d5d5, #e8e8e8);
+    background-image: -webkit-linear-gradient(#d5d5d5, #e8e8e8);
+    background-image:         linear-gradient(#d5d5d5, #e8e8e8);
+
+    box-shadow: rgb(197, 197, 197) 1px 0 0 inset,
+                rgb(197, 197, 197) -1px 0 0 inset,
+                rgb(197, 197, 197) 0 -1px 0 inset,
+                rgba(0, 0, 0, 0.2) 0 1px 4px inset;
+}
+
+/* ==========================================================================
+   User image override
+   ========================================================================== */
+
+.theme-whittle a:hover img.groupImage,
+.theme-whittle a:hover span.groupImage img,
+.theme-whittle a:hover span.userImage img,
+.theme-whittle img.groupImage,
+.theme-whittle span.groupImage img,
+.theme-whittle span.userImage img {
+    padding: 0 !important;
+    border: none;
+    border-radius: 2px;
+}
+
+/* Track lists -- overly specific CSS as a temporary measure
+   ========================================================================== */
+
+.theme-whittle table.tracklist,
+.theme-whittle table.chart {
+    font-size: 13px;
+
+    /* correct table row spacing */
+    border-collapse: separate;
+    border-spacing: 0 3px;
+}
+
+.theme-whittle table.tracklist td,
+.theme-whittle table.chart td {
+    line-height: 18px;
+    border-bottom: none;
+}
+
+.theme-whittle table.chart .subjectCell div {
+    height: 18px;
+}
+
+.theme-whittle .multibuttonCell .lfmMultiButton {
+    margin-top: 1px;
+}
+
+.theme-whittle table.chart td.chartbarCell {
+    width: 300px;
+}
+
+.theme-whittle div.chartbar span {
+    height: 21px;
+}
+
+.theme-whittle .horizontalOptions ul li a,
+.theme-whittle .horizontalOptions ul li span,
+.theme-whittle .horizontalOptions ul li strong {
+    height: 24px;
+    line-height: 24px;
+    font-size: 11px;
+}
+
+.artist-top-tracks .moduleOptions {
+    text-align: left;
+}
+
+.artist-top-tracks .moduleOptions .btn {
+    margin-right: 5px;
+}
+
+/* ==========================================================================
+   Music resource stats
+   ========================================================================== */
+
+.user-image-link .userImage,
+.user-image-link .user-image {
+    width: 40px;
+    height: 40px;
+    display: block;
+    padding: 0;
+}
+
+.music-resource-stats {
+    margin-top: 18px;
+}
+
+.music-resource-stats b {
+    font-size: 22px;
+}
+
+.music-resource-stats ul {
+    margin: 0;
+}
+
+.music-resource-stats .user-image-link {
+    margin-right: 15px;
+}
+
+.music-resource-stats .scrobbles,
+.music-resource-stats .listeners,
+.music-resource-stats .user-scrobbles {
+    float: left;
+    margin-bottom: 18px;
+}
+
+.music-resource-stats .scrobbles,
+.music-resource-stats .user-scrobbles {
+    margin-right: 20px;
+}
+
+.music-resource-stats .listeners {
+    min-width: 40%;
+}
+
+.listener-details {
+    clear: both;
+    position: relative;
+}
+
+.listener-details::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    width: 0;
+    height: 0;
+    border-bottom: 10px solid #eef5fc;
+    border-left: 10px solid #fff;
+    border-right: 10px solid #fff;
+}
+
+.listener-details--spinner {
+    background-image: url('/web/20140716030025/http://cdn.lst.fm/flatness/spinner_big_000000_on_eef5fc.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 32px;
+}
+
+.listener-details--in-library::after {
+    left: 10px;
+}
+
+.listener-details .scrobbling_icon,
+.listener-details .source {
+    display: none;
+}
+
+.listener-details .scrobblesource {
+    text-indent: -9999px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.listener-details .scrobblesource .ss_icon {
+    position: absolute;
+    left: 49px;
+    top: 49px;
+}
+
+
+/* ==========================================================================
+   More of
+   ========================================================================== */
+
+.more-of {
+    height: 150px;
+    color: inherit;
+    border-radius: 3px;
+}
+
+
+a.more-of:hover,
+a.more-of:focus {
+    color: inherit;
+    text-decoration: none;
+}
+
+.more-of h3 {
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.more-of-body {
+    padding: 20px 10px 20px 20px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* More of theme: grey
+   ========================================================================== */
+
+.more-of--grey {
+    background: #eeeeee;
+}
+
+.more-of--grey:hover,
+.more-of--grey:focus {
+    background: #dddddd;
+}
+
+.more-of--grey:active {
+    background: #cccccc;
+}
+
+/* More of theme: blue
+   ========================================================================== */
+
+.more-of--blue {
+    background: #eef5fc;
+}
+
+.more-of--blue:hover,
+.more-of--blue:focus {
+    background: #deebf9;
+}
+
+.more-of--blue:active {
+    background: #cfe2f6;
+}
+
+/* More of theme: dark
+   ========================================================================== */
+
+.more-of--dark {
+    color: #fff;
+    background: #333333;
+}
+
+.more-of--dark p {
+    color: #999;
+}
+
+a.more-of--dark:hover,
+a.more-of--dark:focus {
+    color: #fff;
+}
+
+/* More of: this artist
+   ========================================================================== */
+
+.more-of--artist .more-of-img {
+    border-radius: 0 3px 3px 0;
+}
+
+/* More of: similar artists
+   ========================================================================== */
+
+.more-of-similar-artist {
+    width: 50%;
+    height: 50%;
+    float: left;
+}
+
+.more-of-similar-artist .more-of-img {
+    width: 100%;
+    height: 100%;
+}
+
+/* More of: arrow
+   ========================================================================== */
+
+.more-of-arrow {
+    position: absolute;
+    height: 50%;
+    width: 50%;
+    right: -100%;
+    z-index: 1;
+    bottom: 0;
+    border-bottom-right-radius: 3px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: #0187c5;
+    background-image: url('/web/20140716030025/http://cdn.lst.fm/flatness/responsive/arrow_right_30.png');
+}
+
+a:hover .more-of-arrow,
+a:focus .more-of-arrow {
+    background-color: #0179b1;
+}
+
+a:active .more-of-arrow {
+    background-color: #016c9e;
+}
+
+/* ==========================================================================
+   Tabs
+   ========================================================================== */
+
+.tab {
+    display: inline-block;
+}
+
+.tab--fixed-height {
+    display: table;
+}
+
+.tab a {
+    border-radius: 3px;
+    display: inline-block;
+    padding: 11px 15px;
+    background-color: #eeeeee; /* grey */
+    border: 1px solid #ccc;
+    color: #333;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.tab--fixed-height a {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.tab--chunky a {
+    padding: 18px 30px;
+    font-weight: bold;
+}
+
+.tab a:hover,
+.tab a:focus {
+    background-color: #dddddd;
+    text-decoration: none;
+    color: #333;
+}
+
+.tab a:active {
+    background-color: #cccccc;
+}
+
+.tab--selected a {
+    background-color: #fff;
+    color: #D51007;
+}
+
+.tab--selected a:hover,
+.tab--selected a:focus {
+    background-color: #fff;
+    color: #D51007;
+}
+
+.tab--selected a:active {
+    background-color: #fff;
+}
+
+/* ==========================================================================
+   Tags
+   ========================================================================== */
+
+.tags {
+    display: inline;
+}
+
+.tags li {
+    display: inline;
+}
+
+.tags a,
+.tag a {
+    display: inline-block;
+    color: #fff;
+    padding: 3px 10px;
+    margin-bottom: 6px;
+    background-color: #0187c5;
+    border-radius: 3px;
+    text-transform: lowercase;
+    line-height: 24px;
+    font-size: 12px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 0 inset, rgba(0, 0, 0, 0.1) 0 1px 4px;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.3);
+}
+
+.tags a:focus,
+.tag  a:focus,
+.tags a:hover,
+.tag  a:hover {
+    text-decoration: none;
+    background: #0179b1;
+    color: #fff;
+}
+
+.tags a:active {
+    background: #016ea2;
+}
+
+.add-tag {
+    margin-bottom: 6px;
+}
+
+.more-tags {
+    display: inline-block;
+
+    font-size: 12px;
+    line-height: 24px;
+    text-transform: lowercase;
+
+    padding: 3px 10px 3px 3px;
+    margin-bottom: 6px;
+}
+
+.tags--weighted a:hover,
+.tags--weighted a:focus {
+    text-decoration: underline;
+}
+
+.tags a.tags-weight-0   { background: #68bae0; }
+.tags a.tags-weight-1   { background: #66b9df; }
+.tags a.tags-weight-2   { background: #64b8df; }
+.tags a.tags-weight-3   { background: #62b7de; }
+.tags a.tags-weight-4   { background: #60b6de; }
+.tags a.tags-weight-5   { background: #5eb5dd; }
+.tags a.tags-weight-6   { background: #5cb4dd; }
+.tags a.tags-weight-7   { background: #59b3dc; }
+.tags a.tags-weight-8   { background: #57b2dc; }
+.tags a.tags-weight-9   { background: #55b1db; }
+.tags a.tags-weight-10  { background: #53b0da; }
+.tags a.tags-weight-11  { background: #51afda; }
+.tags a.tags-weight-12  { background: #4faed9; }
+.tags a.tags-weight-13  { background: #4dacd9; }
+.tags a.tags-weight-14  { background: #4babd8; }
+.tags a.tags-weight-15  { background: #49aad8; }
+.tags a.tags-weight-16  { background: #47a9d7; }
+.tags a.tags-weight-17  { background: #45a8d6; }
+.tags a.tags-weight-18  { background: #43a7d6; }
+.tags a.tags-weight-19  { background: #40a6d5; }
+.tags a.tags-weight-20  { background: #3ea5d5; }
+.tags a.tags-weight-21  { background: #3ca4d4; }
+.tags a.tags-weight-22  { background: #3aa3d4; }
+.tags a.tags-weight-23  { background: #38a2d3; }
+.tags a.tags-weight-24  { background: #36a1d3; }
+.tags a.tags-weight-25  { background: #34a0d2; }
+.tags a.tags-weight-26  { background: #329fd1; }
+.tags a.tags-weight-27  { background: #309ed1; }
+.tags a.tags-weight-28  { background: #2e9dd0; }
+.tags a.tags-weight-29  { background: #2c9cd0; }
+.tags a.tags-weight-30  { background: #2a9bcf; }
+.tags a.tags-weight-31  { background: #289acf; }
+.tags a.tags-weight-32  { background: #2599ce; }
+.tags a.tags-weight-33  { background: #2398ce; }
+.tags a.tags-weight-34  { background: #2197cd; }
+.tags a.tags-weight-35  { background: #1f96cc; }
+.tags a.tags-weight-36  { background: #1d95cc; }
+.tags a.tags-weight-37  { background: #1b94cb; }
+.tags a.tags-weight-38  { background: #1992cb; }
+.tags a.tags-weight-39  { background: #1791ca; }
+.tags a.tags-weight-40  { background: #1590ca; }
+.tags a.tags-weight-41  { background: #138fc9; }
+.tags a.tags-weight-42  { background: #118ec8; }
+.tags a.tags-weight-43  { background: #0f8dc8; }
+.tags a.tags-weight-44  { background: #0c8cc7; }
+.tags a.tags-weight-45  { background: #0a8bc7; }
+.tags a.tags-weight-46  { background: #088ac6; }
+.tags a.tags-weight-47  { background: #0689c6; }
+.tags a.tags-weight-48  { background: #0488c5; }
+.tags a.tags-weight-49  { background: #0287c5; }
+.tags a.tags-weight-50  { background: #0086c4; }
+.tags a.tags-weight-51  { background: #0085c3; }
+.tags a.tags-weight-52  { background: #0084c1; }
+.tags a.tags-weight-53  { background: #0083c0; }
+.tags a.tags-weight-54  { background: #0082be; }
+.tags a.tags-weight-55  { background: #0081bd; }
+.tags a.tags-weight-56  { background: #0080bc; }
+.tags a.tags-weight-57  { background: #007fba; }
+.tags a.tags-weight-58  { background: #007eb9; }
+.tags a.tags-weight-59  { background: #007db7; }
+.tags a.tags-weight-60  { background: #007cb6; }
+.tags a.tags-weight-61  { background: #007bb5; }
+.tags a.tags-weight-62  { background: #007ab3; }
+.tags a.tags-weight-63  { background: #007ab2; }
+.tags a.tags-weight-64  { background: #0079b0; }
+.tags a.tags-weight-65  { background: #0078af; }
+.tags a.tags-weight-66  { background: #0077ae; }
+.tags a.tags-weight-67  { background: #0076ac; }
+.tags a.tags-weight-68  { background: #0075ab; }
+.tags a.tags-weight-69  { background: #0074a9; }
+.tags a.tags-weight-70  { background: #0073a8; }
+.tags a.tags-weight-71  { background: #0072a7; }
+.tags a.tags-weight-72  { background: #0071a5; }
+.tags a.tags-weight-73  { background: #0070a4; }
+.tags a.tags-weight-74  { background: #006fa2; }
+.tags a.tags-weight-75  { background: #006ea1; }
+.tags a.tags-weight-76  { background: #006da0; }
+.tags a.tags-weight-77  { background: #006c9e; }
+.tags a.tags-weight-78  { background: #006b9d; }
+.tags a.tags-weight-79  { background: #006a9b; }
+.tags a.tags-weight-80  { background: #00699a; }
+.tags a.tags-weight-81  { background: #006899; }
+.tags a.tags-weight-82  { background: #006797; }
+.tags a.tags-weight-83  { background: #006696; }
+.tags a.tags-weight-84  { background: #006594; }
+.tags a.tags-weight-85  { background: #006493; }
+.tags a.tags-weight-86  { background: #006392; }
+.tags a.tags-weight-87  { background: #006290; }
+.tags a.tags-weight-88  { background: #00628f; }
+.tags a.tags-weight-89  { background: #00618d; }
+.tags a.tags-weight-90  { background: #00608c; }
+.tags a.tags-weight-91  { background: #005f8b; }
+.tags a.tags-weight-92  { background: #005e89; }
+.tags a.tags-weight-93  { background: #005d88; }
+.tags a.tags-weight-94  { background: #005c86; }
+.tags a.tags-weight-95  { background: #005b85; }
+.tags a.tags-weight-96  { background: #005a84; }
+.tags a.tags-weight-97  { background: #005982; }
+.tags a.tags-weight-98  { background: #005881; }
+.tags a.tags-weight-99  { background: #00577f; }
+.tags a.tags-weight-100 { background: #00567e; }
+
+/* ==========================================================================
+   Wiki overrides
+   ========================================================================== */
+
+.theme-whittle #wikiAbstract,
+.theme-whittle div.wiki {
+    margin: 0;
+    line-height: 18px;
+}
+
+/* ==========================================================================
+   Playbutton
+   ========================================================================== */
+
+.track-player {
+    position: relative;
+}
+
+/* html specificity hack to override .btn--primary icon sprite */
+html .iconright.iconright--spotify-track-player:after {
+    margin-top: -32px;
+    width: 64px;
+    height: 64px;
+    background-image: url('/web/20140716030025/http://cdn.lst.fm/flatness/playbutton/1/track_play_spotify.png');
+}
+
+.btn.btn--track-player {
+    width: 100%;
+    height: 64px;
+    padding: 15px 20px 18px 65px;
+}
+
+.track-player h3 {
+    font-weight: normal;
+    margin-bottom: 6px;
+}
+
+.track-player--spotify h3 {
+    margin-top: 7px;
+    margin-bottom: 4px;
+}
+
+.lastfm .track-player--spotify .spotify-inline-play-button {
+    display: block;
+}
+
+.track-player-button,
+.track-player--spotify .spotify-play-icon {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1; /* puts button over the Spotify logo */
+    background-image: url('/web/20140716030025/http://cdn.lst.fm/flatness/playbutton/1/track_play_stop.png');
+    background-repeat: no-repeat;
+}
+
+.track-player-button,
+.track-player--spotify .spotify-play-icon.spotify-play,
+.track-player--spotify .spotify-play-icon.spotify-play:hover {
+    background-position: 0 0;
+}
+
+.js .track-player-button {
+    display: none;
+}
+
+.track-player.is-playing .track-player-button {
+    background-position: 0 -64px;
+}
+
+.track-player--spotify .spotify-play-icon.spotify-pause,
+.track-player--spotify .spotify-play-icon.spotify-pause:hover {
+    background-position: 0 -128px;
+}
+
+.track-player-progress {
+    position: relative;
+    height: 5px;
+    background: #777;
+    margin-right: 3.5em;
+}
+
+.track-player.is-loading .track-player-progress {
+    background-image: url('/web/20140716030025/http://cdn.lst.fm/flatness/playbutton/loading_bar.gif');
+}
+
+.track-player-bar {
+    height: 100%;
+    width: 0;
+    background: #fff;
+}
+
+.track-player-time {
+    position: absolute;
+    right: 20px;
+    bottom: 13px;
+}
+
+.theme-whittle .moduleOptions {
+    color: inherit;
+}
+
+/* ==========================================================================
+   Artist list
+   ========================================================================== */
+
+/* Use nth-child helper classes for legacy browser support */
+.artist-list .item-3n-plus-1 {
+    clear: left;
+}
+
+.artist-list h3 {
+    font-size: 14px;
+}
+
+.artist-list-image {
+    height: 204px;
+    display: block;
+}
+
+.artist-list-image .cover-image {
+    background-position: top;
+}
+
+/* ==========================================================================
+   Social
+   ========================================================================== */
+
+.catalogue-social {
+    background: #eee;
+    margin-bottom: -18px;
+}
+
+/* Social - white button - catalogue overview page overrides (see WEB-19600)
+   ========================================================================== */
+
+.catalogue-social .btn--white {
+    background-color: #fcfcfc;
+}
+
+.catalogue-social .btn--white:hover,
+.catalogue-social .btn--white:focus,
+.catalogue-social .btn--white.is-focused {
+    background-color: #f6f6f6;
+}
+
+.catalogue-social .btn--white:active,
+.catalogue-social .btn--white.is-pressed {
+    background-color: #efefef;
+}

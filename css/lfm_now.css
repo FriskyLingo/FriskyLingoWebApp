@@ -1,0 +1,265 @@
+
+
+
+
+
+/*
+     FILE ARCHIVED ON 13:56:34 Jul 6, 2015 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 18:59:44 Oct 16, 2015.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+body {
+    overflow: hidden;
+    font-size: 14px;
+    background: #000;
+}
+
+.no-content-message {
+    background: #eee;
+    padding: 100px 60px;
+    font-size: 24px;
+    line-height: 48px;
+}
+
+.cssfilters .art-container {
+    -webkit-filter: blur(25px);
+    -moz-filter: blur(25px);
+    filter: blur(25px);
+    opacity: 0.8;
+}
+
+/* Override inline styles when we aren't blurring the background */
+.no-cssfilters .art {
+    background: #333 !important;
+}
+
+/* Position outside of page boundaries, so blurring doesn't show
+   a white border. */
+.art {
+    position: fixed;
+    top:    -40px;
+    bottom: -40px;
+    right:  -40px;
+    left:   -40px;
+    background-size: cover;
+    background-position: center;
+}
+
+.artwork {
+    width: 500px;
+    margin-right: 40px;
+}
+
+.artwork img {
+    width: 500px;
+    max-width: 100%;
+    box-shadow: rgba(0,0,0,0.5) 0 2px 5px;
+}
+
+.track-details-wrapper {
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    color: #fff;
+    text-shadow: rgba(0,0,0,0.3) 0 -1px,
+                 rgba(0,0,0,0.7) 0 0 10px,
+                 rgba(0,0,0,0.3) 0 0 50px;
+}
+
+.track-details {
+    margin: 0 auto;
+    width: 80%;
+    max-width: 1000px;
+}
+
+.now-playing-subtext {
+    font-size: 14px;
+    color: #eee;
+    margin-bottom: 24px;
+    font-weight: normal;
+}
+
+.track-meta {
+    height: 500px;
+    text-align: center;
+}
+
+.track-name {
+    color: #fff;
+    font-size: 50px;
+    line-height: 60px;
+    margin-bottom: 24px;
+    display: inline-block;
+}
+
+.artist-name {
+    color: #fff;
+    font-size: 30px;
+    line-height: 42px;
+}
+
+@media screen and (orientation:landscape) and (max-width: 1000px),
+       screen and (orientation:landscape) and (max-height: 600px) {
+
+    .artwork {
+        width: 400px;
+        height: 400px;
+    }
+
+    .track-meta {
+        height: 400px;
+    }
+
+    .track-name {
+        font-size: 42px;
+        line-height: 54px;
+    }
+
+    .artist-name {
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+}
+
+@media screen and (orientation:landscape) and (max-width: 800px),
+       screen and (orientation:landscape) and (max-height: 500px) {
+
+    .artwork {
+        width: 300px;
+        height: 300px;
+    }
+
+    .track-meta {
+        height: 300px;
+    }
+
+    .track-name {
+        font-size: 36px;
+        line-height: 42px;
+    }
+
+    .artist-name {
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+}
+
+@media screen and (orientation:landscape) and (max-width: 600px),
+       screen and (orientation:landscape) and (max-height: 400px) {
+
+    .artwork {
+        width: 250px;
+        height: 250px;
+    }
+
+    .track-meta {
+        height: 250px;
+    }
+
+    .track-name {
+        font-size: 24px;
+        line-height: 36px;
+    }
+
+}
+
+@media screen and (orientation:landscape) and (max-width: 400px),
+       screen and (orientation:landscape) and (max-height: 300px) {
+
+    .track-details {
+        width: 90%;
+        padding: 0 20px;
+    }
+
+    .artwork {
+        margin-right: 20px;
+    }
+
+    .track-name {
+        font-size: 18px;
+        line-height: 24px;
+        margin-bottom: 12px;
+        font-weight: bold;
+    }
+
+    .artist-name {
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: bold;
+    }
+
+    .now-playing-subtext {
+        margin-bottom: 12px;
+        font-size: 12px;
+    }
+
+}
+
+/* Stop album art floating to left */
+@media screen and (orientation:portrait) {
+
+    .track-meta {
+        overflow: visible;
+        height: 200px;
+    }
+
+    .track-details {
+        width: 90%;
+    }
+
+    .track-details-wrapper > .vertically-center {
+        vertical-align: top;
+    }
+
+    .artwork {
+        float: none;
+        display: block;
+        margin: 42px auto 24px;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .track-meta {
+        height: auto;
+    }
+
+}
+
+@media screen and (orientation:portrait) and (max-width: 400px) {
+
+    .artwork {
+        margin: 12px auto 24px;
+    }
+
+    .track-name {
+        font-size: 18px;
+        line-height: 24px;
+        margin-bottom: 12px;
+        font-weight: bold;
+    }
+
+    .track-name + .now-playing-subtext {
+        display: none;
+    }
+
+    .artist-name {
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: bold;
+    }
+
+    .now-playing-subtext {
+        margin-bottom: 12px;
+        font-size: 12px;
+    }
+
+}
+
+#prof {
+    display: none;
+}
