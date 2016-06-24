@@ -1,0 +1,1528 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QuartersModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="locationTypeId" Type="int" Nullable="false" />
+          <Property Name="code" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="500" />
+          <Property Name="officialDate" Type="date" />
+          <Property Name="lastUpdate" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="lu_LocationType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="shortDescription" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="longDescription" Type="varchar" MaxLength="500" />
+          <Property Name="lastUpdate" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="lu_QuarterType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="shortDescription" Type="varchar" MaxLength="100" />
+          <Property Name="longDescription" Type="varchar" MaxLength="500" />
+          <Property Name="imageFileName" Type="varchar" MaxLength="1000" />
+          <Property Name="lastUpdate" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="NationalSite">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="locationId" Type="int" Nullable="false" />
+          <Property Name="containingLocationId" Type="int" Nullable="false" />
+          <Property Name="lastUpdate" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Quarter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="quarterTypeId" Type="int" Nullable="false" />
+          <Property Name="locationId" Type="int" Nullable="false" />
+          <Property Name="releaseDate" Type="date" />
+          <Property Name="releaseOrder" Type="int" />
+          <Property Name="mintagePhiladelphia" Type="int" />
+          <Property Name="mintageDenver" Type="int" />
+          <Property Name="mintageTotal" Type="int" />
+          <Property Name="elementsDepicted" Type="varchar(max)" />
+          <Property Name="bannerText" Type="varchar" MaxLength="500" />
+          <Property Name="caption1Text" Type="varchar" MaxLength="500" />
+          <Property Name="caption2Text" Type="varchar" MaxLength="500" />
+          <Property Name="engraver" Type="varchar" MaxLength="500" />
+          <Property Name="imageFileName" Type="varchar" MaxLength="1000" />
+          <Property Name="lastUpdate" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="QuarterStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="quarterId" Type="int" Nullable="false" />
+          <Property Name="mintPhiladelphia" Type="tinyint" Nullable="false" />
+          <Property Name="mintDenver" Type="tinyint" Nullable="false" />
+          <Property Name="lastUpdate" Type="smalldatetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Quarters.dbo.User' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="password" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="lastUpdate" Type="smalldatetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Quarters.dbo.vw_Quarters' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_Quarters">
+          <Key>
+            <PropertyRef Name="Quarter_Id" />
+          </Key>
+          <Property Name="Quarter_Id" Type="int" Nullable="false" />
+          <Property Name="Quarter_ReleaseDate" Type="date" />
+          <Property Name="Quarter_ReleaseOrder" Type="int" />
+          <Property Name="Quarter_MintagePhiladelphia" Type="int" />
+          <Property Name="Quarter_MintageDenver" Type="int" />
+          <Property Name="Quarter_MintageTotal" Type="int" />
+          <Property Name="Quarter_ElementsDepicted" Type="varchar(max)" />
+          <Property Name="Quarter_BannerText" Type="varchar" MaxLength="500" />
+          <Property Name="Quarter_Caption1Text" Type="varchar" MaxLength="500" />
+          <Property Name="Quarter_Caption2Text" Type="varchar" MaxLength="500" />
+          <Property Name="Quarter_Engraver" Type="varchar" MaxLength="500" />
+          <Property Name="Quarter_ImageFileName" Type="varchar" MaxLength="1000" />
+          <Property Name="QuarterType_Id" Type="int" />
+          <Property Name="QuarterType_Code" Type="varchar" MaxLength="3" />
+          <Property Name="QuarterType_ShortDescription" Type="varchar" MaxLength="100" />
+          <Property Name="QuarterType_LongDescription" Type="varchar" MaxLength="500" />
+          <Property Name="QuarterType_ImageFileName" Type="varchar" MaxLength="1000" />
+          <Property Name="Location_Id" Type="int" />
+          <Property Name="Location_Code" Type="char" MaxLength="2" />
+          <Property Name="Location_Name" Type="varchar" MaxLength="500" />
+          <Property Name="Location_OfficialDate" Type="date" />
+          <Property Name="ContainingLocation_Id" Type="int" />
+          <Property Name="ContainingLocation_Code" Type="char" MaxLength="2" />
+          <Property Name="ContainingLocation_Name" Type="varchar" MaxLength="500" />
+          <Property Name="LocationType_Id" Type="int" />
+          <Property Name="LocationType_ShortDescription" Type="varchar" MaxLength="3" />
+          <Property Name="LocationType_LongDescription" Type="varchar" MaxLength="500" />
+          <Property Name="QuarterStatus_Id" Type="int" />
+          <Property Name="QuarterStatus_MintPhiladelphia" Type="tinyint" />
+          <Property Name="QuarterStatus_MintDenver" Type="tinyint" />
+        </EntityType>
+        <Association Name="FK__Location__lu_LocationType">
+          <End Role="lu_LocationType" Type="Self.lu_LocationType" Multiplicity="1" />
+          <End Role="Location" Type="Self.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lu_LocationType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Location">
+              <PropertyRef Name="locationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NationalSite__Location__containingLocationId">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="NationalSite" Type="Self.NationalSite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="NationalSite">
+              <PropertyRef Name="containingLocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NationalSite__Location__locationId">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="NationalSite" Type="Self.NationalSite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="NationalSite">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Quarter__Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Quarter" Type="Self.Quarter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Quarter">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Quarter__lu_QuarterType">
+          <End Role="lu_QuarterType" Type="Self.lu_QuarterType" Multiplicity="1" />
+          <End Role="Quarter" Type="Self.Quarter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lu_QuarterType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Quarter">
+              <PropertyRef Name="quarterTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QuarterStatus__Quarter">
+          <End Role="Quarter" Type="Self.Quarter" Multiplicity="1" />
+          <End Role="QuarterStatus" Type="Self.QuarterStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quarter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="QuarterStatus">
+              <PropertyRef Name="quarterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sec_Delete_Location" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Delete_lu_LocationType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Delete_lu_QuarterType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Delete_NationalSite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Delete_Quarter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Delete_QuarterStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Insert_Location" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="locationTypeId" Type="int" Mode="In" />
+          <Parameter Name="code" Type="char" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="officialDate" Type="date" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Insert_lu_LocationType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="shortDescription" Type="varchar" Mode="In" />
+          <Parameter Name="longDescription" Type="varchar" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Insert_lu_QuarterType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="code" Type="varchar" Mode="In" />
+          <Parameter Name="shortDescription" Type="varchar" Mode="In" />
+          <Parameter Name="longDescription" Type="varchar" Mode="In" />
+          <Parameter Name="imageFileName" Type="varchar" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Insert_NationalSite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="locationId" Type="int" Mode="In" />
+          <Parameter Name="containingLocationId" Type="int" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Insert_Quarter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="quarterTypeId" Type="int" Mode="In" />
+          <Parameter Name="locationId" Type="int" Mode="In" />
+          <Parameter Name="releaseDate" Type="date" Mode="In" />
+          <Parameter Name="releaseOrder" Type="int" Mode="In" />
+          <Parameter Name="mintagePhiladelphia" Type="int" Mode="In" />
+          <Parameter Name="mintageDenver" Type="int" Mode="In" />
+          <Parameter Name="mintageTotal" Type="int" Mode="In" />
+          <Parameter Name="elementsDepicted" Type="varchar(max)" Mode="In" />
+          <Parameter Name="bannerText" Type="varchar" Mode="In" />
+          <Parameter Name="caption1Text" Type="varchar" Mode="In" />
+          <Parameter Name="caption2Text" Type="varchar" Mode="In" />
+          <Parameter Name="engraver" Type="varchar" Mode="In" />
+          <Parameter Name="imageFileName" Type="varchar" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Insert_QuarterStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="quarterId" Type="int" Mode="In" />
+          <Parameter Name="mintPhiladelphia" Type="tinyint" Mode="In" />
+          <Parameter Name="mintDenver" Type="tinyint" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Select_Location" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Select_lu_LocationType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Select_lu_QuarterType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Select_NationalSite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Select_Quarter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Select_QuarterStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Select_vw_Quarters" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sec_Update_Location" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="locationTypeId" Type="int" Mode="In" />
+          <Parameter Name="code" Type="char" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="officialDate" Type="date" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Update_lu_LocationType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="shortDescription" Type="varchar" Mode="In" />
+          <Parameter Name="longDescription" Type="varchar" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Update_lu_QuarterType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="code" Type="varchar" Mode="In" />
+          <Parameter Name="shortDescription" Type="varchar" Mode="In" />
+          <Parameter Name="longDescription" Type="varchar" Mode="In" />
+          <Parameter Name="imageFileName" Type="varchar" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Update_NationalSite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="locationId" Type="int" Mode="In" />
+          <Parameter Name="containingLocationId" Type="int" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Update_Quarter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="quarterTypeId" Type="int" Mode="In" />
+          <Parameter Name="locationId" Type="int" Mode="In" />
+          <Parameter Name="releaseDate" Type="date" Mode="In" />
+          <Parameter Name="releaseOrder" Type="int" Mode="In" />
+          <Parameter Name="mintagePhiladelphia" Type="int" Mode="In" />
+          <Parameter Name="mintageDenver" Type="int" Mode="In" />
+          <Parameter Name="mintageTotal" Type="int" Mode="In" />
+          <Parameter Name="elementsDepicted" Type="varchar(max)" Mode="In" />
+          <Parameter Name="bannerText" Type="varchar" Mode="In" />
+          <Parameter Name="caption1Text" Type="varchar" Mode="In" />
+          <Parameter Name="caption2Text" Type="varchar" Mode="In" />
+          <Parameter Name="engraver" Type="varchar" Mode="In" />
+          <Parameter Name="imageFileName" Type="varchar" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Update_QuarterStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="quarterId" Type="int" Mode="In" />
+          <Parameter Name="mintPhiladelphia" Type="tinyint" Mode="In" />
+          <Parameter Name="mintDenver" Type="tinyint" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="QuartersModelStoreContainer">
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lu_LocationType" EntityType="Self.lu_LocationType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lu_QuarterType" EntityType="Self.lu_QuarterType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NationalSite" EntityType="Self.NationalSite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Quarter" EntityType="Self.Quarter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuarterStatus" EntityType="Self.QuarterStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [User].[id] AS [id], 
+    [User].[userId] AS [userId], 
+    [User].[password] AS [password], 
+    [User].[lastUpdate] AS [lastUpdate]
+    FROM [dbo].[User] AS [User]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_Quarters" EntityType="Self.vw_Quarters" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_Quarters].[Quarter_Id] AS [Quarter_Id], 
+    [vw_Quarters].[Quarter_ReleaseDate] AS [Quarter_ReleaseDate], 
+    [vw_Quarters].[Quarter_ReleaseOrder] AS [Quarter_ReleaseOrder], 
+    [vw_Quarters].[Quarter_MintagePhiladelphia] AS [Quarter_MintagePhiladelphia], 
+    [vw_Quarters].[Quarter_MintageDenver] AS [Quarter_MintageDenver], 
+    [vw_Quarters].[Quarter_MintageTotal] AS [Quarter_MintageTotal], 
+    [vw_Quarters].[Quarter_ElementsDepicted] AS [Quarter_ElementsDepicted], 
+    [vw_Quarters].[Quarter_BannerText] AS [Quarter_BannerText], 
+    [vw_Quarters].[Quarter_Caption1Text] AS [Quarter_Caption1Text], 
+    [vw_Quarters].[Quarter_Caption2Text] AS [Quarter_Caption2Text], 
+    [vw_Quarters].[Quarter_Engraver] AS [Quarter_Engraver], 
+    [vw_Quarters].[Quarter_ImageFileName] AS [Quarter_ImageFileName], 
+    [vw_Quarters].[QuarterType_Id] AS [QuarterType_Id], 
+    [vw_Quarters].[QuarterType_Code] AS [QuarterType_Code], 
+    [vw_Quarters].[QuarterType_ShortDescription] AS [QuarterType_ShortDescription], 
+    [vw_Quarters].[QuarterType_LongDescription] AS [QuarterType_LongDescription], 
+    [vw_Quarters].[QuarterType_ImageFileName] AS [QuarterType_ImageFileName], 
+    [vw_Quarters].[Location_Id] AS [Location_Id], 
+    [vw_Quarters].[Location_Code] AS [Location_Code], 
+    [vw_Quarters].[Location_Name] AS [Location_Name], 
+    [vw_Quarters].[Location_OfficialDate] AS [Location_OfficialDate], 
+    [vw_Quarters].[ContainingLocation_Id] AS [ContainingLocation_Id], 
+    [vw_Quarters].[ContainingLocation_Code] AS [ContainingLocation_Code], 
+    [vw_Quarters].[ContainingLocation_Name] AS [ContainingLocation_Name], 
+    [vw_Quarters].[LocationType_Id] AS [LocationType_Id], 
+    [vw_Quarters].[LocationType_ShortDescription] AS [LocationType_ShortDescription], 
+    [vw_Quarters].[LocationType_LongDescription] AS [LocationType_LongDescription], 
+    [vw_Quarters].[QuarterStatus_Id] AS [QuarterStatus_Id], 
+    [vw_Quarters].[QuarterStatus_MintPhiladelphia] AS [QuarterStatus_MintPhiladelphia], 
+    [vw_Quarters].[QuarterStatus_MintDenver] AS [QuarterStatus_MintDenver]
+    FROM [dbo].[vw_Quarters] AS [vw_Quarters]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Location__lu_LocationType" Association="Self.FK__Location__lu_LocationType">
+            <End Role="lu_LocationType" EntitySet="lu_LocationType" />
+            <End Role="Location" EntitySet="Location" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NationalSite__Location__containingLocationId" Association="Self.FK__NationalSite__Location__containingLocationId">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="NationalSite" EntitySet="NationalSite" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NationalSite__Location__locationId" Association="Self.FK__NationalSite__Location__locationId">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="NationalSite" EntitySet="NationalSite" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Quarter__Location" Association="Self.FK__Quarter__Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Quarter" EntitySet="Quarter" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Quarter__lu_QuarterType" Association="Self.FK__Quarter__lu_QuarterType">
+            <End Role="lu_QuarterType" EntitySet="lu_QuarterType" />
+            <End Role="Quarter" EntitySet="Quarter" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QuarterStatus__Quarter" Association="Self.FK__QuarterStatus__Quarter">
+            <End Role="Quarter" EntitySet="Quarter" />
+            <End Role="QuarterStatus" EntitySet="QuarterStatus" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QuartersModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="locationTypeId" Type="Int32" Nullable="false" />
+          <Property Name="code" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="officialDate" Type="DateTime" Precision="0" />
+          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="lu_LocationType" Relationship="Self.FK__Location__lu_LocationType" FromRole="Location" ToRole="lu_LocationType" />
+          <NavigationProperty Name="NationalSites" Relationship="Self.FK__NationalSite__Location__containingLocationId" FromRole="Location" ToRole="NationalSite" />
+          <NavigationProperty Name="NationalSites1" Relationship="Self.FK__NationalSite__Location__locationId" FromRole="Location" ToRole="NationalSite" />
+          <NavigationProperty Name="Quarters" Relationship="Self.FK__Quarter__Location" FromRole="Location" ToRole="Quarter" />
+        </EntityType>
+        <EntityType Name="lu_LocationType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="shortDescription" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="longDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Locations" Relationship="Self.FK__Location__lu_LocationType" FromRole="lu_LocationType" ToRole="Location" />
+        </EntityType>
+        <EntityType Name="NationalSite">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="locationId" Type="Int32" Nullable="false" />
+          <Property Name="containingLocationId" Type="Int32" Nullable="false" />
+          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Location" Relationship="Self.FK__NationalSite__Location__containingLocationId" FromRole="NationalSite" ToRole="Location" />
+          <NavigationProperty Name="Location1" Relationship="Self.FK__NationalSite__Location__locationId" FromRole="NationalSite" ToRole="Location" />
+        </EntityType>
+        <EntityType Name="Quarter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quarterTypeId" Type="Int32" Nullable="false" />
+          <Property Name="locationId" Type="Int32" Nullable="false" />
+          <Property Name="releaseDate" Type="DateTime" Precision="0" />
+          <Property Name="releaseOrder" Type="Int32" />
+          <Property Name="mintagePhiladelphia" Type="Int32" />
+          <Property Name="mintageDenver" Type="Int32" />
+          <Property Name="mintageTotal" Type="Int32" />
+          <Property Name="elementsDepicted" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="bannerText" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="caption1Text" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="caption2Text" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="engraver" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="imageFileName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Location" Relationship="Self.FK__Quarter__Location" FromRole="Quarter" ToRole="Location" />
+          <NavigationProperty Name="QuarterStatus" Relationship="Self.FK__QuarterStatus__Quarter" FromRole="Quarter" ToRole="QuarterStatus" />
+          <NavigationProperty Name="lu_QuarterType" Relationship="QuartersModel.FK__Quarter__lu_QuarterType" FromRole="Quarter" ToRole="lu_QuarterType" />
+        </EntityType>
+        <EntityType Name="QuarterStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quarterId" Type="Int32" Nullable="false" />
+          <Property Name="mintPhiladelphia" Type="Byte" Nullable="false" />
+          <Property Name="mintDenver" Type="Byte" Nullable="false" />
+          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Quarter" Relationship="Self.FK__QuarterStatus__Quarter" FromRole="QuarterStatus" ToRole="Quarter" />
+        </EntityType>
+        <Association Name="FK__Location__lu_LocationType">
+          <End Role="lu_LocationType" Type="Self.lu_LocationType" Multiplicity="1" />
+          <End Role="Location" Type="Self.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lu_LocationType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Location">
+              <PropertyRef Name="locationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NationalSite__Location__containingLocationId">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="NationalSite" Type="Self.NationalSite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="NationalSite">
+              <PropertyRef Name="containingLocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NationalSite__Location__locationId">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="NationalSite" Type="Self.NationalSite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="NationalSite">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Quarter__Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Quarter" Type="Self.Quarter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Quarter">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QuarterStatus__Quarter">
+          <End Role="Quarter" Type="Self.Quarter" Multiplicity="1" />
+          <End Role="QuarterStatus" Type="QuartersModel.QuarterStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quarter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="QuarterStatus">
+              <PropertyRef Name="quarterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuartersContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="lu_LocationType" EntityType="Self.lu_LocationType" />
+          <EntitySet Name="NationalSites" EntityType="Self.NationalSite" />
+          <EntitySet Name="Quarters" EntityType="Self.Quarter" />
+          <EntitySet Name="QuarterStatuses" EntityType="QuartersModel.QuarterStatus" />
+          <AssociationSet Name="FK__Location__lu_LocationType" Association="Self.FK__Location__lu_LocationType">
+            <End Role="lu_LocationType" EntitySet="lu_LocationType" />
+            <End Role="Location" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NationalSite__Location__containingLocationId" Association="Self.FK__NationalSite__Location__containingLocationId">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="NationalSite" EntitySet="NationalSites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NationalSite__Location__locationId" Association="Self.FK__NationalSite__Location__locationId">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="NationalSite" EntitySet="NationalSites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Quarter__Location" Association="Self.FK__Quarter__Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Quarter" EntitySet="Quarters" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QuarterStatus__Quarter" Association="Self.FK__QuarterStatus__Quarter">
+            <End Role="Quarter" EntitySet="Quarters" />
+            <End Role="QuarterStatus" EntitySet="QuarterStatuses" />
+          </AssociationSet>
+          <FunctionImport Name="sec_Delete_Location">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Delete_lu_LocationType">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Delete_lu_QuarterType">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Delete_NationalSite">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Delete_Quarter">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Delete_QuarterStatus">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Insert_Location" ReturnType="Collection(QuartersModel.sec_Insert_Location_Result)">
+            <Parameter Name="locationTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="code" Mode="In" Type="String" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="officialDate" Mode="In" Type="DateTime" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Insert_lu_LocationType" ReturnType="Collection(QuartersModel.sec_Insert_lu_LocationType_Result)">
+            <Parameter Name="shortDescription" Mode="In" Type="String" />
+            <Parameter Name="longDescription" Mode="In" Type="String" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Insert_lu_QuarterType" ReturnType="Collection(QuartersModel.sec_Insert_lu_QuarterType_Result)">
+            <Parameter Name="code" Mode="In" Type="String" />
+            <Parameter Name="shortDescription" Mode="In" Type="String" />
+            <Parameter Name="longDescription" Mode="In" Type="String" />
+            <Parameter Name="imageFileName" Mode="In" Type="String" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Insert_NationalSite" ReturnType="Collection(QuartersModel.sec_Insert_NationalSite_Result)">
+            <Parameter Name="locationId" Mode="In" Type="Int32" />
+            <Parameter Name="containingLocationId" Mode="In" Type="Int32" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Insert_Quarter" ReturnType="Collection(QuartersModel.sec_Insert_Quarter_Result)">
+            <Parameter Name="quarterTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="locationId" Mode="In" Type="Int32" />
+            <Parameter Name="releaseDate" Mode="In" Type="DateTime" />
+            <Parameter Name="releaseOrder" Mode="In" Type="Int32" />
+            <Parameter Name="mintagePhiladelphia" Mode="In" Type="Int32" />
+            <Parameter Name="mintageDenver" Mode="In" Type="Int32" />
+            <Parameter Name="mintageTotal" Mode="In" Type="Int32" />
+            <Parameter Name="elementsDepicted" Mode="In" Type="String" />
+            <Parameter Name="bannerText" Mode="In" Type="String" />
+            <Parameter Name="caption1Text" Mode="In" Type="String" />
+            <Parameter Name="caption2Text" Mode="In" Type="String" />
+            <Parameter Name="engraver" Mode="In" Type="String" />
+            <Parameter Name="imageFileName" Mode="In" Type="String" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Insert_QuarterStatus" ReturnType="Collection(QuartersModel.sec_Insert_QuarterStatus_Result)">
+            <Parameter Name="quarterId" Mode="In" Type="Int32" />
+            <Parameter Name="mintPhiladelphia" Mode="In" Type="Byte" />
+            <Parameter Name="mintDenver" Mode="In" Type="Byte" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Select_Location" ReturnType="Collection(QuartersModel.sec_Select_Location_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Select_lu_LocationType" ReturnType="Collection(QuartersModel.sec_Select_lu_LocationType_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Select_lu_QuarterType" ReturnType="Collection(QuartersModel.sec_Select_lu_QuarterType_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Select_NationalSite" ReturnType="Collection(QuartersModel.sec_Select_NationalSite_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Select_Quarter" ReturnType="Collection(QuartersModel.sec_Select_Quarter_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Select_QuarterStatus" ReturnType="Collection(QuartersModel.sec_Select_QuarterStatus_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Update_Location" ReturnType="Collection(QuartersModel.sec_Update_Location_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="locationTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="code" Mode="In" Type="String" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="officialDate" Mode="In" Type="DateTime" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Update_lu_LocationType" ReturnType="Collection(QuartersModel.sec_Update_lu_LocationType_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="shortDescription" Mode="In" Type="String" />
+            <Parameter Name="longDescription" Mode="In" Type="String" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Update_lu_QuarterType" ReturnType="Collection(QuartersModel.sec_Update_lu_QuarterType_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="code" Mode="In" Type="String" />
+            <Parameter Name="shortDescription" Mode="In" Type="String" />
+            <Parameter Name="longDescription" Mode="In" Type="String" />
+            <Parameter Name="imageFileName" Mode="In" Type="String" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Update_NationalSite" ReturnType="Collection(QuartersModel.sec_Update_NationalSite_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="locationId" Mode="In" Type="Int32" />
+            <Parameter Name="containingLocationId" Mode="In" Type="Int32" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Update_Quarter" ReturnType="Collection(QuartersModel.sec_Update_Quarter_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="quarterTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="locationId" Mode="In" Type="Int32" />
+            <Parameter Name="releaseDate" Mode="In" Type="DateTime" />
+            <Parameter Name="releaseOrder" Mode="In" Type="Int32" />
+            <Parameter Name="mintagePhiladelphia" Mode="In" Type="Int32" />
+            <Parameter Name="mintageDenver" Mode="In" Type="Int32" />
+            <Parameter Name="mintageTotal" Mode="In" Type="Int32" />
+            <Parameter Name="elementsDepicted" Mode="In" Type="String" />
+            <Parameter Name="bannerText" Mode="In" Type="String" />
+            <Parameter Name="caption1Text" Mode="In" Type="String" />
+            <Parameter Name="caption2Text" Mode="In" Type="String" />
+            <Parameter Name="engraver" Mode="In" Type="String" />
+            <Parameter Name="imageFileName" Mode="In" Type="String" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Update_QuarterStatus" ReturnType="Collection(QuartersModel.sec_Update_QuarterStatus_Result)">
+            <Parameter Name="quarterId" Mode="In" Type="Int32" />
+            <Parameter Name="mintPhiladelphia" Mode="In" Type="Byte" />
+            <Parameter Name="mintDenver" Mode="In" Type="Byte" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Select_vw_Quarters" ReturnType="Collection(QuartersModel.sec_Select_vw_Quarters_Result)" />
+          <EntitySet Name="lu_QuarterType" EntityType="QuartersModel.lu_QuarterType" />
+          <EntitySet Name="vw_Quarters" EntityType="QuartersModel.vw_Quarters" />
+          <AssociationSet Name="FK__Quarter__lu_QuarterType" Association="QuartersModel.FK__Quarter__lu_QuarterType">
+            <End Role="lu_QuarterType" EntitySet="lu_QuarterType" />
+            <End Role="Quarter" EntitySet="Quarters" />
+          </AssociationSet>
+          <EntitySet Name="Users" EntityType="QuartersModel.User" />
+        </EntityContainer>
+        <ComplexType Name="sec_Insert_Location_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="locationTypeId" Nullable="false" />
+          <Property Type="String" Name="code" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="officialDate" Nullable="true" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Insert_lu_LocationType_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="shortDescription" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="longDescription" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Insert_lu_QuarterType_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="shortDescription" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="longDescription" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+          <Property Type="String" Name="code" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="imageFileName" Nullable="true" MaxLength="1000" />
+        </ComplexType>
+        <ComplexType Name="sec_Insert_NationalSite_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="locationId" Nullable="false" />
+          <Property Type="Int32" Name="containingLocationId" Nullable="false" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Insert_Quarter_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="quarterTypeId" Nullable="false" />
+          <Property Type="Int32" Name="locationId" Nullable="false" />
+          <Property Type="DateTime" Name="releaseDate" Nullable="true" />
+          <Property Type="Int32" Name="releaseOrder" Nullable="true" />
+          <Property Type="Int32" Name="mintagePhiladelphia" Nullable="true" />
+          <Property Type="Int32" Name="mintageDenver" Nullable="true" />
+          <Property Type="Int32" Name="mintageTotal" Nullable="true" />
+          <Property Type="String" Name="elementsDepicted" Nullable="true" />
+          <Property Type="String" Name="bannerText" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="caption1Text" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="caption2Text" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="engraver" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="imageFileName" Nullable="true" MaxLength="1000" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Insert_QuarterStatus_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="quarterId" Nullable="false" />
+          <Property Type="Byte" Name="mintPhiladelphia" Nullable="false" />
+          <Property Type="Byte" Name="mintDenver" Nullable="false" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Select_Location_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="locationTypeId" Nullable="false" />
+          <Property Type="String" Name="code" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="officialDate" Nullable="true" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Select_lu_LocationType_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="shortDescription" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="longDescription" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Select_lu_QuarterType_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="shortDescription" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="longDescription" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+          <Property Type="String" Name="code" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="imageFileName" Nullable="true" MaxLength="1000" />
+        </ComplexType>
+        <ComplexType Name="sec_Select_NationalSite_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="locationId" Nullable="false" />
+          <Property Type="Int32" Name="containingLocationId" Nullable="false" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Select_Quarter_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="quarterTypeId" Nullable="false" />
+          <Property Type="Int32" Name="locationId" Nullable="false" />
+          <Property Type="DateTime" Name="releaseDate" Nullable="true" />
+          <Property Type="Int32" Name="releaseOrder" Nullable="true" />
+          <Property Type="Int32" Name="mintagePhiladelphia" Nullable="true" />
+          <Property Type="Int32" Name="mintageDenver" Nullable="true" />
+          <Property Type="Int32" Name="mintageTotal" Nullable="true" />
+          <Property Type="String" Name="elementsDepicted" Nullable="true" />
+          <Property Type="String" Name="bannerText" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="caption1Text" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="caption2Text" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="engraver" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="imageFileName" Nullable="true" MaxLength="1000" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Select_QuarterStatus_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="quarterId" Nullable="false" />
+          <Property Type="Byte" Name="mintPhiladelphia" Nullable="false" />
+          <Property Type="Byte" Name="mintDenver" Nullable="false" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Update_Location_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="locationTypeId" Nullable="false" />
+          <Property Type="String" Name="code" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="officialDate" Nullable="true" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Update_lu_LocationType_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="shortDescription" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="longDescription" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Update_lu_QuarterType_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="shortDescription" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="longDescription" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+          <Property Type="String" Name="code" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="imageFileName" Nullable="true" MaxLength="1000" />
+        </ComplexType>
+        <ComplexType Name="sec_Update_NationalSite_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="locationId" Nullable="false" />
+          <Property Type="Int32" Name="containingLocationId" Nullable="false" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Update_Quarter_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="quarterTypeId" Nullable="false" />
+          <Property Type="Int32" Name="locationId" Nullable="false" />
+          <Property Type="DateTime" Name="releaseDate" Nullable="true" />
+          <Property Type="Int32" Name="releaseOrder" Nullable="true" />
+          <Property Type="Int32" Name="mintagePhiladelphia" Nullable="true" />
+          <Property Type="Int32" Name="mintageDenver" Nullable="true" />
+          <Property Type="Int32" Name="mintageTotal" Nullable="true" />
+          <Property Type="String" Name="elementsDepicted" Nullable="true" />
+          <Property Type="String" Name="bannerText" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="caption1Text" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="caption2Text" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="engraver" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="imageFileName" Nullable="true" MaxLength="1000" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Update_QuarterStatus_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="quarterId" Nullable="false" />
+          <Property Type="Byte" Name="mintPhiladelphia" Nullable="false" />
+          <Property Type="Byte" Name="mintDenver" Nullable="false" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Select_vw_Quarters_Result">
+          <Property Type="Int32" Name="Quarter_Id" Nullable="false" />
+          <Property Type="DateTime" Name="Quarter_ReleaseDate" Nullable="true" />
+          <Property Type="Int32" Name="Quarter_ReleaseOrder" Nullable="true" />
+          <Property Type="Int32" Name="Quarter_MintagePhiladelphia" Nullable="true" />
+          <Property Type="Int32" Name="Quarter_MintageDenver" Nullable="true" />
+          <Property Type="Int32" Name="Quarter_MintageTotal" Nullable="true" />
+          <Property Type="String" Name="Quarter_ElementsDepicted" Nullable="true" />
+          <Property Type="String" Name="Quarter_BannerText" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Quarter_Caption1Text" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Quarter_Caption2Text" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Quarter_Engraver" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Quarter_ImageFileName" Nullable="true" MaxLength="1000" />
+          <Property Type="Int32" Name="QuarterType_Id" Nullable="true" />
+          <Property Type="String" Name="QuarterType_ShortDescription" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="QuarterType_LongDescription" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="Location_Id" Nullable="true" />
+          <Property Type="String" Name="Location_Code" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="Location_Name" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="Location_OfficialDate" Nullable="true" />
+          <Property Type="Int32" Name="ContainingLocation_Id" Nullable="true" />
+          <Property Type="String" Name="ContainingLocation_Code" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="ContainingLocation_Name" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="LocationType_Id" Nullable="true" />
+          <Property Type="String" Name="LocationType_ShortDescription" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="LocationType_LongDescription" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="QuarterStatus_Id" Nullable="true" />
+          <Property Type="Byte" Name="QuarterStatus_MintPhiladelphia" Nullable="true" />
+          <Property Type="Byte" Name="QuarterStatus_MintDenver" Nullable="true" />
+          <Property Type="String" Name="QuarterType_Code" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="QuarterType_ImageFileName" Nullable="true" MaxLength="1000" />
+        </ComplexType>
+        <EntityType Name="lu_QuarterType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="shortDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="longDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="imageFileName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Quarters" Relationship="QuartersModel.FK__Quarter__lu_QuarterType" FromRole="lu_QuarterType" ToRole="Quarter" />
+        </EntityType>
+        <EntityType Name="vw_Quarters">
+          <Key>
+            <PropertyRef Name="Quarter_Id" />
+          </Key>
+          <Property Name="Quarter_Id" Type="Int32" Nullable="false" />
+          <Property Name="Quarter_ReleaseDate" Type="DateTime" Precision="0" />
+          <Property Name="Quarter_ReleaseOrder" Type="Int32" />
+          <Property Name="Quarter_MintagePhiladelphia" Type="Int32" />
+          <Property Name="Quarter_MintageDenver" Type="Int32" />
+          <Property Name="Quarter_MintageTotal" Type="Int32" />
+          <Property Name="Quarter_ElementsDepicted" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Quarter_BannerText" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Quarter_Caption1Text" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Quarter_Caption2Text" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Quarter_Engraver" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Quarter_ImageFileName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="QuarterType_Id" Type="Int32" />
+          <Property Name="QuarterType_Code" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="QuarterType_ShortDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="QuarterType_LongDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="QuarterType_ImageFileName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Location_Id" Type="Int32" />
+          <Property Name="Location_Code" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="Location_Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Location_OfficialDate" Type="DateTime" Precision="0" />
+          <Property Name="ContainingLocation_Id" Type="Int32" />
+          <Property Name="ContainingLocation_Code" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="ContainingLocation_Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="LocationType_Id" Type="Int32" />
+          <Property Name="LocationType_ShortDescription" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="LocationType_LongDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="QuarterStatus_Id" Type="Int32" />
+          <Property Name="QuarterStatus_MintPhiladelphia" Type="Byte" />
+          <Property Name="QuarterStatus_MintDenver" Type="Byte" />
+        </EntityType>
+        <Association Name="FK__Quarter__lu_QuarterType">
+          <End Type="QuartersModel.lu_QuarterType" Role="lu_QuarterType" Multiplicity="1" />
+          <End Type="QuartersModel.Quarter" Role="Quarter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lu_QuarterType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Quarter">
+              <PropertyRef Name="quarterTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="password" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QuartersModelStoreContainer" CdmEntityContainer="QuartersContext">
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="QuartersModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="locationTypeId" ColumnName="locationTypeId" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="officialDate" ColumnName="officialDate" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="QuartersModel.Location">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="QuartersModel.Store.sec_Insert_Location">
+                  <ScalarProperty Name="lastUpdate" ParameterName="lastUpdate" />
+                  <ScalarProperty Name="officialDate" ParameterName="officialDate" />
+                  <ScalarProperty Name="name" ParameterName="name" />
+                  <ScalarProperty Name="code" ParameterName="code" />
+                  <ScalarProperty Name="locationTypeId" ParameterName="locationTypeId" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="QuartersModel.Store.sec_Update_Location">
+                  <ScalarProperty Name="lastUpdate" ParameterName="lastUpdate" Version="Current" />
+                  <ScalarProperty Name="officialDate" ParameterName="officialDate" Version="Current" />
+                  <ScalarProperty Name="name" ParameterName="name" Version="Current" />
+                  <ScalarProperty Name="code" ParameterName="code" Version="Current" />
+                  <ScalarProperty Name="locationTypeId" ParameterName="locationTypeId" Version="Current" />
+                  <ScalarProperty Name="id" ParameterName="id" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="QuartersModel.Store.sec_Delete_Location">
+                  <ScalarProperty Name="id" ParameterName="id" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lu_LocationType">
+            <EntityTypeMapping TypeName="QuartersModel.lu_LocationType">
+              <MappingFragment StoreEntitySet="lu_LocationType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="shortDescription" ColumnName="shortDescription" />
+                <ScalarProperty Name="longDescription" ColumnName="longDescription" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="QuartersModel.lu_LocationType">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="QuartersModel.Store.sec_Insert_lu_LocationType">
+                  <ScalarProperty Name="lastUpdate" ParameterName="lastUpdate" />
+                  <ScalarProperty Name="longDescription" ParameterName="longDescription" />
+                  <ScalarProperty Name="shortDescription" ParameterName="shortDescription" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="QuartersModel.Store.sec_Update_lu_LocationType">
+                  <ScalarProperty Name="lastUpdate" ParameterName="lastUpdate" Version="Current" />
+                  <ScalarProperty Name="longDescription" ParameterName="longDescription" Version="Current" />
+                  <ScalarProperty Name="shortDescription" ParameterName="shortDescription" Version="Current" />
+                  <ScalarProperty Name="id" ParameterName="id" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="QuartersModel.Store.sec_Delete_lu_LocationType">
+                  <ScalarProperty Name="id" ParameterName="id" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NationalSites">
+            <EntityTypeMapping TypeName="QuartersModel.NationalSite">
+              <MappingFragment StoreEntitySet="NationalSite">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="containingLocationId" ColumnName="containingLocationId" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="QuartersModel.NationalSite">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="QuartersModel.Store.sec_Insert_NationalSite">
+                  <ScalarProperty Name="lastUpdate" ParameterName="lastUpdate" />
+                  <ScalarProperty Name="containingLocationId" ParameterName="containingLocationId" />
+                  <ScalarProperty Name="locationId" ParameterName="locationId" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="QuartersModel.Store.sec_Update_NationalSite">
+                  <ScalarProperty Name="lastUpdate" ParameterName="lastUpdate" Version="Current" />
+                  <ScalarProperty Name="containingLocationId" ParameterName="containingLocationId" Version="Current" />
+                  <ScalarProperty Name="locationId" ParameterName="locationId" Version="Current" />
+                  <ScalarProperty Name="id" ParameterName="id" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="QuartersModel.Store.sec_Delete_NationalSite">
+                  <ScalarProperty Name="id" ParameterName="id" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quarters">
+            <EntityTypeMapping TypeName="QuartersModel.Quarter">
+              <MappingFragment StoreEntitySet="Quarter">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="quarterTypeId" ColumnName="quarterTypeId" />
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="releaseDate" ColumnName="releaseDate" />
+                <ScalarProperty Name="releaseOrder" ColumnName="releaseOrder" />
+                <ScalarProperty Name="mintagePhiladelphia" ColumnName="mintagePhiladelphia" />
+                <ScalarProperty Name="mintageDenver" ColumnName="mintageDenver" />
+                <ScalarProperty Name="mintageTotal" ColumnName="mintageTotal" />
+                <ScalarProperty Name="elementsDepicted" ColumnName="elementsDepicted" />
+                <ScalarProperty Name="bannerText" ColumnName="bannerText" />
+                <ScalarProperty Name="caption1Text" ColumnName="caption1Text" />
+                <ScalarProperty Name="caption2Text" ColumnName="caption2Text" />
+                <ScalarProperty Name="engraver" ColumnName="engraver" />
+                <ScalarProperty Name="imageFileName" ColumnName="imageFileName" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="QuartersModel.Quarter">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="QuartersModel.Store.sec_Insert_Quarter">
+                  <ScalarProperty Name="lastUpdate" ParameterName="lastUpdate" />
+                  <ScalarProperty Name="imageFileName" ParameterName="imageFileName" />
+                  <ScalarProperty Name="engraver" ParameterName="engraver" />
+                  <ScalarProperty Name="caption2Text" ParameterName="caption2Text" />
+                  <ScalarProperty Name="caption1Text" ParameterName="caption1Text" />
+                  <ScalarProperty Name="bannerText" ParameterName="bannerText" />
+                  <ScalarProperty Name="elementsDepicted" ParameterName="elementsDepicted" />
+                  <ScalarProperty Name="mintageTotal" ParameterName="mintageTotal" />
+                  <ScalarProperty Name="mintageDenver" ParameterName="mintageDenver" />
+                  <ScalarProperty Name="mintagePhiladelphia" ParameterName="mintagePhiladelphia" />
+                  <ScalarProperty Name="releaseOrder" ParameterName="releaseOrder" />
+                  <ScalarProperty Name="releaseDate" ParameterName="releaseDate" />
+                  <ScalarProperty Name="locationId" ParameterName="locationId" />
+                  <ScalarProperty Name="quarterTypeId" ParameterName="quarterTypeId" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="QuartersModel.Store.sec_Update_Quarter">
+                  <ScalarProperty Name="lastUpdate" ParameterName="lastUpdate" Version="Current" />
+                  <ScalarProperty Name="imageFileName" ParameterName="imageFileName" Version="Current" />
+                  <ScalarProperty Name="engraver" ParameterName="engraver" Version="Current" />
+                  <ScalarProperty Name="caption2Text" ParameterName="caption2Text" Version="Current" />
+                  <ScalarProperty Name="caption1Text" ParameterName="caption1Text" Version="Current" />
+                  <ScalarProperty Name="bannerText" ParameterName="bannerText" Version="Current" />
+                  <ScalarProperty Name="elementsDepicted" ParameterName="elementsDepicted" Version="Current" />
+                  <ScalarProperty Name="mintageTotal" ParameterName="mintageTotal" Version="Current" />
+                  <ScalarProperty Name="mintageDenver" ParameterName="mintageDenver" Version="Current" />
+                  <ScalarProperty Name="mintagePhiladelphia" ParameterName="mintagePhiladelphia" Version="Current" />
+                  <ScalarProperty Name="releaseOrder" ParameterName="releaseOrder" Version="Current" />
+                  <ScalarProperty Name="releaseDate" ParameterName="releaseDate" Version="Current" />
+                  <ScalarProperty Name="locationId" ParameterName="locationId" Version="Current" />
+                  <ScalarProperty Name="quarterTypeId" ParameterName="quarterTypeId" Version="Current" />
+                  <ScalarProperty Name="id" ParameterName="id" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="QuartersModel.Store.sec_Delete_Quarter">
+                  <ScalarProperty Name="id" ParameterName="id" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuarterStatuses">
+            <EntityTypeMapping TypeName="QuartersModel.QuarterStatus">
+              <MappingFragment StoreEntitySet="QuarterStatus">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="quarterId" ColumnName="quarterId" />
+                <ScalarProperty Name="mintPhiladelphia" ColumnName="mintPhiladelphia" />
+                <ScalarProperty Name="mintDenver" ColumnName="mintDenver" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="QuartersModel.QuarterStatus">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="QuartersModel.Store.sec_Insert_QuarterStatus">
+                  <ScalarProperty Name="lastUpdate" ParameterName="lastUpdate" />
+                  <ScalarProperty Name="mintDenver" ParameterName="mintDenver" />
+                  <ScalarProperty Name="mintPhiladelphia" ParameterName="mintPhiladelphia" />
+                  <ScalarProperty Name="quarterId" ParameterName="quarterId" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="QuartersModel.Store.sec_Update_QuarterStatus">
+                  <ScalarProperty Name="lastUpdate" ParameterName="lastUpdate" Version="Current" />
+                  <ScalarProperty Name="mintDenver" ParameterName="mintDenver" Version="Current" />
+                  <ScalarProperty Name="mintPhiladelphia" ParameterName="mintPhiladelphia" Version="Current" />
+                  <ScalarProperty Name="quarterId" ParameterName="quarterId" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="QuartersModel.Store.sec_Delete_QuarterStatus">
+                  <ScalarProperty Name="id" ParameterName="id" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sec_Delete_Location" FunctionName="QuartersModel.Store.sec_Delete_Location" />
+          <FunctionImportMapping FunctionImportName="sec_Delete_lu_LocationType" FunctionName="QuartersModel.Store.sec_Delete_lu_LocationType" />
+          <FunctionImportMapping FunctionImportName="sec_Delete_lu_QuarterType" FunctionName="QuartersModel.Store.sec_Delete_lu_QuarterType" />
+          <FunctionImportMapping FunctionImportName="sec_Delete_NationalSite" FunctionName="QuartersModel.Store.sec_Delete_NationalSite" />
+          <FunctionImportMapping FunctionImportName="sec_Delete_Quarter" FunctionName="QuartersModel.Store.sec_Delete_Quarter" />
+          <FunctionImportMapping FunctionImportName="sec_Delete_QuarterStatus" FunctionName="QuartersModel.Store.sec_Delete_QuarterStatus" />
+          <FunctionImportMapping FunctionImportName="sec_Insert_Location" FunctionName="QuartersModel.Store.sec_Insert_Location">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuartersModel.sec_Insert_Location_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="locationTypeId" ColumnName="locationTypeId" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="officialDate" ColumnName="officialDate" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Insert_lu_LocationType" FunctionName="QuartersModel.Store.sec_Insert_lu_LocationType">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuartersModel.sec_Insert_lu_LocationType_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="shortDescription" ColumnName="shortDescription" />
+                <ScalarProperty Name="longDescription" ColumnName="longDescription" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Insert_lu_QuarterType" FunctionName="QuartersModel.Store.sec_Insert_lu_QuarterType">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuartersModel.sec_Insert_lu_QuarterType_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="shortDescription" ColumnName="shortDescription" />
+                <ScalarProperty Name="longDescription" ColumnName="longDescription" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="imageFileName" ColumnName="imageFileName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Insert_NationalSite" FunctionName="QuartersModel.Store.sec_Insert_NationalSite">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuartersModel.sec_Insert_NationalSite_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="containingLocationId" ColumnName="containingLocationId" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Insert_Quarter" FunctionName="QuartersModel.Store.sec_Insert_Quarter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuartersModel.sec_Insert_Quarter_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="quarterTypeId" ColumnName="quarterTypeId" />
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="releaseDate" ColumnName="releaseDate" />
+                <ScalarProperty Name="releaseOrder" ColumnName="releaseOrder" />
+                <ScalarProperty Name="mintagePhiladelphia" ColumnName="mintagePhiladelphia" />
+                <ScalarProperty Name="mintageDenver" ColumnName="mintageDenver" />
+                <ScalarProperty Name="mintageTotal" ColumnName="mintageTotal" />
+                <ScalarProperty Name="elementsDepicted" ColumnName="elementsDepicted" />
+                <ScalarProperty Name="bannerText" ColumnName="bannerText" />
+                <ScalarProperty Name="caption1Text" ColumnName="caption1Text" />
+                <ScalarProperty Name="caption2Text" ColumnName="caption2Text" />
+                <ScalarProperty Name="engraver" ColumnName="engraver" />
+                <ScalarProperty Name="imageFileName" ColumnName="imageFileName" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Insert_QuarterStatus" FunctionName="QuartersModel.Store.sec_Insert_QuarterStatus">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuartersModel.sec_Insert_QuarterStatus_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="quarterId" ColumnName="quarterId" />
+                <ScalarProperty Name="mintPhiladelphia" ColumnName="mintPhiladelphia" />
+                <ScalarProperty Name="mintDenver" ColumnName="mintDenver" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Select_Location" FunctionName="QuartersModel.Store.sec_Select_Location">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuartersModel.sec_Select_Location_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="locationTypeId" ColumnName="locationTypeId" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="officialDate" ColumnName="officialDate" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Select_lu_LocationType" FunctionName="QuartersModel.Store.sec_Select_lu_LocationType">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuartersModel.sec_Select_lu_LocationType_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="shortDescription" ColumnName="shortDescription" />
+                <ScalarProperty Name="longDescription" ColumnName="longDescription" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Select_lu_QuarterType" FunctionName="QuartersModel.Store.sec_Select_lu_QuarterType">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuartersModel.sec_Select_lu_QuarterType_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="shortDescription" ColumnName="shortDescription" />
+                <ScalarProperty Name="longDescription" ColumnName="longDescription" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="imageFileName" ColumnName="imageFileName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Select_NationalSite" FunctionName="QuartersModel.Store.sec_Select_NationalSite">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuartersModel.sec_Select_NationalSite_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="containingLocationId" ColumnName="containingLocationId" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Select_Quarter" FunctionName="QuartersModel.Store.sec_Select_Quarter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuartersModel.sec_Select_Quarter_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="quarterTypeId" ColumnName="quarterTypeId" />
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="releaseDate" ColumnName="releaseDate" />
+                <ScalarProperty Name="releaseOrder" ColumnName="releaseOrder" />
+                <ScalarProperty Name="mintagePhiladelphia" ColumnName="mintagePhiladelphia" />
+                <ScalarProperty Name="mintageDenver" ColumnName="mintageDenver" />
+                <ScalarProperty Name="mintageTotal" ColumnName="mintageTotal" />
+                <ScalarProperty Name="elementsDepicted" ColumnName="elementsDepicted" />
+                <ScalarProperty Name="bannerText" ColumnName="bannerText" />
+                <ScalarProperty Name="caption1Text" ColumnName="caption1Text" />
+                <ScalarProperty Name="caption2Text" ColumnName="caption2Text" />
+                <ScalarProperty Name="engraver" ColumnName="engraver" />
+                <ScalarProperty Name="imageFileName" ColumnName="imageFileName" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Select_QuarterStatus" FunctionName="QuartersModel.Store.sec_Select_QuarterStatus">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuartersModel.sec_Select_QuarterStatus_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="quarterId" ColumnName="quarterId" />
+                <ScalarProperty Name="mintPhiladelphia" ColumnName="mintPhiladelphia" />
+                <ScalarProperty Name="mintDenver" ColumnName="mintDenver" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Update_Location" FunctionName="QuartersModel.Store.sec_Update_Location">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuartersModel.sec_Update_Location_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="locationTypeId" ColumnName="locationTypeId" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="officialDate" ColumnName="officialDate" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Update_lu_LocationType" FunctionName="QuartersModel.Store.sec_Update_lu_LocationType">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuartersModel.sec_Update_lu_LocationType_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="shortDescription" ColumnName="shortDescription" />
+                <ScalarProperty Name="longDescription" ColumnName="longDescription" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Update_lu_QuarterType" FunctionName="QuartersModel.Store.sec_Update_lu_QuarterType">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuartersModel.sec_Update_lu_QuarterType_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="shortDescription" ColumnName="shortDescription" />
+                <ScalarProperty Name="longDescription" ColumnName="longDescription" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="imageFileName" ColumnName="imageFileName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Update_NationalSite" FunctionName="QuartersModel.Store.sec_Update_NationalSite">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuartersModel.sec_Update_NationalSite_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="containingLocationId" ColumnName="containingLocationId" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Update_Quarter" FunctionName="QuartersModel.Store.sec_Update_Quarter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuartersModel.sec_Update_Quarter_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="quarterTypeId" ColumnName="quarterTypeId" />
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="releaseDate" ColumnName="releaseDate" />
+                <ScalarProperty Name="releaseOrder" ColumnName="releaseOrder" />
+                <ScalarProperty Name="mintagePhiladelphia" ColumnName="mintagePhiladelphia" />
+                <ScalarProperty Name="mintageDenver" ColumnName="mintageDenver" />
+                <ScalarProperty Name="mintageTotal" ColumnName="mintageTotal" />
+                <ScalarProperty Name="elementsDepicted" ColumnName="elementsDepicted" />
+                <ScalarProperty Name="bannerText" ColumnName="bannerText" />
+                <ScalarProperty Name="caption1Text" ColumnName="caption1Text" />
+                <ScalarProperty Name="caption2Text" ColumnName="caption2Text" />
+                <ScalarProperty Name="engraver" ColumnName="engraver" />
+                <ScalarProperty Name="imageFileName" ColumnName="imageFileName" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Update_QuarterStatus" FunctionName="QuartersModel.Store.sec_Update_QuarterStatus">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuartersModel.sec_Update_QuarterStatus_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="quarterId" ColumnName="quarterId" />
+                <ScalarProperty Name="mintPhiladelphia" ColumnName="mintPhiladelphia" />
+                <ScalarProperty Name="mintDenver" ColumnName="mintDenver" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Select_vw_Quarters" FunctionName="QuartersModel.Store.sec_Select_vw_Quarters">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuartersModel.sec_Select_vw_Quarters_Result">
+                <ScalarProperty Name="Quarter_Id" ColumnName="Quarter_Id" />
+                <ScalarProperty Name="Quarter_ReleaseDate" ColumnName="Quarter_ReleaseDate" />
+                <ScalarProperty Name="Quarter_ReleaseOrder" ColumnName="Quarter_ReleaseOrder" />
+                <ScalarProperty Name="Quarter_MintagePhiladelphia" ColumnName="Quarter_MintagePhiladelphia" />
+                <ScalarProperty Name="Quarter_MintageDenver" ColumnName="Quarter_MintageDenver" />
+                <ScalarProperty Name="Quarter_MintageTotal" ColumnName="Quarter_MintageTotal" />
+                <ScalarProperty Name="Quarter_ElementsDepicted" ColumnName="Quarter_ElementsDepicted" />
+                <ScalarProperty Name="Quarter_BannerText" ColumnName="Quarter_BannerText" />
+                <ScalarProperty Name="Quarter_Caption1Text" ColumnName="Quarter_Caption1Text" />
+                <ScalarProperty Name="Quarter_Caption2Text" ColumnName="Quarter_Caption2Text" />
+                <ScalarProperty Name="Quarter_Engraver" ColumnName="Quarter_Engraver" />
+                <ScalarProperty Name="Quarter_ImageFileName" ColumnName="Quarter_ImageFileName" />
+                <ScalarProperty Name="QuarterType_Id" ColumnName="QuarterType_Id" />
+                <ScalarProperty Name="QuarterType_ShortDescription" ColumnName="QuarterType_ShortDescription" />
+                <ScalarProperty Name="QuarterType_LongDescription" ColumnName="QuarterType_LongDescription" />
+                <ScalarProperty Name="Location_Id" ColumnName="Location_Id" />
+                <ScalarProperty Name="Location_Code" ColumnName="Location_Code" />
+                <ScalarProperty Name="Location_Name" ColumnName="Location_Name" />
+                <ScalarProperty Name="Location_OfficialDate" ColumnName="Location_OfficialDate" />
+                <ScalarProperty Name="ContainingLocation_Id" ColumnName="ContainingLocation_Id" />
+                <ScalarProperty Name="ContainingLocation_Code" ColumnName="ContainingLocation_Code" />
+                <ScalarProperty Name="ContainingLocation_Name" ColumnName="ContainingLocation_Name" />
+                <ScalarProperty Name="LocationType_Id" ColumnName="LocationType_Id" />
+                <ScalarProperty Name="LocationType_ShortDescription" ColumnName="LocationType_ShortDescription" />
+                <ScalarProperty Name="LocationType_LongDescription" ColumnName="LocationType_LongDescription" />
+                <ScalarProperty Name="QuarterStatus_Id" ColumnName="QuarterStatus_Id" />
+                <ScalarProperty Name="QuarterStatus_MintPhiladelphia" ColumnName="QuarterStatus_MintPhiladelphia" />
+                <ScalarProperty Name="QuarterStatus_MintDenver" ColumnName="QuarterStatus_MintDenver" />
+                <ScalarProperty Name="QuarterType_Code" ColumnName="QuarterType_Code" />
+                <ScalarProperty Name="QuarterType_ImageFileName" ColumnName="QuarterType_ImageFileName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="lu_QuarterType">
+            <EntityTypeMapping TypeName="QuartersModel.lu_QuarterType">
+              <MappingFragment StoreEntitySet="lu_QuarterType">
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+                <ScalarProperty Name="imageFileName" ColumnName="imageFileName" />
+                <ScalarProperty Name="longDescription" ColumnName="longDescription" />
+                <ScalarProperty Name="shortDescription" ColumnName="shortDescription" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="QuartersModel.lu_QuarterType">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="QuartersModel.Store.sec_Insert_lu_QuarterType">
+                  <ScalarProperty Name="lastUpdate" ParameterName="lastUpdate" />
+                  <ScalarProperty Name="imageFileName" ParameterName="imageFileName" />
+                  <ScalarProperty Name="longDescription" ParameterName="longDescription" />
+                  <ScalarProperty Name="shortDescription" ParameterName="shortDescription" />
+                  <ScalarProperty Name="code" ParameterName="code" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="QuartersModel.Store.sec_Update_lu_QuarterType">
+                  <ScalarProperty Name="lastUpdate" ParameterName="lastUpdate" Version="Current" />
+                  <ScalarProperty Name="imageFileName" ParameterName="imageFileName" Version="Current" />
+                  <ScalarProperty Name="longDescription" ParameterName="longDescription" Version="Current" />
+                  <ScalarProperty Name="shortDescription" ParameterName="shortDescription" Version="Current" />
+                  <ScalarProperty Name="code" ParameterName="code" Version="Current" />
+                  <ScalarProperty Name="id" ParameterName="id" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="QuartersModel.Store.sec_Delete_lu_QuarterType">
+                  <ScalarProperty Name="id" ParameterName="id" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_Quarters">
+            <EntityTypeMapping TypeName="QuartersModel.vw_Quarters">
+              <MappingFragment StoreEntitySet="vw_Quarters">
+                <ScalarProperty Name="QuarterStatus_MintDenver" ColumnName="QuarterStatus_MintDenver" />
+                <ScalarProperty Name="QuarterStatus_MintPhiladelphia" ColumnName="QuarterStatus_MintPhiladelphia" />
+                <ScalarProperty Name="QuarterStatus_Id" ColumnName="QuarterStatus_Id" />
+                <ScalarProperty Name="LocationType_LongDescription" ColumnName="LocationType_LongDescription" />
+                <ScalarProperty Name="LocationType_ShortDescription" ColumnName="LocationType_ShortDescription" />
+                <ScalarProperty Name="LocationType_Id" ColumnName="LocationType_Id" />
+                <ScalarProperty Name="ContainingLocation_Name" ColumnName="ContainingLocation_Name" />
+                <ScalarProperty Name="ContainingLocation_Code" ColumnName="ContainingLocation_Code" />
+                <ScalarProperty Name="ContainingLocation_Id" ColumnName="ContainingLocation_Id" />
+                <ScalarProperty Name="Location_OfficialDate" ColumnName="Location_OfficialDate" />
+                <ScalarProperty Name="Location_Name" ColumnName="Location_Name" />
+                <ScalarProperty Name="Location_Code" ColumnName="Location_Code" />
+                <ScalarProperty Name="Location_Id" ColumnName="Location_Id" />
+                <ScalarProperty Name="QuarterType_ImageFileName" ColumnName="QuarterType_ImageFileName" />
+                <ScalarProperty Name="QuarterType_LongDescription" ColumnName="QuarterType_LongDescription" />
+                <ScalarProperty Name="QuarterType_ShortDescription" ColumnName="QuarterType_ShortDescription" />
+                <ScalarProperty Name="QuarterType_Code" ColumnName="QuarterType_Code" />
+                <ScalarProperty Name="QuarterType_Id" ColumnName="QuarterType_Id" />
+                <ScalarProperty Name="Quarter_ImageFileName" ColumnName="Quarter_ImageFileName" />
+                <ScalarProperty Name="Quarter_Engraver" ColumnName="Quarter_Engraver" />
+                <ScalarProperty Name="Quarter_Caption2Text" ColumnName="Quarter_Caption2Text" />
+                <ScalarProperty Name="Quarter_Caption1Text" ColumnName="Quarter_Caption1Text" />
+                <ScalarProperty Name="Quarter_BannerText" ColumnName="Quarter_BannerText" />
+                <ScalarProperty Name="Quarter_ElementsDepicted" ColumnName="Quarter_ElementsDepicted" />
+                <ScalarProperty Name="Quarter_MintageTotal" ColumnName="Quarter_MintageTotal" />
+                <ScalarProperty Name="Quarter_MintageDenver" ColumnName="Quarter_MintageDenver" />
+                <ScalarProperty Name="Quarter_MintagePhiladelphia" ColumnName="Quarter_MintagePhiladelphia" />
+                <ScalarProperty Name="Quarter_ReleaseOrder" ColumnName="Quarter_ReleaseOrder" />
+                <ScalarProperty Name="Quarter_ReleaseDate" ColumnName="Quarter_ReleaseDate" />
+                <ScalarProperty Name="Quarter_Id" ColumnName="Quarter_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="QuartersModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

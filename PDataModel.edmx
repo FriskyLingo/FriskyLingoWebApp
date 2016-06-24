@@ -1,0 +1,1594 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="lu_Category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="category" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="excluded" Type="tinyint" />
+          <Property Name="url" Type="varchar" MaxLength="300" />
+          <Property Name="lastUpdate" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="lu_Performer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="500" />
+          <Property Name="aliases" Type="varchar(max)" />
+          <Property Name="gender" Type="varchar" MaxLength="10" />
+          <Property Name="excluded" Type="tinyint" />
+          <Property Name="url" Type="varchar" MaxLength="300" />
+          <Property Name="lastUpdate" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Scene">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="siteId" Type="int" Nullable="false" />
+          <Property Name="sceneId" Type="int" />
+          <Property Name="title" Type="varchar" MaxLength="1000" />
+          <Property Name="releaseDate" Type="smalldatetime" />
+          <Property Name="url" Type="varchar" MaxLength="300" />
+          <Property Name="description" Type="varchar(max)" />
+          <Property Name="likes" Type="int" />
+          <Property Name="dislikes" Type="int" />
+          <Property Name="views" Type="int" />
+          <Property Name="rating" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="lastUpdate" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Scene_Categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sceneId" Type="int" Nullable="false" />
+          <Property Name="categoryId" Type="int" Nullable="false" />
+          <Property Name="lastUpdate" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Scene_Data18">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="siteId" Type="int" Nullable="false" />
+          <Property Name="data18Id" Type="int" />
+          <Property Name="title" Type="varchar" MaxLength="1000" />
+          <Property Name="releaseDate" Type="smalldatetime" />
+          <Property Name="url" Type="varchar" MaxLength="300" />
+          <Property Name="story" Type="varchar(max)" />
+          <Property Name="lastUpdate" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Scene_Data18_Categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sceneId" Type="int" Nullable="false" />
+          <Property Name="categoryId" Type="int" Nullable="false" />
+          <Property Name="lastUpdate" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Scene_Data18_Performers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sceneId" Type="int" Nullable="false" />
+          <Property Name="performerId" Type="int" Nullable="false" />
+          <Property Name="lastUpdate" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Scene_Performers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sceneId" Type="int" Nullable="false" />
+          <Property Name="performerId" Type="int" Nullable="false" />
+          <Property Name="lastUpdate" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Site">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="studioId" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="300" />
+          <Property Name="abbreviation" Type="varchar" MaxLength="10" />
+          <Property Name="url" Type="varchar" MaxLength="300" />
+          <Property Name="lastUpdate" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Studio">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="300" />
+          <Property Name="url" Type="varchar" MaxLength="300" />
+          <Property Name="lastUpdate" Type="smalldatetime" />
+        </EntityType>
+        <Association Name="FK_Scene_Categories_lu_Category">
+          <End Role="lu_Category" Type="Self.lu_Category" Multiplicity="1" />
+          <End Role="Scene_Data18_Categories" Type="Self.Scene_Data18_Categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lu_Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Scene_Data18_Categories">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scene_Categories_Scene">
+          <End Role="Scene_Data18" Type="Self.Scene_Data18" Multiplicity="1" />
+          <End Role="Scene_Data18_Categories" Type="Self.Scene_Data18_Categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scene_Data18">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Scene_Data18_Categories">
+              <PropertyRef Name="sceneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scene_Performers_lu_Performer">
+          <End Role="lu_Performer" Type="Self.lu_Performer" Multiplicity="1" />
+          <End Role="Scene_Data18_Performers" Type="Self.Scene_Data18_Performers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lu_Performer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Scene_Data18_Performers">
+              <PropertyRef Name="performerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scene_Performers_Scene">
+          <End Role="Scene_Data18" Type="Self.Scene_Data18" Multiplicity="1" />
+          <End Role="Scene_Data18_Performers" Type="Self.Scene_Data18_Performers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scene_Data18">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Scene_Data18_Performers">
+              <PropertyRef Name="sceneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scene_Site">
+          <End Role="Site" Type="Self.Site" Multiplicity="1" />
+          <End Role="Scene_Data18" Type="Self.Scene_Data18" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Site">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Scene_Data18">
+              <PropertyRef Name="siteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scene1_Categories_lu_Category">
+          <End Role="lu_Category" Type="Self.lu_Category" Multiplicity="1" />
+          <End Role="Scene_Categories" Type="Self.Scene_Categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lu_Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Scene_Categories">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scene1_Categories_Scene">
+          <End Role="Scene" Type="Self.Scene" Multiplicity="1" />
+          <End Role="Scene_Categories" Type="Self.Scene_Categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scene">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Scene_Categories">
+              <PropertyRef Name="sceneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scene1_Performers_lu_Performer">
+          <End Role="lu_Performer" Type="Self.lu_Performer" Multiplicity="1" />
+          <End Role="Scene_Performers" Type="Self.Scene_Performers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lu_Performer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Scene_Performers">
+              <PropertyRef Name="performerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scene1_Performers_Scene">
+          <End Role="Scene" Type="Self.Scene" Multiplicity="1" />
+          <End Role="Scene_Performers" Type="Self.Scene_Performers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scene">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Scene_Performers">
+              <PropertyRef Name="sceneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scene1_Site">
+          <End Role="Site" Type="Self.Site" Multiplicity="1" />
+          <End Role="Scene" Type="Self.Scene" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Site">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Scene">
+              <PropertyRef Name="siteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Site_Studio">
+          <End Role="Studio" Type="Self.Studio" Multiplicity="0..1" />
+          <End Role="Site" Type="Self.Site" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Studio">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Site">
+              <PropertyRef Name="studioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sec_Delete_lu_Category" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Delete_lu_Performer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Delete_Scene" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Delete_Scene_Categories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Delete_Scene_Data18" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Delete_Scene_Data18_Categories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Delete_Scene_Data18_Performers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Delete_Scene_Performers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Delete_Site" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Delete_Studio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Insert_lu_Category" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="category" Type="varchar" Mode="In" />
+          <Parameter Name="excluded" Type="tinyint" Mode="In" />
+          <Parameter Name="url" Type="varchar" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Insert_lu_Performer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="aliases" Type="varchar(max)" Mode="In" />
+          <Parameter Name="gender" Type="varchar" Mode="In" />
+          <Parameter Name="excluded" Type="tinyint" Mode="In" />
+          <Parameter Name="url" Type="varchar" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Insert_NewScene" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="siteAbbreviation" Type="varchar" Mode="In" />
+          <Parameter Name="siteTitle" Type="varchar" Mode="In" />
+          <Parameter Name="sceneId" Type="int" Mode="In" />
+          <Parameter Name="sceneTitle" Type="varchar" Mode="In" />
+          <Parameter Name="releaseDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="url" Type="varchar" Mode="In" />
+          <Parameter Name="description" Type="varchar(max)" Mode="In" />
+          <Parameter Name="likes" Type="int" Mode="In" />
+          <Parameter Name="dislikes" Type="int" Mode="In" />
+          <Parameter Name="views" Type="int" Mode="In" />
+          <Parameter Name="rating" Type="decimal" Mode="In" />
+          <Parameter Name="studio" Type="varchar" Mode="In" />
+          <Parameter Name="performers" Type="varchar(max)" Mode="In" />
+          <Parameter Name="categories" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="sec_Insert_NewScene_Data18" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="siteAbbreviation" Type="varchar" Mode="In" />
+          <Parameter Name="siteTitle" Type="varchar" Mode="In" />
+          <Parameter Name="data18Id" Type="int" Mode="In" />
+          <Parameter Name="sceneTitle" Type="varchar" Mode="In" />
+          <Parameter Name="releaseDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="url" Type="varchar" Mode="In" />
+          <Parameter Name="story" Type="varchar(max)" Mode="In" />
+          <Parameter Name="studio" Type="varchar" Mode="In" />
+          <Parameter Name="performers" Type="varchar(max)" Mode="In" />
+          <Parameter Name="categories" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="sec_Insert_Scene" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="siteId" Type="int" Mode="In" />
+          <Parameter Name="sceneId" Type="int" Mode="In" />
+          <Parameter Name="title" Type="varchar" Mode="In" />
+          <Parameter Name="releaseDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="url" Type="varchar" Mode="In" />
+          <Parameter Name="description" Type="varchar(max)" Mode="In" />
+          <Parameter Name="likes" Type="int" Mode="In" />
+          <Parameter Name="dislikes" Type="int" Mode="In" />
+          <Parameter Name="views" Type="int" Mode="In" />
+          <Parameter Name="rating" Type="decimal" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Insert_Scene_Categories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sceneId" Type="int" Mode="In" />
+          <Parameter Name="categoryId" Type="int" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Insert_Scene_Data18" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="siteId" Type="int" Mode="In" />
+          <Parameter Name="data18Id" Type="int" Mode="In" />
+          <Parameter Name="title" Type="varchar" Mode="In" />
+          <Parameter Name="releaseDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="url" Type="varchar" Mode="In" />
+          <Parameter Name="story" Type="varchar(max)" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Insert_Scene_Data18_Categories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sceneId" Type="int" Mode="In" />
+          <Parameter Name="categoryId" Type="int" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Insert_Scene_Data18_Performers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sceneId" Type="int" Mode="In" />
+          <Parameter Name="performerId" Type="int" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Insert_Scene_Performers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sceneId" Type="int" Mode="In" />
+          <Parameter Name="performerId" Type="int" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Insert_Site" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="studioId" Type="int" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="abbreviation" Type="varchar" Mode="In" />
+          <Parameter Name="url" Type="varchar" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Insert_Studio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="url" Type="varchar" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Select_lu_Category" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Select_lu_Performer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Select_Scene" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Select_Scene_Categories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Select_Scene_Data18" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Select_Scene_Data18_Categories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Select_Scene_Data18_Performers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Select_Scene_Performers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Select_Site" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Select_Studio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sec_Update_lu_Category" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="category" Type="varchar" Mode="In" />
+          <Parameter Name="excluded" Type="tinyint" Mode="In" />
+          <Parameter Name="url" Type="varchar" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Update_lu_Performer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="aliases" Type="varchar(max)" Mode="In" />
+          <Parameter Name="gender" Type="varchar" Mode="In" />
+          <Parameter Name="excluded" Type="tinyint" Mode="In" />
+          <Parameter Name="url" Type="varchar" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Update_Scene" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="siteId" Type="int" Mode="In" />
+          <Parameter Name="data18Id" Type="int" Mode="In" />
+          <Parameter Name="title" Type="varchar" Mode="In" />
+          <Parameter Name="releaseDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="url" Type="varchar" Mode="In" />
+          <Parameter Name="description" Type="varchar(max)" Mode="In" />
+          <Parameter Name="likes" Type="int" Mode="In" />
+          <Parameter Name="dislikes" Type="int" Mode="In" />
+          <Parameter Name="views" Type="int" Mode="In" />
+          <Parameter Name="rating" Type="decimal" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Update_Scene_Categories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="sceneId" Type="int" Mode="In" />
+          <Parameter Name="categoryId" Type="int" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Update_Scene_Data18" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="siteId" Type="int" Mode="In" />
+          <Parameter Name="data18Id" Type="int" Mode="In" />
+          <Parameter Name="title" Type="varchar" Mode="In" />
+          <Parameter Name="releaseDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="url" Type="varchar" Mode="In" />
+          <Parameter Name="story" Type="varchar(max)" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Update_Scene_Data18_Categories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="sceneId" Type="int" Mode="In" />
+          <Parameter Name="categoryId" Type="int" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Update_Scene_Data18_Performers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="sceneId" Type="int" Mode="In" />
+          <Parameter Name="performerId" Type="int" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Update_Scene_Performers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="sceneId" Type="int" Mode="In" />
+          <Parameter Name="performerId" Type="int" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Update_Site" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="studioId" Type="int" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="abbreviation" Type="varchar" Mode="In" />
+          <Parameter Name="url" Type="varchar" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sec_Update_Studio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="url" Type="varchar" Mode="In" />
+          <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="PDataModelStoreContainer">
+          <EntitySet Name="lu_Category" EntityType="Self.lu_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lu_Performer" EntityType="Self.lu_Performer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scene" EntityType="Self.Scene" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scene_Categories" EntityType="Self.Scene_Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scene_Data18" EntityType="Self.Scene_Data18" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scene_Data18_Categories" EntityType="Self.Scene_Data18_Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scene_Data18_Performers" EntityType="Self.Scene_Data18_Performers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scene_Performers" EntityType="Self.Scene_Performers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Site" EntityType="Self.Site" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Studio" EntityType="Self.Studio" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Scene_Categories_lu_Category" Association="Self.FK_Scene_Categories_lu_Category">
+            <End Role="lu_Category" EntitySet="lu_Category" />
+            <End Role="Scene_Data18_Categories" EntitySet="Scene_Data18_Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scene_Categories_Scene" Association="Self.FK_Scene_Categories_Scene">
+            <End Role="Scene_Data18" EntitySet="Scene_Data18" />
+            <End Role="Scene_Data18_Categories" EntitySet="Scene_Data18_Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scene_Performers_lu_Performer" Association="Self.FK_Scene_Performers_lu_Performer">
+            <End Role="lu_Performer" EntitySet="lu_Performer" />
+            <End Role="Scene_Data18_Performers" EntitySet="Scene_Data18_Performers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scene_Performers_Scene" Association="Self.FK_Scene_Performers_Scene">
+            <End Role="Scene_Data18" EntitySet="Scene_Data18" />
+            <End Role="Scene_Data18_Performers" EntitySet="Scene_Data18_Performers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scene_Site" Association="Self.FK_Scene_Site">
+            <End Role="Site" EntitySet="Site" />
+            <End Role="Scene_Data18" EntitySet="Scene_Data18" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scene1_Categories_lu_Category" Association="Self.FK_Scene1_Categories_lu_Category">
+            <End Role="lu_Category" EntitySet="lu_Category" />
+            <End Role="Scene_Categories" EntitySet="Scene_Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scene1_Categories_Scene" Association="Self.FK_Scene1_Categories_Scene">
+            <End Role="Scene" EntitySet="Scene" />
+            <End Role="Scene_Categories" EntitySet="Scene_Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scene1_Performers_lu_Performer" Association="Self.FK_Scene1_Performers_lu_Performer">
+            <End Role="lu_Performer" EntitySet="lu_Performer" />
+            <End Role="Scene_Performers" EntitySet="Scene_Performers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scene1_Performers_Scene" Association="Self.FK_Scene1_Performers_Scene">
+            <End Role="Scene" EntitySet="Scene" />
+            <End Role="Scene_Performers" EntitySet="Scene_Performers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scene1_Site" Association="Self.FK_Scene1_Site">
+            <End Role="Site" EntitySet="Site" />
+            <End Role="Scene" EntitySet="Scene" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Site_Studio" Association="Self.FK_Site_Studio">
+            <End Role="Studio" EntitySet="Studio" />
+            <End Role="Site" EntitySet="Site" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="lu_Category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="category" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="excluded" Type="Byte" />
+          <Property Name="url" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Scene_Data18_Categories" Relationship="Self.FK_Scene_Categories_lu_Category" FromRole="lu_Category" ToRole="Scene_Data18_Categories" />
+          <NavigationProperty Name="Scene_Categories" Relationship="Self.FK_Scene1_Categories_lu_Category" FromRole="lu_Category" ToRole="Scene_Categories" />
+        </EntityType>
+        <EntityType Name="lu_Performer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="aliases" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="excluded" Type="Byte" />
+          <Property Name="url" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Scene_Data18_Performers" Relationship="Self.FK_Scene_Performers_lu_Performer" FromRole="lu_Performer" ToRole="Scene_Data18_Performers" />
+          <NavigationProperty Name="Scene_Performers" Relationship="Self.FK_Scene1_Performers_lu_Performer" FromRole="lu_Performer" ToRole="Scene_Performers" />
+        </EntityType>
+        <EntityType Name="Scene">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="siteId" Type="Int32" Nullable="false" />
+          <Property Name="sceneId" Type="Int32" />
+          <Property Name="title" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="releaseDate" Type="DateTime" Precision="0" />
+          <Property Name="url" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="likes" Type="Int32" />
+          <Property Name="dislikes" Type="Int32" />
+          <Property Name="views" Type="Int32" />
+          <Property Name="rating" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Scene_Categories" Relationship="Self.FK_Scene1_Categories_Scene" FromRole="Scene" ToRole="Scene_Categories" />
+          <NavigationProperty Name="Scene_Performers" Relationship="Self.FK_Scene1_Performers_Scene" FromRole="Scene" ToRole="Scene_Performers" />
+          <NavigationProperty Name="Site" Relationship="Self.FK_Scene1_Site" FromRole="Scene" ToRole="Site" />
+        </EntityType>
+        <EntityType Name="Scene_Categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sceneId" Type="Int32" Nullable="false" />
+          <Property Name="categoryId" Type="Int32" Nullable="false" />
+          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="lu_Category" Relationship="Self.FK_Scene1_Categories_lu_Category" FromRole="Scene_Categories" ToRole="lu_Category" />
+          <NavigationProperty Name="Scene" Relationship="Self.FK_Scene1_Categories_Scene" FromRole="Scene_Categories" ToRole="Scene" />
+        </EntityType>
+        <EntityType Name="Scene_Data18">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="siteId" Type="Int32" Nullable="false" />
+          <Property Name="data18Id" Type="Int32" />
+          <Property Name="title" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="releaseDate" Type="DateTime" Precision="0" />
+          <Property Name="url" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="story" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Scene_Data18_Categories" Relationship="Self.FK_Scene_Categories_Scene" FromRole="Scene_Data18" ToRole="Scene_Data18_Categories" />
+          <NavigationProperty Name="Scene_Data18_Performers" Relationship="Self.FK_Scene_Performers_Scene" FromRole="Scene_Data18" ToRole="Scene_Data18_Performers" />
+          <NavigationProperty Name="Site" Relationship="Self.FK_Scene_Site" FromRole="Scene_Data18" ToRole="Site" />
+        </EntityType>
+        <EntityType Name="Scene_Data18_Categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sceneId" Type="Int32" Nullable="false" />
+          <Property Name="categoryId" Type="Int32" Nullable="false" />
+          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="lu_Category" Relationship="Self.FK_Scene_Categories_lu_Category" FromRole="Scene_Data18_Categories" ToRole="lu_Category" />
+          <NavigationProperty Name="Scene_Data18" Relationship="Self.FK_Scene_Categories_Scene" FromRole="Scene_Data18_Categories" ToRole="Scene_Data18" />
+        </EntityType>
+        <EntityType Name="Scene_Data18_Performers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sceneId" Type="Int32" Nullable="false" />
+          <Property Name="performerId" Type="Int32" Nullable="false" />
+          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="lu_Performer" Relationship="Self.FK_Scene_Performers_lu_Performer" FromRole="Scene_Data18_Performers" ToRole="lu_Performer" />
+          <NavigationProperty Name="Scene_Data18" Relationship="Self.FK_Scene_Performers_Scene" FromRole="Scene_Data18_Performers" ToRole="Scene_Data18" />
+        </EntityType>
+        <EntityType Name="Scene_Performers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sceneId" Type="Int32" Nullable="false" />
+          <Property Name="performerId" Type="Int32" Nullable="false" />
+          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="lu_Performer" Relationship="Self.FK_Scene1_Performers_lu_Performer" FromRole="Scene_Performers" ToRole="lu_Performer" />
+          <NavigationProperty Name="Scene" Relationship="Self.FK_Scene1_Performers_Scene" FromRole="Scene_Performers" ToRole="Scene" />
+        </EntityType>
+        <EntityType Name="Site">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="studioId" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="abbreviation" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="url" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Scenes" Relationship="Self.FK_Scene1_Site" FromRole="Site" ToRole="Scene" />
+          <NavigationProperty Name="Scene_Data18" Relationship="Self.FK_Scene_Site" FromRole="Site" ToRole="Scene_Data18" />
+          <NavigationProperty Name="Studio" Relationship="Self.FK_Site_Studio" FromRole="Site" ToRole="Studio" />
+        </EntityType>
+        <EntityType Name="Studio">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="url" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Sites" Relationship="Self.FK_Site_Studio" FromRole="Studio" ToRole="Site" />
+        </EntityType>
+        <Association Name="FK_Scene_Categories_lu_Category">
+          <End Role="lu_Category" Type="Self.lu_Category" Multiplicity="1" />
+          <End Role="Scene_Data18_Categories" Type="Self.Scene_Data18_Categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lu_Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Scene_Data18_Categories">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scene1_Categories_lu_Category">
+          <End Role="lu_Category" Type="Self.lu_Category" Multiplicity="1" />
+          <End Role="Scene_Categories" Type="Self.Scene_Categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lu_Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Scene_Categories">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scene_Performers_lu_Performer">
+          <End Role="lu_Performer" Type="Self.lu_Performer" Multiplicity="1" />
+          <End Role="Scene_Data18_Performers" Type="Self.Scene_Data18_Performers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lu_Performer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Scene_Data18_Performers">
+              <PropertyRef Name="performerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scene1_Performers_lu_Performer">
+          <End Role="lu_Performer" Type="Self.lu_Performer" Multiplicity="1" />
+          <End Role="Scene_Performers" Type="Self.Scene_Performers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lu_Performer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Scene_Performers">
+              <PropertyRef Name="performerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scene1_Categories_Scene">
+          <End Role="Scene" Type="Self.Scene" Multiplicity="1" />
+          <End Role="Scene_Categories" Type="Self.Scene_Categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scene">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Scene_Categories">
+              <PropertyRef Name="sceneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scene1_Performers_Scene">
+          <End Role="Scene" Type="Self.Scene" Multiplicity="1" />
+          <End Role="Scene_Performers" Type="Self.Scene_Performers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scene">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Scene_Performers">
+              <PropertyRef Name="sceneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scene1_Site">
+          <End Role="Site" Type="Self.Site" Multiplicity="1" />
+          <End Role="Scene" Type="Self.Scene" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Site">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Scene">
+              <PropertyRef Name="siteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scene_Categories_Scene">
+          <End Role="Scene_Data18" Type="Self.Scene_Data18" Multiplicity="1" />
+          <End Role="Scene_Data18_Categories" Type="Self.Scene_Data18_Categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scene_Data18">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Scene_Data18_Categories">
+              <PropertyRef Name="sceneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scene_Performers_Scene">
+          <End Role="Scene_Data18" Type="Self.Scene_Data18" Multiplicity="1" />
+          <End Role="Scene_Data18_Performers" Type="Self.Scene_Data18_Performers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scene_Data18">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Scene_Data18_Performers">
+              <PropertyRef Name="sceneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scene_Site">
+          <End Role="Site" Type="Self.Site" Multiplicity="1" />
+          <End Role="Scene_Data18" Type="Self.Scene_Data18" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Site">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Scene_Data18">
+              <PropertyRef Name="siteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Site_Studio">
+          <End Role="Studio" Type="Self.Studio" Multiplicity="0..1" />
+          <End Role="Site" Type="Self.Site" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Studio">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Site">
+              <PropertyRef Name="studioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PDataContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="lu_Category" EntityType="Self.lu_Category" />
+          <EntitySet Name="lu_Performer" EntityType="Self.lu_Performer" />
+          <EntitySet Name="Scenes" EntityType="Self.Scene" />
+          <EntitySet Name="Scene_Categories" EntityType="Self.Scene_Categories" />
+          <EntitySet Name="Scene_Data18" EntityType="Self.Scene_Data18" />
+          <EntitySet Name="Scene_Data18_Categories" EntityType="Self.Scene_Data18_Categories" />
+          <EntitySet Name="Scene_Data18_Performers" EntityType="Self.Scene_Data18_Performers" />
+          <EntitySet Name="Scene_Performers" EntityType="Self.Scene_Performers" />
+          <EntitySet Name="Sites" EntityType="Self.Site" />
+          <EntitySet Name="Studios" EntityType="Self.Studio" />
+          <AssociationSet Name="FK_Scene_Categories_lu_Category" Association="Self.FK_Scene_Categories_lu_Category">
+            <End Role="lu_Category" EntitySet="lu_Category" />
+            <End Role="Scene_Data18_Categories" EntitySet="Scene_Data18_Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scene1_Categories_lu_Category" Association="Self.FK_Scene1_Categories_lu_Category">
+            <End Role="lu_Category" EntitySet="lu_Category" />
+            <End Role="Scene_Categories" EntitySet="Scene_Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scene_Performers_lu_Performer" Association="Self.FK_Scene_Performers_lu_Performer">
+            <End Role="lu_Performer" EntitySet="lu_Performer" />
+            <End Role="Scene_Data18_Performers" EntitySet="Scene_Data18_Performers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scene1_Performers_lu_Performer" Association="Self.FK_Scene1_Performers_lu_Performer">
+            <End Role="lu_Performer" EntitySet="lu_Performer" />
+            <End Role="Scene_Performers" EntitySet="Scene_Performers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scene1_Categories_Scene" Association="Self.FK_Scene1_Categories_Scene">
+            <End Role="Scene" EntitySet="Scenes" />
+            <End Role="Scene_Categories" EntitySet="Scene_Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scene1_Performers_Scene" Association="Self.FK_Scene1_Performers_Scene">
+            <End Role="Scene" EntitySet="Scenes" />
+            <End Role="Scene_Performers" EntitySet="Scene_Performers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scene1_Site" Association="Self.FK_Scene1_Site">
+            <End Role="Site" EntitySet="Sites" />
+            <End Role="Scene" EntitySet="Scenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scene_Categories_Scene" Association="Self.FK_Scene_Categories_Scene">
+            <End Role="Scene_Data18" EntitySet="Scene_Data18" />
+            <End Role="Scene_Data18_Categories" EntitySet="Scene_Data18_Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scene_Performers_Scene" Association="Self.FK_Scene_Performers_Scene">
+            <End Role="Scene_Data18" EntitySet="Scene_Data18" />
+            <End Role="Scene_Data18_Performers" EntitySet="Scene_Data18_Performers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scene_Site" Association="Self.FK_Scene_Site">
+            <End Role="Site" EntitySet="Sites" />
+            <End Role="Scene_Data18" EntitySet="Scene_Data18" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Site_Studio" Association="Self.FK_Site_Studio">
+            <End Role="Studio" EntitySet="Studios" />
+            <End Role="Site" EntitySet="Sites" />
+          </AssociationSet>
+          <FunctionImport Name="sec_Delete_lu_Category">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Delete_lu_Performer">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Delete_Scene">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Delete_Scene_Categories">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Delete_Scene_Data18">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Delete_Scene_Data18_Categories">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Delete_Scene_Data18_Performers">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Delete_Scene_Performers">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Delete_Site">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Delete_Studio">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Insert_lu_Category">
+            <Parameter Name="category" Mode="In" Type="String" />
+            <Parameter Name="excluded" Mode="In" Type="Byte" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Insert_lu_Performer">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="aliases" Mode="In" Type="String" />
+            <Parameter Name="gender" Mode="In" Type="String" />
+            <Parameter Name="excluded" Mode="In" Type="Byte" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Insert_NewScene">
+            <Parameter Name="siteAbbreviation" Mode="In" Type="String" />
+            <Parameter Name="siteTitle" Mode="In" Type="String" />
+            <Parameter Name="sceneId" Mode="In" Type="Int32" />
+            <Parameter Name="sceneTitle" Mode="In" Type="String" />
+            <Parameter Name="releaseDate" Mode="In" Type="DateTime" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="likes" Mode="In" Type="Int32" />
+            <Parameter Name="dislikes" Mode="In" Type="Int32" />
+            <Parameter Name="views" Mode="In" Type="Int32" />
+            <Parameter Name="rating" Mode="In" Type="Decimal" />
+            <Parameter Name="studio" Mode="In" Type="String" />
+            <Parameter Name="performers" Mode="In" Type="String" />
+            <Parameter Name="categories" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Insert_NewScene_Data18">
+            <Parameter Name="siteAbbreviation" Mode="In" Type="String" />
+            <Parameter Name="siteTitle" Mode="In" Type="String" />
+            <Parameter Name="data18Id" Mode="In" Type="Int32" />
+            <Parameter Name="sceneTitle" Mode="In" Type="String" />
+            <Parameter Name="releaseDate" Mode="In" Type="DateTime" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="story" Mode="In" Type="String" />
+            <Parameter Name="studio" Mode="In" Type="String" />
+            <Parameter Name="performers" Mode="In" Type="String" />
+            <Parameter Name="categories" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Insert_Scene">
+            <Parameter Name="siteId" Mode="In" Type="Int32" />
+            <Parameter Name="sceneId" Mode="In" Type="Int32" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="releaseDate" Mode="In" Type="DateTime" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="likes" Mode="In" Type="Int32" />
+            <Parameter Name="dislikes" Mode="In" Type="Int32" />
+            <Parameter Name="views" Mode="In" Type="Int32" />
+            <Parameter Name="rating" Mode="In" Type="Decimal" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Insert_Scene_Categories">
+            <Parameter Name="sceneId" Mode="In" Type="Int32" />
+            <Parameter Name="categoryId" Mode="In" Type="Int32" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Insert_Scene_Data18">
+            <Parameter Name="siteId" Mode="In" Type="Int32" />
+            <Parameter Name="data18Id" Mode="In" Type="Int32" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="releaseDate" Mode="In" Type="DateTime" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="story" Mode="In" Type="String" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Insert_Scene_Data18_Categories">
+            <Parameter Name="sceneId" Mode="In" Type="Int32" />
+            <Parameter Name="categoryId" Mode="In" Type="Int32" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Insert_Scene_Data18_Performers">
+            <Parameter Name="sceneId" Mode="In" Type="Int32" />
+            <Parameter Name="performerId" Mode="In" Type="Int32" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Insert_Scene_Performers">
+            <Parameter Name="sceneId" Mode="In" Type="Int32" />
+            <Parameter Name="performerId" Mode="In" Type="Int32" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Insert_Site">
+            <Parameter Name="studioId" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="abbreviation" Mode="In" Type="String" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Insert_Studio">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Select_lu_Category" ReturnType="Collection(PDataModel.sec_Select_lu_Category_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Select_lu_Performer" ReturnType="Collection(PDataModel.sec_Select_lu_Performer_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Select_Scene">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Select_Scene_Categories" ReturnType="Collection(PDataModel.sec_Select_Scene_Categories_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Select_Scene_Data18" ReturnType="Collection(PDataModel.sec_Select_Scene_Data18_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Select_Scene_Data18_Categories" ReturnType="Collection(PDataModel.sec_Select_Scene_Data18_Categories_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Select_Scene_Data18_Performers" ReturnType="Collection(PDataModel.sec_Select_Scene_Data18_Performers_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Select_Scene_Performers" ReturnType="Collection(PDataModel.sec_Select_Scene_Performers_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Select_Site" ReturnType="Collection(PDataModel.sec_Select_Site_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Select_Studio" ReturnType="Collection(PDataModel.sec_Select_Studio_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Update_lu_Category" ReturnType="Collection(PDataModel.sec_Update_lu_Category_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="category" Mode="In" Type="String" />
+            <Parameter Name="excluded" Mode="In" Type="Byte" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Update_lu_Performer" ReturnType="Collection(PDataModel.sec_Update_lu_Performer_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="aliases" Mode="In" Type="String" />
+            <Parameter Name="gender" Mode="In" Type="String" />
+            <Parameter Name="excluded" Mode="In" Type="Byte" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Update_Scene">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="siteId" Mode="In" Type="Int32" />
+            <Parameter Name="data18Id" Mode="In" Type="Int32" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="releaseDate" Mode="In" Type="DateTime" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="likes" Mode="In" Type="Int32" />
+            <Parameter Name="dislikes" Mode="In" Type="Int32" />
+            <Parameter Name="views" Mode="In" Type="Int32" />
+            <Parameter Name="rating" Mode="In" Type="Decimal" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Update_Scene_Categories" ReturnType="Collection(PDataModel.sec_Update_Scene_Categories_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="sceneId" Mode="In" Type="Int32" />
+            <Parameter Name="categoryId" Mode="In" Type="Int32" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Update_Scene_Data18" ReturnType="Collection(PDataModel.sec_Update_Scene_Data18_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="siteId" Mode="In" Type="Int32" />
+            <Parameter Name="data18Id" Mode="In" Type="Int32" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="releaseDate" Mode="In" Type="DateTime" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="story" Mode="In" Type="String" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Update_Scene_Data18_Categories" ReturnType="Collection(PDataModel.sec_Update_Scene_Data18_Categories_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="sceneId" Mode="In" Type="Int32" />
+            <Parameter Name="categoryId" Mode="In" Type="Int32" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Update_Scene_Data18_Performers" ReturnType="Collection(PDataModel.sec_Update_Scene_Data18_Performers_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="sceneId" Mode="In" Type="Int32" />
+            <Parameter Name="performerId" Mode="In" Type="Int32" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Update_Scene_Performers" ReturnType="Collection(PDataModel.sec_Update_Scene_Performers_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="sceneId" Mode="In" Type="Int32" />
+            <Parameter Name="performerId" Mode="In" Type="Int32" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Update_Site" ReturnType="Collection(PDataModel.sec_Update_Site_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="studioId" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="abbreviation" Mode="In" Type="String" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sec_Update_Studio" ReturnType="Collection(PDataModel.sec_Update_Studio_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="sec_Select_lu_Category_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="category" Nullable="false" MaxLength="500" />
+          <Property Type="Byte" Name="excluded" Nullable="true" />
+          <Property Type="String" Name="url" Nullable="true" MaxLength="300" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Select_lu_Performer_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="aliases" Nullable="true" />
+          <Property Type="String" Name="gender" Nullable="true" MaxLength="10" />
+          <Property Type="Byte" Name="excluded" Nullable="true" />
+          <Property Type="String" Name="url" Nullable="true" MaxLength="300" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Select_Scene_Categories_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="sceneId" Nullable="false" />
+          <Property Type="Int32" Name="categoryId" Nullable="false" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Select_Scene_Data18_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="siteId" Nullable="false" />
+          <Property Type="Int32" Name="data18Id" Nullable="true" />
+          <Property Type="String" Name="title" Nullable="true" MaxLength="1000" />
+          <Property Type="DateTime" Name="releaseDate" Nullable="true" Precision="16" />
+          <Property Type="String" Name="url" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="story" Nullable="true" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Select_Scene_Data18_Categories_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="sceneId" Nullable="false" />
+          <Property Type="Int32" Name="categoryId" Nullable="false" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Select_Scene_Data18_Performers_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="sceneId" Nullable="false" />
+          <Property Type="Int32" Name="performerId" Nullable="false" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Select_Scene_Performers_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="sceneId" Nullable="false" />
+          <Property Type="Int32" Name="performerId" Nullable="false" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Select_Site_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="studioId" Nullable="true" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="abbreviation" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="url" Nullable="true" MaxLength="300" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Select_Studio_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="url" Nullable="true" MaxLength="300" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Update_lu_Category_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="category" Nullable="false" MaxLength="500" />
+          <Property Type="Byte" Name="excluded" Nullable="true" />
+          <Property Type="String" Name="url" Nullable="true" MaxLength="300" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Update_lu_Performer_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="aliases" Nullable="true" />
+          <Property Type="String" Name="gender" Nullable="true" MaxLength="10" />
+          <Property Type="Byte" Name="excluded" Nullable="true" />
+          <Property Type="String" Name="url" Nullable="true" MaxLength="300" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Update_Scene_Categories_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="sceneId" Nullable="false" />
+          <Property Type="Int32" Name="categoryId" Nullable="false" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Update_Scene_Data18_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="siteId" Nullable="false" />
+          <Property Type="Int32" Name="data18Id" Nullable="true" />
+          <Property Type="String" Name="title" Nullable="true" MaxLength="1000" />
+          <Property Type="DateTime" Name="releaseDate" Nullable="true" Precision="16" />
+          <Property Type="String" Name="url" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="story" Nullable="true" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Update_Scene_Data18_Categories_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="sceneId" Nullable="false" />
+          <Property Type="Int32" Name="categoryId" Nullable="false" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Update_Scene_Data18_Performers_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="sceneId" Nullable="false" />
+          <Property Type="Int32" Name="performerId" Nullable="false" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Update_Scene_Performers_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="sceneId" Nullable="false" />
+          <Property Type="Int32" Name="performerId" Nullable="false" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Update_Site_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="studioId" Nullable="true" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="abbreviation" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="url" Nullable="true" MaxLength="300" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="sec_Update_Studio_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="url" Nullable="true" MaxLength="300" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PDataModelStoreContainer" CdmEntityContainer="PDataContext">
+          <EntitySetMapping Name="lu_Category">
+            <EntityTypeMapping TypeName="PDataModel.lu_Category">
+              <MappingFragment StoreEntitySet="lu_Category">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="excluded" ColumnName="excluded" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lu_Performer">
+            <EntityTypeMapping TypeName="PDataModel.lu_Performer">
+              <MappingFragment StoreEntitySet="lu_Performer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="aliases" ColumnName="aliases" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="excluded" ColumnName="excluded" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scenes">
+            <EntityTypeMapping TypeName="PDataModel.Scene">
+              <MappingFragment StoreEntitySet="Scene">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="siteId" ColumnName="siteId" />
+                <ScalarProperty Name="sceneId" ColumnName="sceneId" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="releaseDate" ColumnName="releaseDate" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="likes" ColumnName="likes" />
+                <ScalarProperty Name="dislikes" ColumnName="dislikes" />
+                <ScalarProperty Name="views" ColumnName="views" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scene_Categories">
+            <EntityTypeMapping TypeName="PDataModel.Scene_Categories">
+              <MappingFragment StoreEntitySet="Scene_Categories">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="sceneId" ColumnName="sceneId" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scene_Data18">
+            <EntityTypeMapping TypeName="PDataModel.Scene_Data18">
+              <MappingFragment StoreEntitySet="Scene_Data18">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="siteId" ColumnName="siteId" />
+                <ScalarProperty Name="data18Id" ColumnName="data18Id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="releaseDate" ColumnName="releaseDate" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="story" ColumnName="story" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scene_Data18_Categories">
+            <EntityTypeMapping TypeName="PDataModel.Scene_Data18_Categories">
+              <MappingFragment StoreEntitySet="Scene_Data18_Categories">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="sceneId" ColumnName="sceneId" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scene_Data18_Performers">
+            <EntityTypeMapping TypeName="PDataModel.Scene_Data18_Performers">
+              <MappingFragment StoreEntitySet="Scene_Data18_Performers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="sceneId" ColumnName="sceneId" />
+                <ScalarProperty Name="performerId" ColumnName="performerId" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scene_Performers">
+            <EntityTypeMapping TypeName="PDataModel.Scene_Performers">
+              <MappingFragment StoreEntitySet="Scene_Performers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="sceneId" ColumnName="sceneId" />
+                <ScalarProperty Name="performerId" ColumnName="performerId" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sites">
+            <EntityTypeMapping TypeName="PDataModel.Site">
+              <MappingFragment StoreEntitySet="Site">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="studioId" ColumnName="studioId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="abbreviation" ColumnName="abbreviation" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Studios">
+            <EntityTypeMapping TypeName="PDataModel.Studio">
+              <MappingFragment StoreEntitySet="Studio">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sec_Delete_lu_Category" FunctionName="PDataModel.Store.sec_Delete_lu_Category" />
+          <FunctionImportMapping FunctionImportName="sec_Delete_lu_Performer" FunctionName="PDataModel.Store.sec_Delete_lu_Performer" />
+          <FunctionImportMapping FunctionImportName="sec_Delete_Scene" FunctionName="PDataModel.Store.sec_Delete_Scene" />
+          <FunctionImportMapping FunctionImportName="sec_Delete_Scene_Categories" FunctionName="PDataModel.Store.sec_Delete_Scene_Categories" />
+          <FunctionImportMapping FunctionImportName="sec_Delete_Scene_Data18" FunctionName="PDataModel.Store.sec_Delete_Scene_Data18" />
+          <FunctionImportMapping FunctionImportName="sec_Delete_Scene_Data18_Categories" FunctionName="PDataModel.Store.sec_Delete_Scene_Data18_Categories" />
+          <FunctionImportMapping FunctionImportName="sec_Delete_Scene_Data18_Performers" FunctionName="PDataModel.Store.sec_Delete_Scene_Data18_Performers" />
+          <FunctionImportMapping FunctionImportName="sec_Delete_Scene_Performers" FunctionName="PDataModel.Store.sec_Delete_Scene_Performers" />
+          <FunctionImportMapping FunctionImportName="sec_Delete_Site" FunctionName="PDataModel.Store.sec_Delete_Site" />
+          <FunctionImportMapping FunctionImportName="sec_Delete_Studio" FunctionName="PDataModel.Store.sec_Delete_Studio" />
+          <FunctionImportMapping FunctionImportName="sec_Insert_lu_Category" FunctionName="PDataModel.Store.sec_Insert_lu_Category" />
+          <FunctionImportMapping FunctionImportName="sec_Insert_lu_Performer" FunctionName="PDataModel.Store.sec_Insert_lu_Performer" />
+          <FunctionImportMapping FunctionImportName="sec_Insert_NewScene" FunctionName="PDataModel.Store.sec_Insert_NewScene" />
+          <FunctionImportMapping FunctionImportName="sec_Insert_NewScene_Data18" FunctionName="PDataModel.Store.sec_Insert_NewScene_Data18" />
+          <FunctionImportMapping FunctionImportName="sec_Insert_Scene" FunctionName="PDataModel.Store.sec_Insert_Scene" />
+          <FunctionImportMapping FunctionImportName="sec_Insert_Scene_Categories" FunctionName="PDataModel.Store.sec_Insert_Scene_Categories" />
+          <FunctionImportMapping FunctionImportName="sec_Insert_Scene_Data18" FunctionName="PDataModel.Store.sec_Insert_Scene_Data18" />
+          <FunctionImportMapping FunctionImportName="sec_Insert_Scene_Data18_Categories" FunctionName="PDataModel.Store.sec_Insert_Scene_Data18_Categories" />
+          <FunctionImportMapping FunctionImportName="sec_Insert_Scene_Data18_Performers" FunctionName="PDataModel.Store.sec_Insert_Scene_Data18_Performers" />
+          <FunctionImportMapping FunctionImportName="sec_Insert_Scene_Performers" FunctionName="PDataModel.Store.sec_Insert_Scene_Performers" />
+          <FunctionImportMapping FunctionImportName="sec_Insert_Site" FunctionName="PDataModel.Store.sec_Insert_Site" />
+          <FunctionImportMapping FunctionImportName="sec_Insert_Studio" FunctionName="PDataModel.Store.sec_Insert_Studio" />
+          <FunctionImportMapping FunctionImportName="sec_Select_lu_Category" FunctionName="PDataModel.Store.sec_Select_lu_Category">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PDataModel.sec_Select_lu_Category_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="excluded" ColumnName="excluded" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Select_lu_Performer" FunctionName="PDataModel.Store.sec_Select_lu_Performer">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PDataModel.sec_Select_lu_Performer_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="aliases" ColumnName="aliases" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="excluded" ColumnName="excluded" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Select_Scene" FunctionName="PDataModel.Store.sec_Select_Scene" />
+          <FunctionImportMapping FunctionImportName="sec_Select_Scene_Categories" FunctionName="PDataModel.Store.sec_Select_Scene_Categories">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PDataModel.sec_Select_Scene_Categories_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="sceneId" ColumnName="sceneId" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Select_Scene_Data18" FunctionName="PDataModel.Store.sec_Select_Scene_Data18">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PDataModel.sec_Select_Scene_Data18_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="siteId" ColumnName="siteId" />
+                <ScalarProperty Name="data18Id" ColumnName="data18Id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="releaseDate" ColumnName="releaseDate" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="story" ColumnName="story" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Select_Scene_Data18_Categories" FunctionName="PDataModel.Store.sec_Select_Scene_Data18_Categories">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PDataModel.sec_Select_Scene_Data18_Categories_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="sceneId" ColumnName="sceneId" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Select_Scene_Data18_Performers" FunctionName="PDataModel.Store.sec_Select_Scene_Data18_Performers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PDataModel.sec_Select_Scene_Data18_Performers_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="sceneId" ColumnName="sceneId" />
+                <ScalarProperty Name="performerId" ColumnName="performerId" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Select_Scene_Performers" FunctionName="PDataModel.Store.sec_Select_Scene_Performers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PDataModel.sec_Select_Scene_Performers_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="sceneId" ColumnName="sceneId" />
+                <ScalarProperty Name="performerId" ColumnName="performerId" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Select_Site" FunctionName="PDataModel.Store.sec_Select_Site">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PDataModel.sec_Select_Site_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="studioId" ColumnName="studioId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="abbreviation" ColumnName="abbreviation" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Select_Studio" FunctionName="PDataModel.Store.sec_Select_Studio">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PDataModel.sec_Select_Studio_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Update_lu_Category" FunctionName="PDataModel.Store.sec_Update_lu_Category">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PDataModel.sec_Update_lu_Category_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="excluded" ColumnName="excluded" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Update_lu_Performer" FunctionName="PDataModel.Store.sec_Update_lu_Performer">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PDataModel.sec_Update_lu_Performer_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="aliases" ColumnName="aliases" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="excluded" ColumnName="excluded" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Update_Scene" FunctionName="PDataModel.Store.sec_Update_Scene" />
+          <FunctionImportMapping FunctionImportName="sec_Update_Scene_Categories" FunctionName="PDataModel.Store.sec_Update_Scene_Categories">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PDataModel.sec_Update_Scene_Categories_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="sceneId" ColumnName="sceneId" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Update_Scene_Data18" FunctionName="PDataModel.Store.sec_Update_Scene_Data18">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PDataModel.sec_Update_Scene_Data18_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="siteId" ColumnName="siteId" />
+                <ScalarProperty Name="data18Id" ColumnName="data18Id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="releaseDate" ColumnName="releaseDate" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="story" ColumnName="story" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Update_Scene_Data18_Categories" FunctionName="PDataModel.Store.sec_Update_Scene_Data18_Categories">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PDataModel.sec_Update_Scene_Data18_Categories_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="sceneId" ColumnName="sceneId" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Update_Scene_Data18_Performers" FunctionName="PDataModel.Store.sec_Update_Scene_Data18_Performers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PDataModel.sec_Update_Scene_Data18_Performers_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="sceneId" ColumnName="sceneId" />
+                <ScalarProperty Name="performerId" ColumnName="performerId" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Update_Scene_Performers" FunctionName="PDataModel.Store.sec_Update_Scene_Performers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PDataModel.sec_Update_Scene_Performers_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="sceneId" ColumnName="sceneId" />
+                <ScalarProperty Name="performerId" ColumnName="performerId" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Update_Site" FunctionName="PDataModel.Store.sec_Update_Site">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PDataModel.sec_Update_Site_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="studioId" ColumnName="studioId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="abbreviation" ColumnName="abbreviation" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sec_Update_Studio" FunctionName="PDataModel.Store.sec_Update_Studio">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PDataModel.sec_Update_Studio_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
