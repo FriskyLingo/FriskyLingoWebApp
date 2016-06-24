@@ -1,0 +1,707 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8"/>
+
+        <!--------------------------------------------------------------------------------------
+            CSS/STYLES
+        --------------------------------------------------------------------------------------->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="Content/font-awesome.min.css" rel="stylesheet" />
+        <link type="text/css" href="css/css_Custom.css" rel="stylesheet"/>
+    <style type="text/css">
+        body {
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body,
+        html {
+            height: 100%;
+        }
+
+        .nav .open > a,
+        .nav .open > a:hover,
+        .nav .open > a:focus {
+            background-color: transparent;
+        }
+
+        /*-------------------------------*/
+        /*           Wrappers            */
+        /*-------------------------------*/
+
+        #wrapper {
+            padding-left: 0;
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+
+        #wrapper.toggled {
+            padding-left: 220px;
+        }
+
+        #sidebar-wrapper {
+            z-index: 1000;
+            left: 220px;
+            width: 0;
+            height: 100%;
+            margin-left: -220px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            background: #1a1a1a;
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+
+        #sidebar-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
+        #wrapper.toggled #sidebar-wrapper {
+            width: 220px;
+        }
+
+        #page-content-wrapper {
+            width: 100%;
+            padding-top: 70px;
+        }
+
+        #wrapper.toggled #page-content-wrapper {
+            position: absolute;
+            margin-right: -220px;
+        }
+
+        /*-------------------------------*/
+        /*     Sidebar nav styles        */
+        /*-------------------------------*/
+
+        .sidebar-nav {
+            position: absolute;
+            top: 0;
+            width: 220px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            position: relative;
+            line-height: 20px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .sidebar-nav li:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            height: 100%;
+            width: 3px;
+            background-color: #1c1c1c;
+            -webkit-transition: width .2s ease-in;
+            -moz-transition: width .2s ease-in;
+            -ms-transition: width .2s ease-in;
+            transition: width .2s ease-in;
+        }
+
+        .sidebar-nav li:first-child a {
+            color: #fff;
+            background-color: #1a1a1a;
+        }
+
+        .sidebar-nav li:nth-child(2):before {
+            background-color: #ec1b5a;
+        }
+
+        .sidebar-nav li:nth-child(3):before {
+            background-color: #79aefe;
+        }
+
+        .sidebar-nav li:nth-child(4):before {
+            background-color: #314190;
+        }
+
+        .sidebar-nav li:nth-child(5):before {
+            background-color: #279636;
+        }
+
+        .sidebar-nav li:nth-child(6):before {
+            background-color: #7d5d81;
+        }
+
+        .sidebar-nav li:nth-child(7):before {
+            background-color: #ead24c;
+        }
+
+        .sidebar-nav li:nth-child(8):before {
+            background-color: #2d2366;
+        }
+
+        .sidebar-nav li:nth-child(9):before {
+            background-color: #35acdf;
+        }
+
+        .sidebar-nav li:hover:before,
+        .sidebar-nav li.open:hover:before {
+            width: 100%;
+            -webkit-transition: width .2s ease-in;
+            -moz-transition: width .2s ease-in;
+            -ms-transition: width .2s ease-in;
+            transition: width .2s ease-in;
+        }
+
+        .sidebar-nav li a {
+            display: block;
+            color: #ddd;
+            text-decoration: none;
+            padding: 10px 15px 10px 30px;
+        }
+
+        .sidebar-nav li a:hover,
+        .sidebar-nav li a:active,
+        .sidebar-nav li a:focus,
+        .sidebar-nav li.open a:hover,
+        .sidebar-nav li.open a:active,
+        .sidebar-nav li.open a:focus {
+            color: #fff;
+            text-decoration: none;
+            background-color: transparent;
+        }
+
+        .sidebar-nav > .sidebar-brand {
+            height: 65px;
+            font-size: 20px;
+            line-height: 44px;
+        }
+
+        .sidebar-nav .dropdown-menu {
+            position: relative;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            border-radius: 0;
+            border: none;
+            background-color: #222;
+            box-shadow: none;
+        }
+
+        /*-------------------------------*/
+        /*       Hamburger-Cross         */
+        /*-------------------------------*/
+
+        .hamburger {
+            position: fixed;
+            top: 20px;
+            z-index: 999;
+            display: block;
+            width: 32px;
+            height: 32px;
+            margin-left: 15px;
+            background: transparent;
+            border: none;
+        }
+
+        .hamburger:hover,
+        .hamburger:focus,
+        .hamburger:active {
+            outline: none;
+        }
+
+        .hamburger.is-closed:before {
+            content: '';
+            display: block;
+            width: 100px;
+            font-size: 14px;
+            color: #fff;
+            line-height: 32px;
+            text-align: center;
+            opacity: 0;
+            -webkit-transform: translate3d(0, 0, 0);
+            -webkit-transition: all .35s ease-in-out;
+        }
+
+        .hamburger.is-closed:hover:before {
+            opacity: 1;
+            display: block;
+            -webkit-transform: translate3d(-100px, 0, 0);
+            -webkit-transition: all .35s ease-in-out;
+        }
+
+        .hamburger.is-closed .hamb-top,
+        .hamburger.is-closed .hamb-middle,
+        .hamburger.is-closed .hamb-bottom,
+        .hamburger.is-open .hamb-top,
+        .hamburger.is-open .hamb-middle,
+        .hamburger.is-open .hamb-bottom {
+            position: absolute;
+            left: 0;
+            height: 4px;
+            width: 100%;
+        }
+
+        .hamburger.is-closed .hamb-top,
+        .hamburger.is-closed .hamb-middle,
+        .hamburger.is-closed .hamb-bottom {
+            background-color: #1a1a1a;
+        }
+
+        .hamburger.is-closed .hamb-top {
+            top: 5px;
+            -webkit-transition: all .35s ease-in-out;
+        }
+
+        .hamburger.is-closed .hamb-middle {
+            top: 50%;
+            margin-top: -2px;
+        }
+
+        .hamburger.is-closed .hamb-bottom {
+            bottom: 5px;
+            -webkit-transition: all .35s ease-in-out;
+        }
+
+        .hamburger.is-closed:hover .hamb-top {
+            top: 0;
+            -webkit-transition: all .35s ease-in-out;
+        }
+
+        .hamburger.is-closed:hover .hamb-bottom {
+            bottom: 0;
+            -webkit-transition: all .35s ease-in-out;
+        }
+
+        .hamburger.is-open .hamb-top,
+        .hamburger.is-open .hamb-middle,
+        .hamburger.is-open .hamb-bottom {
+            background-color: #1a1a1a;
+        }
+
+        .hamburger.is-open .hamb-top,
+        .hamburger.is-open .hamb-bottom {
+            top: 50%;
+            margin-top: -2px;
+        }
+
+        .hamburger.is-open .hamb-top {
+            -webkit-transform: rotate(45deg);
+            -webkit-transition: -webkit-transform .2s cubic-bezier(.73, 1, .28, .08);
+        }
+
+        .hamburger.is-open .hamb-middle {
+            display: none;
+        }
+
+        .hamburger.is-open .hamb-bottom {
+            -webkit-transform: rotate(-45deg);
+            -webkit-transition: -webkit-transform .2s cubic-bezier(.73, 1, .28, .08);
+        }
+
+        .hamburger.is-open:before {
+            content: '';
+            display: block;
+            width: 100px;
+            font-size: 14px;
+            color: #fff;
+            line-height: 32px;
+            text-align: center;
+            opacity: 0;
+            -webkit-transform: translate3d(0, 0, 0);
+            -webkit-transition: all .35s ease-in-out;
+        }
+
+        .hamburger.is-open:hover:before {
+            opacity: 1;
+            display: block;
+            -webkit-transform: translate3d(-100px, 0, 0);
+            -webkit-transition: all .35s ease-in-out;
+        }
+
+        /*-------------------------------*/
+        /*            Overlay            */
+        /*-------------------------------*/
+
+        .overlay {
+            position: fixed;
+            display: none;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(250, 250, 250, .8);
+            z-index: 1;
+        }
+    </style>
+
+    <style>
+        /*******************************************************************
+        Checked List Group
+        *******************************************************************/
+        /* CSS REQUIRED */
+        .state-icon {
+            left: -5px;
+        }
+        .list-group-item-primary {
+            color: rgb(255, 255, 255);
+            background-color: rgb(66, 139, 202);
+        }
+
+        /* DEMO ONLY - REMOVES UNWANTED MARGIN */
+        .well .list-group {
+            margin-bottom: 0px;
+        }
+    </style>
+
+    <style>
+        .funkyradio div {
+            clear: both;
+            overflow: hidden;
+        }
+
+        .funkyradio label {
+            width: 100%;
+            border-radius: 3px;
+            border: 1px solid #D1D3D4;
+            font-weight: normal;
+        }
+
+        .funkyradio input[type="radio"]:empty,
+        .funkyradio input[type="checkbox"]:empty {
+            display: none;
+        }
+
+        .funkyradio input[type="radio"]:empty ~ label,
+        .funkyradio input[type="checkbox"]:empty ~ label {
+            position: relative;
+            line-height: 2.5em;
+            text-indent: 4.25em;
+            cursor: pointer;
+            -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                    user-select: none;
+        }
+
+        .funkyradio input[type="radio"]:empty ~ label:before,
+        .funkyradio input[type="checkbox"]:empty ~ label:before {
+            position: absolute;
+            display: block;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            content: '';
+            font-size: large;
+            width: 2.5em;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .funkyradio input[type="radio"]:hover:not(:checked) ~ label,
+        .funkyradio input[type="checkbox"]:hover:not(:checked) ~ label {
+            color: #888;
+        }
+
+        .funkyradio input[type="radio"]:hover:not(:checked) ~ label:before,
+        .funkyradio input[type="checkbox"]:hover:not(:checked) ~ label:before {
+            font-family: 'FontAwesome';
+            content: '\f00c';
+            font-size: large;
+            text-indent: .8em;
+            color: rgba(0, 0, 0, 0);
+        }
+
+        /**********************************************************************************
+            Selected Item Text Color
+        **********************************************************************************/
+        .funkyradio input[type="radio"]:checked ~ label,
+        .funkyradio input[type="checkbox"]:checked ~ label {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /**********************************************************************************
+            Unselected Item Text Color
+        **********************************************************************************/
+        .funkyradio input[type="radio"]:not(:checked) ~ label,
+        .funkyradio input[type="checkbox"]:not(:checked) ~ label {
+            color: rgba(0, 0, 0, 0.4);
+        }
+
+        .funkyradio input[type="radio"]:checked ~ label:before,
+        .funkyradio input[type="checkbox"]:checked ~ label:before {
+            font-family: 'FontAwesome';
+            content: '\f00c';
+            font-size: large;
+            text-indent: .8em;
+            color: #333;
+            background-color: #ccc;
+        }
+
+        .funkyradio input[type="radio"]:focus ~ label:before,
+        .funkyradio input[type="checkbox"]:focus ~ label:before {
+            box-shadow: 0 0 0 3px #999;
+        }
+
+        /**********************************************************************************
+            Label Background Colors
+        **********************************************************************************/
+        .funkyradio-pink label {
+            background-color: #F9B3B1;
+        }
+        .funkyradio-red label {
+            background-color: #FF7373;
+        }
+        .funkyradio-green label {
+            background-color: #95D195;
+        }
+        .funkyradio-orange label {
+            background-color: #F9B67E;
+        }
+        .funkyradio-yellow label {
+            background-color: #E6E696;
+        }
+        .funkyradio-lightblue label {
+            background-color: #A5DCF2;
+        }
+
+
+        /**********************************************************************************
+            Empty boxes next to unchecked items & label backgrounds when item is checked
+        **********************************************************************************/
+        .funkyradio-pink input[type="radio"]:empty ~ label:before,
+        .funkyradio-pink input[type="checkbox"]:empty ~ label:before,
+        .funkyradio-pink input[type="radio"]:checked ~ label,
+        .funkyradio-pink input[type="checkbox"]:checked ~ label {
+            background-color: #f68a87;
+        }
+        .funkyradio-red input[type="radio"]:empty ~ label:before,
+        .funkyradio-red input[type="checkbox"]:empty ~ label:before,
+        .funkyradio-red input[type="radio"]:checked ~ label,
+        .funkyradio-red input[type="checkbox"]:checked ~ label {
+            background-color: #ff2727;
+        }
+        .funkyradio-green input[type="radio"]:empty ~ label:before,
+        .funkyradio-green input[type="checkbox"]:empty ~ label:before,
+        .funkyradio-green input[type="radio"]:checked ~ label,
+        .funkyradio-green input[type="checkbox"]:checked ~ label {
+            background-color: #5cb85c;
+        }
+        .funkyradio-orange input[type="radio"]:empty ~ label:before,
+        .funkyradio-orange input[type="checkbox"]:empty ~ label:before,
+        .funkyradio-orange input[type="radio"]:checked ~ label,
+        .funkyradio-orange input[type="checkbox"]:checked ~ label {
+            background-color: #f68e38;
+        }
+        .funkyradio-yellow input[type="radio"]:empty ~ label:before,
+        .funkyradio-yellow input[type="checkbox"]:empty ~ label:before,
+        .funkyradio-yellow input[type="radio"]:checked ~ label,
+        .funkyradio-yellow input[type="checkbox"]:checked ~ label {
+            background-color: #d8d85e;
+        }
+        .funkyradio-lightblue input[type="radio"]:empty ~ label:before,
+        .funkyradio-lightblue input[type="checkbox"]:empty ~ label:before,
+        .funkyradio-lightblue input[type="radio"]:checked ~ label,
+        .funkyradio-lightblue input[type="checkbox"]:checked ~ label {
+            background-color: #75caeb;
+        }
+
+
+        /**********************************************************************************
+            Checkmarks next to selected item
+        **********************************************************************************/
+        .funkyradio-pink input[type="radio"]:checked ~ label:before,
+        .funkyradio-pink input[type="checkbox"]:checked ~ label:before {
+            color: #fff;
+            background-color: #f25c58;
+        }
+
+        .funkyradio-red input[type="radio"]:checked ~ label:before,
+        .funkyradio-red input[type="checkbox"]:checked ~ label:before {
+            color: #fff;
+            background-color: #CC1F1F;
+        }
+
+        .funkyradio-green input[type="radio"]:checked ~ label:before,
+        .funkyradio-green input[type="checkbox"]:checked ~ label:before {
+            color: #fff;
+            background-color: #449d44;
+        }
+
+        .funkyradio-orange input[type="radio"]:checked ~ label:before,
+        .funkyradio-orange input[type="checkbox"]:checked ~ label:before {
+            color: #fff;
+            background-color: #f0730b;
+        }
+
+        .funkyradio-yellow input[type="radio"]:checked ~ label:before,
+        .funkyradio-yellow input[type="checkbox"]:checked ~ label:before {
+            color: #fff;
+            background-color: #cece35;
+        }
+
+        .funkyradio-lightblue input[type="radio"]:checked ~ label:before,
+        .funkyradio-lightblue input[type="checkbox"]:checked ~ label:before {
+            color: #fff;
+            background-color: #48b9e5;
+        }
+    </style>
+
+
+    <!--------------------------------------------------------------------------------------
+            SCRIPTS
+        --------------------------------------------------------------------------------------->
+        <script src="Scripts/modernizr-2.8.3.js"></script>
+        <script src="Scripts/jquery-2.1.4.min.js"></script>
+        <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/respond.min.js"></script>
+        <script src="Scripts/Sortable.min.js"></script>
+    </head>
+    <body>
+        <!-- Wrapper -->
+        <div id="wrapper" class="">
+            <div class="overlay" style="display: none;"></div>
+
+            <!-- Sidebar -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+                <ul class="nav sidebar-nav">
+                    <li class="sidebar-brand">
+                        <a href="#">
+                            MENU
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">Play Game</a>
+                    </li>
+                    <li>
+                        <a href="#">Previous Games</a>
+                    </li>
+                    <li>
+                        <a href="#">Statistics</a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- /#sidebar-wrapper -->
+
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+                <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+                    <span class="hamb-top"></span>
+                    <span class="hamb-middle"></span>
+                    <span class="hamb-bottom"></span>
+                </button>
+
+                <div class="container" id="divContainerCreateGame">
+                    <div class="row">
+                        <!-- Select Players -->
+                        <div class="col-md-6">
+                            <h3>Choose Players <small>Click to include; drag and drop to set order</small>
+                            </h3>
+                            <div class="funkyradio" id="divPlayers">
+                                <div class="funkyradio-lightblue">
+                                    <input type="checkbox" name="checkbox" id="checkbox1"/>
+                                    <label for="checkbox1">Justin</label>
+                                </div>
+                                <div class="funkyradio-lightblue">
+                                    <input type="checkbox" name="checkbox" id="checkbox2"/>
+                                    <label for="checkbox2">Kevin</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Select Location -->
+                        <div class="col-md-6">
+                            <h3>Choose Location</h3>
+                            <div class="funkyradio">
+                                <div class="funkyradio-pink">
+                                    <input type="radio" name="radio" id="radio2"/>
+                                    <label for="radio2">Pink</label>
+                                </div>
+                                <div class="funkyradio-red">
+                                    <input type="radio" name="radio" id="radio3"/>
+                                    <label for="radio3">Red</label>
+                                </div>
+                                <div class="funkyradio-green">
+                                    <input type="radio" name="radio" id="radio4"/>
+                                    <label for="radio4">Green</label>
+                                </div>
+                                <div class="funkyradio-orange">
+                                    <input type="radio" name="radio" id="radio5"/>
+                                    <label for="radio5">Orange</label>
+                                </div>
+                                <div class="funkyradio-yellow">
+                                    <input type="radio" name="radio" id="radio6"/>
+                                    <label for="radio6">Yellow</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-6" style="padding-top: 20px;">
+                            <button class="btn btn-success btn3d btn-block btn-lg" type="button">Start Game!</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container" id="divContainerGame">
+
+                        <!-- Game Header -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>Game #1</h2>
+                                <hr/>
+                            </div>
+                        </div>
+                        <!-- /Game Header -->
+
+                        <!-- Game -->
+                        <div class="row">
+                            <!-- Players & Shot Counters -->
+                            <div class="col-md-9" style="height: 150px;">
+                                <!-- Player #1 -->
+                                <div class="row" style="height: 75px; padding-top: 10px;">
+                                    <h4 style="float: left; padding-top: 10px; width: 80px;">Justin</h4><button class="btn btn-default btn-lg btn3d" type="button"><span class="glyphicon">1</span></button><button class="btn btn-default btn-lg btn3d" type="button"><span class="glyphicon">2</span></button><button class="btn btn-default btn-lg btn3d" type="button"><span class="glyphicon">3</span></button><button class="btn btn-default btn-lg btn3d" type="button"><span class="glyphicon">4</span></button><button class="btn btn-default btn-lg btn3d" type="button"><span class="glyphicon">5</span></button><button class="btn btn-default btn-lg btn3d" type="button"><span class="glyphicon">6</span></button><button class="btn btn-default btn-lg btn3d" type="button"><span class="glyphicon">7</span></button><button class="btn btn-default btn-lg btn3d" type="button"><span class="glyphicon">8</span></button><button class="btn btn-default btn-lg btn3d" type="button"><span class="glyphicon">9</span></button><button class="btn btn-default btn-lg btn3d" type="button"><span class="glyphicon">10</span></button>
+                                    <span style="padding-left: 20px;"></span>
+                                    <button class="btn btn-primary btn3d" type="button">Start</button>
+                                    <button class="btn btn-danger btn3d" type="button">Done</button>
+                                </div>
+                                <!-- /Player #1 -->
+
+                                <!-- Player #2 -->
+                                <div class="row" style="height: 75px; padding-top: 10px;">
+                                    <h4 style="float: left; padding-top: 10px; width: 80px;">Kevin</h4><button class="btn btn-default btn-lg btn3d" type="button"><span class="glyphicon">1</span></button><button class="btn btn-default btn-lg btn3d" type="button"><span class="glyphicon">2</span></button><button class="btn btn-default btn-lg btn3d" type="button"><span class="glyphicon">3</span></button><button class="btn btn-default btn-lg btn3d" type="button"><span class="glyphicon">4</span></button><button class="btn btn-default btn-lg btn3d" type="button"><span class="glyphicon">5</span></button><button class="btn btn-default btn-lg btn3d" type="button"><span class="glyphicon">6</span></button><button class="btn btn-default btn-lg btn3d" type="button"><span class="glyphicon">7</span></button><button class="btn btn-default btn-lg btn3d" type="button"><span class="glyphicon">8</span></button><button class="btn btn-default btn-lg btn3d" type="button"><span class="glyphicon">9</span></button><button class="btn btn-default btn-lg btn3d" type="button"><span class="glyphicon">10</span></button>
+                                    <span style="padding-left: 20px;"></span>
+                                    <button class="btn btn-primary btn3d" type="button">Start</button>
+                                    <button class="btn btn-danger btn3d" type="button">Done</button>
+                                </div>
+                                <!-- /Player #2 -->
+                            </div>
+                            <!-- /Players & Shot Counters -->
+
+                            <!-- Winner -->
+                            <div class="col-md-3" style="height: 150px;">
+                                <div class="alert alert-success" style="width: 100%; height: 100%;" role="alert">
+                                    <div style="padding-top: 18px;"><span style="font-size: 4em; font-weight: bold;">WINNER</span></div>
+                                </div>
+                            </div>
+                            <!-- /Winner -->
+                        </div>
+                        <!-- /Game -->
+
+                </div>
+            </div>
+            <!-- /#page-content-wrapper -->
+
+        </div>
+        <!-- /#wrapper -->
+
+    <script type="text/javascript" src="Scripts/js_Custom.js"></script>
+    </body>
+</html>

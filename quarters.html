@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Quarters</title>
+
+    <link href="Content/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/css_VerticalNavBar.css" rel="stylesheet" />
+    <link href="css/animate.min.css" rel="stylesheet"/>
+
+    <script src="Scripts/jquery-2.2.3.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+
+    <script src="Scripts/handlebars.min.js"></script>
+    <script src="Scripts/sugar.min.js"></script>
+    <script src="Scripts/moment.min.js"></script>
+    <script src="js/jquery.storageapi.min.js"></script>
+
+    <script id="tab-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="list-group">
+            <a id="a{{code}}" href="#" class="list-group-item vertical-tab">
+                <img class="img-responsive" src="images/quarters/{{code}}/240x/{{imageFileName}}" alt="{{shortDescription}}" />
+                <strong>{{shortDescription}}</strong>
+            </a>
+        </div>
+        {{/each}}
+    </script>
+
+    <script id="tab-content-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="bhoechie-tab-content" data-quartertype="{{code}}" data-tabid="a{{code}}">
+            <div class="panel panel-primary filterable">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{longDescription}}</h3>
+                    <div class="pull-right">
+                        <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span></button>
+                    </div>
+                </div>
+                <table class="table quarter-status" data-quartertype="{{code}}">
+                    <thead>
+                        <tr class="filters">
+                            <th>
+                                <input type="text" class="form-control" placeholder="Quarter" disabled>
+                            </th>
+                            <th>
+                                <input type="text" class="form-control" placeholder="{{#if_eq this.code 'STT'}}State{{else if_eq this.code 'TTY'}}Territory/District{{else}}National Site{{/if_eq}}" disabled>
+                            </th>
+                            <th>
+                                <input type="text" class="form-control" placeholder="Mint-P" disabled>
+                            </th>
+                            <th>
+                                <input type="text" class="form-control" placeholder="Mint-D" disabled>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-{{code}}"></tbody>
+                </table>
+            </div>
+        </div>
+        {{/each}}
+    </script>
+
+    <script id="quarter-row-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <tr data-quartertype="{{QuarterType_Code}}">
+            <td>
+                <img class="img-responsive" src="images/quarters/{{QuarterType_Code}}/150x/{{Quarter_ImageFileName}}" alt="{{Location_Name}}" />
+            </td>
+            <td>
+                {{Location_Name}}
+            </td>
+            <td data-quarterstatustype="P">
+                <div class="material-switch">
+                    <input id="cb_{{Quarter_Id}}_P" type="checkbox"{{#if QuarterStatus_MintPhiladelphia}}checked{{/if}} />
+                    <label for="cb_{{Quarter_Id}}_P" class="label-success"></label>
+                </div>
+            </td>
+            <td data-quarterstatustype="D">
+                <div class="material-switch">
+                    <input id="cb_{{Quarter_Id}}_D" type="checkbox"{{#if QuarterStatus_MintDenver}}checked{{/if}} />
+                    <label for="cb_{{Quarter_Id}}_D" class="label-success"></label>
+                </div>
+            </td>
+        </tr>
+        {{/each}}
+    </script>
+
+    <script src="js/js_quarters.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div id="divTabs" class="col-xs-2 col-sm-2 col-md-2 col-lg-2 bhoechie-tab-menu">
+        </div>
+        <div id="divTabContents" class="col-xs-10 col-sm-10 col-md-10 col-lg-10 bhoechie-tab">
+        </div>
+        <!--<div class="col-xs-4 col-sm-6 col-md-10 col-lg-12 bhoechie-tab-container">
+
+        </div>-->
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="divLoginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="div-login-msg">
+                    <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                    <span id="text-login-msg">Please sign in to make changes</span>
+                </div>
+                <br/>
+                <form>
+                    <div class="form-group">
+                        <label class="sr-only" for="userId">Username</label>
+                        <input type="text" class="form-control" id="userId" placeholder="User ID">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="password">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btnCancel" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button id="btnLogin" type="button" class="btn btn-primary">Login</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
