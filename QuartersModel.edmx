@@ -62,6 +62,7 @@
           <Property Name="caption1Text" Type="varchar" MaxLength="500" />
           <Property Name="caption2Text" Type="varchar" MaxLength="500" />
           <Property Name="engraver" Type="varchar" MaxLength="500" />
+          <Property Name="notes" Type="varchar(max)" />
           <Property Name="imageFileName" Type="varchar" MaxLength="1000" />
           <Property Name="lastUpdate" Type="smalldatetime" />
         </EntityType>
@@ -106,6 +107,7 @@ warning 6002: The table/view 'Quarters.dbo.vw_Quarters' does not have a primary 
           <Property Name="Quarter_Caption2Text" Type="varchar" MaxLength="500" />
           <Property Name="Quarter_Engraver" Type="varchar" MaxLength="500" />
           <Property Name="Quarter_ImageFileName" Type="varchar" MaxLength="1000" />
+          <Property Name="Quarter_Notes" Type="varchar(max)" />
           <Property Name="QuarterType_Id" Type="int" />
           <Property Name="QuarterType_Code" Type="varchar" MaxLength="3" />
           <Property Name="QuarterType_ShortDescription" Type="varchar" MaxLength="100" />
@@ -252,6 +254,7 @@ warning 6002: The table/view 'Quarters.dbo.vw_Quarters' does not have a primary 
           <Parameter Name="caption1Text" Type="varchar" Mode="In" />
           <Parameter Name="caption2Text" Type="varchar" Mode="In" />
           <Parameter Name="engraver" Type="varchar" Mode="In" />
+          <Parameter Name="notes" Type="varchar(max)" Mode="In" />
           <Parameter Name="imageFileName" Type="varchar" Mode="In" />
           <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
         </Function>
@@ -322,6 +325,7 @@ warning 6002: The table/view 'Quarters.dbo.vw_Quarters' does not have a primary 
           <Parameter Name="caption1Text" Type="varchar" Mode="In" />
           <Parameter Name="caption2Text" Type="varchar" Mode="In" />
           <Parameter Name="engraver" Type="varchar" Mode="In" />
+          <Parameter Name="notes" Type="varchar(max)" Mode="In" />
           <Parameter Name="imageFileName" Type="varchar" Mode="In" />
           <Parameter Name="lastUpdate" Type="smalldatetime" Mode="In" />
         </Function>
@@ -360,6 +364,7 @@ warning 6002: The table/view 'Quarters.dbo.vw_Quarters' does not have a primary 
     [vw_Quarters].[Quarter_Caption2Text] AS [Quarter_Caption2Text], 
     [vw_Quarters].[Quarter_Engraver] AS [Quarter_Engraver], 
     [vw_Quarters].[Quarter_ImageFileName] AS [Quarter_ImageFileName], 
+    [vw_Quarters].[Quarter_Notes] AS [Quarter_Notes], 
     [vw_Quarters].[QuarterType_Id] AS [QuarterType_Id], 
     [vw_Quarters].[QuarterType_Code] AS [QuarterType_Code], 
     [vw_Quarters].[QuarterType_ShortDescription] AS [QuarterType_ShortDescription], 
@@ -422,7 +427,7 @@ warning 6002: The table/view 'Quarters.dbo.vw_Quarters' does not have a primary 
           <NavigationProperty Name="lu_LocationType" Relationship="Self.FK__Location__lu_LocationType" FromRole="Location" ToRole="lu_LocationType" />
           <NavigationProperty Name="NationalSites" Relationship="Self.FK__NationalSite__Location__containingLocationId" FromRole="Location" ToRole="NationalSite" />
           <NavigationProperty Name="NationalSites1" Relationship="Self.FK__NationalSite__Location__locationId" FromRole="Location" ToRole="NationalSite" />
-          <NavigationProperty Name="Quarters" Relationship="Self.FK__Quarter__Location" FromRole="Location" ToRole="Quarter" />
+          <NavigationProperty Name="Quarters" Relationship="QuartersModel.FK__Quarter__Location" FromRole="Location" ToRole="Quarter" />
         </EntityType>
         <EntityType Name="lu_LocationType">
           <Key>
@@ -445,29 +450,6 @@ warning 6002: The table/view 'Quarters.dbo.vw_Quarters' does not have a primary 
           <NavigationProperty Name="Location" Relationship="Self.FK__NationalSite__Location__containingLocationId" FromRole="NationalSite" ToRole="Location" />
           <NavigationProperty Name="Location1" Relationship="Self.FK__NationalSite__Location__locationId" FromRole="NationalSite" ToRole="Location" />
         </EntityType>
-        <EntityType Name="Quarter">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="quarterTypeId" Type="Int32" Nullable="false" />
-          <Property Name="locationId" Type="Int32" Nullable="false" />
-          <Property Name="releaseDate" Type="DateTime" Precision="0" />
-          <Property Name="releaseOrder" Type="Int32" />
-          <Property Name="mintagePhiladelphia" Type="Int32" />
-          <Property Name="mintageDenver" Type="Int32" />
-          <Property Name="mintageTotal" Type="Int32" />
-          <Property Name="elementsDepicted" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="bannerText" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="caption1Text" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="caption2Text" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="engraver" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="imageFileName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Location" Relationship="Self.FK__Quarter__Location" FromRole="Quarter" ToRole="Location" />
-          <NavigationProperty Name="QuarterStatus" Relationship="Self.FK__QuarterStatus__Quarter" FromRole="Quarter" ToRole="QuarterStatus" />
-          <NavigationProperty Name="lu_QuarterType" Relationship="QuartersModel.FK__Quarter__lu_QuarterType" FromRole="Quarter" ToRole="lu_QuarterType" />
-        </EntityType>
         <EntityType Name="QuarterStatus">
           <Key>
             <PropertyRef Name="id" />
@@ -477,7 +459,7 @@ warning 6002: The table/view 'Quarters.dbo.vw_Quarters' does not have a primary 
           <Property Name="mintPhiladelphia" Type="Byte" Nullable="false" />
           <Property Name="mintDenver" Type="Byte" Nullable="false" />
           <Property Name="lastUpdate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Quarter" Relationship="Self.FK__QuarterStatus__Quarter" FromRole="QuarterStatus" ToRole="Quarter" />
+          <NavigationProperty Name="Quarter" Relationship="QuartersModel.FK__QuarterStatus__Quarter" FromRole="QuarterStatus" ToRole="Quarter" />
         </EntityType>
         <Association Name="FK__Location__lu_LocationType">
           <End Role="lu_LocationType" Type="Self.lu_LocationType" Multiplicity="1" />
@@ -515,35 +497,10 @@ warning 6002: The table/view 'Quarters.dbo.vw_Quarters' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Quarter__Location">
-          <End Role="Location" Type="Self.Location" Multiplicity="1" />
-          <End Role="Quarter" Type="Self.Quarter" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Location">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Quarter">
-              <PropertyRef Name="locationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__QuarterStatus__Quarter">
-          <End Role="Quarter" Type="Self.Quarter" Multiplicity="1" />
-          <End Role="QuarterStatus" Type="QuartersModel.QuarterStatus" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Quarter">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="QuarterStatus">
-              <PropertyRef Name="quarterId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="QuartersContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Locations" EntityType="Self.Location" />
           <EntitySet Name="lu_LocationType" EntityType="Self.lu_LocationType" />
           <EntitySet Name="NationalSites" EntityType="Self.NationalSite" />
-          <EntitySet Name="Quarters" EntityType="Self.Quarter" />
           <EntitySet Name="QuarterStatuses" EntityType="QuartersModel.QuarterStatus" />
           <AssociationSet Name="FK__Location__lu_LocationType" Association="Self.FK__Location__lu_LocationType">
             <End Role="lu_LocationType" EntitySet="lu_LocationType" />
@@ -556,14 +513,6 @@ warning 6002: The table/view 'Quarters.dbo.vw_Quarters' does not have a primary 
           <AssociationSet Name="FK__NationalSite__Location__locationId" Association="Self.FK__NationalSite__Location__locationId">
             <End Role="Location" EntitySet="Locations" />
             <End Role="NationalSite" EntitySet="NationalSites" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Quarter__Location" Association="Self.FK__Quarter__Location">
-            <End Role="Location" EntitySet="Locations" />
-            <End Role="Quarter" EntitySet="Quarters" />
-          </AssociationSet>
-          <AssociationSet Name="FK__QuarterStatus__Quarter" Association="Self.FK__QuarterStatus__Quarter">
-            <End Role="Quarter" EntitySet="Quarters" />
-            <End Role="QuarterStatus" EntitySet="QuarterStatuses" />
           </AssociationSet>
           <FunctionImport Name="sec_Delete_Location">
           <Parameter Name="id" Mode="In" Type="Int32" />
@@ -620,6 +569,7 @@ warning 6002: The table/view 'Quarters.dbo.vw_Quarters' does not have a primary 
             <Parameter Name="caption1Text" Mode="In" Type="String" />
             <Parameter Name="caption2Text" Mode="In" Type="String" />
             <Parameter Name="engraver" Mode="In" Type="String" />
+            <Parameter Name="notes" Mode="In" Type="String" />
             <Parameter Name="imageFileName" Mode="In" Type="String" />
             <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -689,6 +639,7 @@ warning 6002: The table/view 'Quarters.dbo.vw_Quarters' does not have a primary 
             <Parameter Name="caption1Text" Mode="In" Type="String" />
             <Parameter Name="caption2Text" Mode="In" Type="String" />
             <Parameter Name="engraver" Mode="In" Type="String" />
+            <Parameter Name="notes" Mode="In" Type="String" />
             <Parameter Name="imageFileName" Mode="In" Type="String" />
             <Parameter Name="lastUpdate" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -700,12 +651,21 @@ warning 6002: The table/view 'Quarters.dbo.vw_Quarters' does not have a primary 
           </FunctionImport>
           <FunctionImport Name="sec_Select_vw_Quarters" ReturnType="Collection(QuartersModel.sec_Select_vw_Quarters_Result)" />
           <EntitySet Name="lu_QuarterType" EntityType="QuartersModel.lu_QuarterType" />
+          <EntitySet Name="Users" EntityType="QuartersModel.User" />
+          <EntitySet Name="Quarters" EntityType="QuartersModel.Quarter" />
           <EntitySet Name="vw_Quarters" EntityType="QuartersModel.vw_Quarters" />
+          <AssociationSet Name="FK__Quarter__Location" Association="QuartersModel.FK__Quarter__Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Quarter" EntitySet="Quarters" />
+          </AssociationSet>
           <AssociationSet Name="FK__Quarter__lu_QuarterType" Association="QuartersModel.FK__Quarter__lu_QuarterType">
             <End Role="lu_QuarterType" EntitySet="lu_QuarterType" />
             <End Role="Quarter" EntitySet="Quarters" />
           </AssociationSet>
-          <EntitySet Name="Users" EntityType="QuartersModel.User" />
+          <AssociationSet Name="FK__QuarterStatus__Quarter" Association="QuartersModel.FK__QuarterStatus__Quarter">
+            <End Role="Quarter" EntitySet="Quarters" />
+            <End Role="QuarterStatus" EntitySet="QuarterStatuses" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sec_Insert_Location_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -907,6 +867,41 @@ warning 6002: The table/view 'Quarters.dbo.vw_Quarters' does not have a primary 
           <Property Name="lastUpdate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Quarters" Relationship="QuartersModel.FK__Quarter__lu_QuarterType" FromRole="lu_QuarterType" ToRole="Quarter" />
         </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="password" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Quarter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quarterTypeId" Type="Int32" Nullable="false" />
+          <Property Name="locationId" Type="Int32" Nullable="false" />
+          <Property Name="releaseDate" Type="DateTime" Precision="0" />
+          <Property Name="releaseOrder" Type="Int32" />
+          <Property Name="mintagePhiladelphia" Type="Int32" />
+          <Property Name="mintageDenver" Type="Int32" />
+          <Property Name="mintageTotal" Type="Int32" />
+          <Property Name="elementsDepicted" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="bannerText" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="caption1Text" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="caption2Text" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="engraver" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="imageFileName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Location" Relationship="QuartersModel.FK__Quarter__Location" FromRole="Quarter" ToRole="Location" />
+          <NavigationProperty Name="lu_QuarterType" Relationship="QuartersModel.FK__Quarter__lu_QuarterType" FromRole="Quarter" ToRole="lu_QuarterType" />
+          <NavigationProperty Name="QuarterStatus" Relationship="QuartersModel.FK__QuarterStatus__Quarter" FromRole="Quarter" ToRole="QuarterStatus" />
+        </EntityType>
         <EntityType Name="vw_Quarters">
           <Key>
             <PropertyRef Name="Quarter_Id" />
@@ -923,6 +918,7 @@ warning 6002: The table/view 'Quarters.dbo.vw_Quarters' does not have a primary 
           <Property Name="Quarter_Caption2Text" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Quarter_Engraver" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Quarter_ImageFileName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Quarter_Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="QuarterType_Id" Type="Int32" />
           <Property Name="QuarterType_Code" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
           <Property Name="QuarterType_ShortDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -942,6 +938,18 @@ warning 6002: The table/view 'Quarters.dbo.vw_Quarters' does not have a primary 
           <Property Name="QuarterStatus_MintPhiladelphia" Type="Byte" />
           <Property Name="QuarterStatus_MintDenver" Type="Byte" />
         </EntityType>
+        <Association Name="FK__Quarter__Location">
+          <End Type="QuartersModel.Location" Role="Location" Multiplicity="1" />
+          <End Type="QuartersModel.Quarter" Role="Quarter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Quarter">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Quarter__lu_QuarterType">
           <End Type="QuartersModel.lu_QuarterType" Role="lu_QuarterType" Multiplicity="1" />
           <End Type="QuartersModel.Quarter" Role="Quarter" Multiplicity="*" />
@@ -954,17 +962,18 @@ warning 6002: The table/view 'Quarters.dbo.vw_Quarters' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="userId" />
-            <PropertyRef Name="password" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
-        </EntityType>
+        <Association Name="FK__QuarterStatus__Quarter">
+          <End Type="QuartersModel.Quarter" Role="Quarter" Multiplicity="1" />
+          <End Type="QuartersModel.QuarterStatus" Role="QuarterStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quarter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="QuarterStatus">
+              <PropertyRef Name="quarterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1056,67 +1065,6 @@ warning 6002: The table/view 'Quarters.dbo.vw_Quarters' does not have a primary 
                   <ScalarProperty Name="id" ParameterName="id" Version="Current" />
                 </UpdateFunction>
                 <DeleteFunction FunctionName="QuartersModel.Store.sec_Delete_NationalSite">
-                  <ScalarProperty Name="id" ParameterName="id" />
-                </DeleteFunction>
-              </ModificationFunctionMapping>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Quarters">
-            <EntityTypeMapping TypeName="QuartersModel.Quarter">
-              <MappingFragment StoreEntitySet="Quarter">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="quarterTypeId" ColumnName="quarterTypeId" />
-                <ScalarProperty Name="locationId" ColumnName="locationId" />
-                <ScalarProperty Name="releaseDate" ColumnName="releaseDate" />
-                <ScalarProperty Name="releaseOrder" ColumnName="releaseOrder" />
-                <ScalarProperty Name="mintagePhiladelphia" ColumnName="mintagePhiladelphia" />
-                <ScalarProperty Name="mintageDenver" ColumnName="mintageDenver" />
-                <ScalarProperty Name="mintageTotal" ColumnName="mintageTotal" />
-                <ScalarProperty Name="elementsDepicted" ColumnName="elementsDepicted" />
-                <ScalarProperty Name="bannerText" ColumnName="bannerText" />
-                <ScalarProperty Name="caption1Text" ColumnName="caption1Text" />
-                <ScalarProperty Name="caption2Text" ColumnName="caption2Text" />
-                <ScalarProperty Name="engraver" ColumnName="engraver" />
-                <ScalarProperty Name="imageFileName" ColumnName="imageFileName" />
-                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-            <EntityTypeMapping TypeName="QuartersModel.Quarter">
-              <ModificationFunctionMapping>
-                <InsertFunction FunctionName="QuartersModel.Store.sec_Insert_Quarter">
-                  <ScalarProperty Name="lastUpdate" ParameterName="lastUpdate" />
-                  <ScalarProperty Name="imageFileName" ParameterName="imageFileName" />
-                  <ScalarProperty Name="engraver" ParameterName="engraver" />
-                  <ScalarProperty Name="caption2Text" ParameterName="caption2Text" />
-                  <ScalarProperty Name="caption1Text" ParameterName="caption1Text" />
-                  <ScalarProperty Name="bannerText" ParameterName="bannerText" />
-                  <ScalarProperty Name="elementsDepicted" ParameterName="elementsDepicted" />
-                  <ScalarProperty Name="mintageTotal" ParameterName="mintageTotal" />
-                  <ScalarProperty Name="mintageDenver" ParameterName="mintageDenver" />
-                  <ScalarProperty Name="mintagePhiladelphia" ParameterName="mintagePhiladelphia" />
-                  <ScalarProperty Name="releaseOrder" ParameterName="releaseOrder" />
-                  <ScalarProperty Name="releaseDate" ParameterName="releaseDate" />
-                  <ScalarProperty Name="locationId" ParameterName="locationId" />
-                  <ScalarProperty Name="quarterTypeId" ParameterName="quarterTypeId" />
-                </InsertFunction>
-                <UpdateFunction FunctionName="QuartersModel.Store.sec_Update_Quarter">
-                  <ScalarProperty Name="lastUpdate" ParameterName="lastUpdate" Version="Current" />
-                  <ScalarProperty Name="imageFileName" ParameterName="imageFileName" Version="Current" />
-                  <ScalarProperty Name="engraver" ParameterName="engraver" Version="Current" />
-                  <ScalarProperty Name="caption2Text" ParameterName="caption2Text" Version="Current" />
-                  <ScalarProperty Name="caption1Text" ParameterName="caption1Text" Version="Current" />
-                  <ScalarProperty Name="bannerText" ParameterName="bannerText" Version="Current" />
-                  <ScalarProperty Name="elementsDepicted" ParameterName="elementsDepicted" Version="Current" />
-                  <ScalarProperty Name="mintageTotal" ParameterName="mintageTotal" Version="Current" />
-                  <ScalarProperty Name="mintageDenver" ParameterName="mintageDenver" Version="Current" />
-                  <ScalarProperty Name="mintagePhiladelphia" ParameterName="mintagePhiladelphia" Version="Current" />
-                  <ScalarProperty Name="releaseOrder" ParameterName="releaseOrder" Version="Current" />
-                  <ScalarProperty Name="releaseDate" ParameterName="releaseDate" Version="Current" />
-                  <ScalarProperty Name="locationId" ParameterName="locationId" Version="Current" />
-                  <ScalarProperty Name="quarterTypeId" ParameterName="quarterTypeId" Version="Current" />
-                  <ScalarProperty Name="id" ParameterName="id" Version="Current" />
-                </UpdateFunction>
-                <DeleteFunction FunctionName="QuartersModel.Store.sec_Delete_Quarter">
                   <ScalarProperty Name="id" ParameterName="id" />
                 </DeleteFunction>
               </ModificationFunctionMapping>
@@ -1456,6 +1404,38 @@ warning 6002: The table/view 'Quarters.dbo.vw_Quarters' does not have a primary 
               </ModificationFunctionMapping>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="QuartersModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quarters">
+            <EntityTypeMapping TypeName="QuartersModel.Quarter">
+              <MappingFragment StoreEntitySet="Quarter">
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+                <ScalarProperty Name="imageFileName" ColumnName="imageFileName" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="engraver" ColumnName="engraver" />
+                <ScalarProperty Name="caption2Text" ColumnName="caption2Text" />
+                <ScalarProperty Name="caption1Text" ColumnName="caption1Text" />
+                <ScalarProperty Name="bannerText" ColumnName="bannerText" />
+                <ScalarProperty Name="elementsDepicted" ColumnName="elementsDepicted" />
+                <ScalarProperty Name="mintageTotal" ColumnName="mintageTotal" />
+                <ScalarProperty Name="mintageDenver" ColumnName="mintageDenver" />
+                <ScalarProperty Name="mintagePhiladelphia" ColumnName="mintagePhiladelphia" />
+                <ScalarProperty Name="releaseOrder" ColumnName="releaseOrder" />
+                <ScalarProperty Name="releaseDate" ColumnName="releaseDate" />
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="quarterTypeId" ColumnName="quarterTypeId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="vw_Quarters">
             <EntityTypeMapping TypeName="QuartersModel.vw_Quarters">
               <MappingFragment StoreEntitySet="vw_Quarters">
@@ -1477,6 +1457,7 @@ warning 6002: The table/view 'Quarters.dbo.vw_Quarters' does not have a primary 
                 <ScalarProperty Name="QuarterType_ShortDescription" ColumnName="QuarterType_ShortDescription" />
                 <ScalarProperty Name="QuarterType_Code" ColumnName="QuarterType_Code" />
                 <ScalarProperty Name="QuarterType_Id" ColumnName="QuarterType_Id" />
+                <ScalarProperty Name="Quarter_Notes" ColumnName="Quarter_Notes" />
                 <ScalarProperty Name="Quarter_ImageFileName" ColumnName="Quarter_ImageFileName" />
                 <ScalarProperty Name="Quarter_Engraver" ColumnName="Quarter_Engraver" />
                 <ScalarProperty Name="Quarter_Caption2Text" ColumnName="Quarter_Caption2Text" />
@@ -1489,16 +1470,6 @@ warning 6002: The table/view 'Quarters.dbo.vw_Quarters' does not have a primary 
                 <ScalarProperty Name="Quarter_ReleaseOrder" ColumnName="Quarter_ReleaseOrder" />
                 <ScalarProperty Name="Quarter_ReleaseDate" ColumnName="Quarter_ReleaseDate" />
                 <ScalarProperty Name="Quarter_Id" ColumnName="Quarter_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="QuartersModel.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

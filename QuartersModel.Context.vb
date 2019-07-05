@@ -27,11 +27,11 @@ Partial Public Class QuartersContext
     Public Overridable Property Locations() As DbSet(Of Location)
     Public Overridable Property lu_LocationType() As DbSet(Of lu_LocationType)
     Public Overridable Property NationalSites() As DbSet(Of NationalSite)
-    Public Overridable Property Quarters() As DbSet(Of Quarter)
     Public Overridable Property QuarterStatuses() As DbSet(Of QuarterStatus)
     Public Overridable Property lu_QuarterType() As DbSet(Of lu_QuarterType)
-    Public Overridable Property vw_Quarters() As DbSet(Of vw_Quarters)
     Public Overridable Property Users() As DbSet(Of User)
+    Public Overridable Property Quarters() As DbSet(Of Quarter)
+    Public Overridable Property vw_Quarters() As DbSet(Of vw_Quarters)
 
     Public Overridable Function sec_Delete_Location(id As Nullable(Of Integer)) As Integer
         Dim idParameter As ObjectParameter = If(id.HasValue, New ObjectParameter("id", id), New ObjectParameter("id", GetType(Integer)))
@@ -117,7 +117,7 @@ Partial Public Class QuartersContext
         Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of sec_Insert_NationalSite_Result)("sec_Insert_NationalSite", locationIdParameter, containingLocationIdParameter, lastUpdateParameter)
     End Function
 
-    Public Overridable Function sec_Insert_Quarter(quarterTypeId As Nullable(Of Integer), locationId As Nullable(Of Integer), releaseDate As Nullable(Of Date), releaseOrder As Nullable(Of Integer), mintagePhiladelphia As Nullable(Of Integer), mintageDenver As Nullable(Of Integer), mintageTotal As Nullable(Of Integer), elementsDepicted As String, bannerText As String, caption1Text As String, caption2Text As String, engraver As String, imageFileName As String, lastUpdate As Nullable(Of Date)) As ObjectResult(Of sec_Insert_Quarter_Result)
+    Public Overridable Function sec_Insert_Quarter(quarterTypeId As Nullable(Of Integer), locationId As Nullable(Of Integer), releaseDate As Nullable(Of Date), releaseOrder As Nullable(Of Integer), mintagePhiladelphia As Nullable(Of Integer), mintageDenver As Nullable(Of Integer), mintageTotal As Nullable(Of Integer), elementsDepicted As String, bannerText As String, caption1Text As String, caption2Text As String, engraver As String, notes As String, imageFileName As String, lastUpdate As Nullable(Of Date)) As ObjectResult(Of sec_Insert_Quarter_Result)
         Dim quarterTypeIdParameter As ObjectParameter = If(quarterTypeId.HasValue, New ObjectParameter("quarterTypeId", quarterTypeId), New ObjectParameter("quarterTypeId", GetType(Integer)))
 
         Dim locationIdParameter As ObjectParameter = If(locationId.HasValue, New ObjectParameter("locationId", locationId), New ObjectParameter("locationId", GetType(Integer)))
@@ -142,11 +142,13 @@ Partial Public Class QuartersContext
 
         Dim engraverParameter As ObjectParameter = If(engraver IsNot Nothing, New ObjectParameter("engraver", engraver), New ObjectParameter("engraver", GetType(String)))
 
+        Dim notesParameter As ObjectParameter = If(notes IsNot Nothing, New ObjectParameter("notes", notes), New ObjectParameter("notes", GetType(String)))
+
         Dim imageFileNameParameter As ObjectParameter = If(imageFileName IsNot Nothing, New ObjectParameter("imageFileName", imageFileName), New ObjectParameter("imageFileName", GetType(String)))
 
         Dim lastUpdateParameter As ObjectParameter = If(lastUpdate.HasValue, New ObjectParameter("lastUpdate", lastUpdate), New ObjectParameter("lastUpdate", GetType(Date)))
 
-        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of sec_Insert_Quarter_Result)("sec_Insert_Quarter", quarterTypeIdParameter, locationIdParameter, releaseDateParameter, releaseOrderParameter, mintagePhiladelphiaParameter, mintageDenverParameter, mintageTotalParameter, elementsDepictedParameter, bannerTextParameter, caption1TextParameter, caption2TextParameter, engraverParameter, imageFileNameParameter, lastUpdateParameter)
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of sec_Insert_Quarter_Result)("sec_Insert_Quarter", quarterTypeIdParameter, locationIdParameter, releaseDateParameter, releaseOrderParameter, mintagePhiladelphiaParameter, mintageDenverParameter, mintageTotalParameter, elementsDepictedParameter, bannerTextParameter, caption1TextParameter, caption2TextParameter, engraverParameter, notesParameter, imageFileNameParameter, lastUpdateParameter)
     End Function
 
     Public Overridable Function sec_Insert_QuarterStatus(quarterId As Nullable(Of Integer), mintPhiladelphia As Nullable(Of Byte), mintDenver As Nullable(Of Byte), lastUpdate As Nullable(Of Date)) As ObjectResult(Of sec_Insert_QuarterStatus_Result)
@@ -253,7 +255,7 @@ Partial Public Class QuartersContext
         Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of sec_Update_NationalSite_Result)("sec_Update_NationalSite", idParameter, locationIdParameter, containingLocationIdParameter, lastUpdateParameter)
     End Function
 
-    Public Overridable Function sec_Update_Quarter(id As Nullable(Of Integer), quarterTypeId As Nullable(Of Integer), locationId As Nullable(Of Integer), releaseDate As Nullable(Of Date), releaseOrder As Nullable(Of Integer), mintagePhiladelphia As Nullable(Of Integer), mintageDenver As Nullable(Of Integer), mintageTotal As Nullable(Of Integer), elementsDepicted As String, bannerText As String, caption1Text As String, caption2Text As String, engraver As String, imageFileName As String, lastUpdate As Nullable(Of Date)) As ObjectResult(Of sec_Update_Quarter_Result)
+    Public Overridable Function sec_Update_Quarter(id As Nullable(Of Integer), quarterTypeId As Nullable(Of Integer), locationId As Nullable(Of Integer), releaseDate As Nullable(Of Date), releaseOrder As Nullable(Of Integer), mintagePhiladelphia As Nullable(Of Integer), mintageDenver As Nullable(Of Integer), mintageTotal As Nullable(Of Integer), elementsDepicted As String, bannerText As String, caption1Text As String, caption2Text As String, engraver As String, notes As String, imageFileName As String, lastUpdate As Nullable(Of Date)) As ObjectResult(Of sec_Update_Quarter_Result)
         Dim idParameter As ObjectParameter = If(id.HasValue, New ObjectParameter("id", id), New ObjectParameter("id", GetType(Integer)))
 
         Dim quarterTypeIdParameter As ObjectParameter = If(quarterTypeId.HasValue, New ObjectParameter("quarterTypeId", quarterTypeId), New ObjectParameter("quarterTypeId", GetType(Integer)))
@@ -280,11 +282,13 @@ Partial Public Class QuartersContext
 
         Dim engraverParameter As ObjectParameter = If(engraver IsNot Nothing, New ObjectParameter("engraver", engraver), New ObjectParameter("engraver", GetType(String)))
 
+        Dim notesParameter As ObjectParameter = If(notes IsNot Nothing, New ObjectParameter("notes", notes), New ObjectParameter("notes", GetType(String)))
+
         Dim imageFileNameParameter As ObjectParameter = If(imageFileName IsNot Nothing, New ObjectParameter("imageFileName", imageFileName), New ObjectParameter("imageFileName", GetType(String)))
 
         Dim lastUpdateParameter As ObjectParameter = If(lastUpdate.HasValue, New ObjectParameter("lastUpdate", lastUpdate), New ObjectParameter("lastUpdate", GetType(Date)))
 
-        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of sec_Update_Quarter_Result)("sec_Update_Quarter", idParameter, quarterTypeIdParameter, locationIdParameter, releaseDateParameter, releaseOrderParameter, mintagePhiladelphiaParameter, mintageDenverParameter, mintageTotalParameter, elementsDepictedParameter, bannerTextParameter, caption1TextParameter, caption2TextParameter, engraverParameter, imageFileNameParameter, lastUpdateParameter)
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of sec_Update_Quarter_Result)("sec_Update_Quarter", idParameter, quarterTypeIdParameter, locationIdParameter, releaseDateParameter, releaseOrderParameter, mintagePhiladelphiaParameter, mintageDenverParameter, mintageTotalParameter, elementsDepictedParameter, bannerTextParameter, caption1TextParameter, caption2TextParameter, engraverParameter, notesParameter, imageFileNameParameter, lastUpdateParameter)
     End Function
 
     Public Overridable Function sec_Update_QuarterStatus(quarterId As Nullable(Of Integer), mintPhiladelphia As Nullable(Of Byte), mintDenver As Nullable(Of Byte), lastUpdate As Nullable(Of Date)) As ObjectResult(Of sec_Update_QuarterStatus_Result)

@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	console.log('v0.7');
 	var brazzersLinks = [];
 	var brazzersLinksProcessed = [];
 	var brazzersSceneData = [];
@@ -8,33 +9,40 @@ $(document).ready(function() {
 	//Get the links
 	///////////////////////////////////////////////
 	$.when(getTextFile('data/bLinks.txt')).done(function(data){
-		//console.log('DONE getting bLinks.txt');
+		console.log('Step #1 - DONE getting bLinks.txt');
 		
 		brazzersLinks = data.split('\r\n');
 		
 		if (brazzersLinks.length > 0) {
-			console.log('brazzersLinks: [' + brazzersLinks.length + ']');
+			console.log('----brazzersLinks: [' + brazzersLinks.length + ']');
 		} else {
-			console.log('!!-ERROR-!!' + '\t' + 'brazzersLinks data not found!');
+			console.log('----!!-ERROR-!!' + '\t' + 'brazzersLinks data not found!');
 		}
+		
+		console.log('');
 		
 		///////////////////////////////////////////////
 		//Get the processed links
 		///////////////////////////////////////////////
 		$.when(getTextFile('data/bLinksProcessed.txt')).done(function(data){
-			//console.log('DONE getting bLinksProcessed.txt');
+			console.log('Step #2 - DONE getting bLinksProcessed.txt');
 			
 			brazzersLinksProcessed = data.split('\r\n');
 			
 			if (brazzersLinksProcessed.length > 0) {
-				console.log('brazzersLinksProcessed: [' + brazzersLinksProcessed.length + ']');
+				console.log('----brazzersLinksProcessed: [' + brazzersLinksProcessed.length + ']');
 			} else {
-				console.log('!!-ERROR-!!' + '\t' + 'brazzersLinksProcessed data not found!');
+				console.log('----!!-ERROR-!!' + '\t' + 'brazzersLinksProcessed data not found!');
 			}
 			
+			console.log('');
+			
 			//Get the list of unprocessed links
+			console.log('Step #3 - DONE getting brazzersLinksUnprocessed');
 			brazzersLinksUnprocessed = brazzersLinks.subtract(brazzersLinksProcessed);
-			console.log('brazzersLinksUnprocessed: [' + brazzersLinksUnprocessed.length + ']');
+			console.log('----brazzersLinksUnprocessed: [' + brazzersLinksUnprocessed.length + ']');
+			
+			console.log('');
 			
 			///////////////////////////////////////////////
 			//Get the scene data
@@ -58,6 +66,8 @@ $(document).ready(function() {
 					$('div.bg-wrapper').removeClass('bg-wrapper');
 					
 					brazzersLinks = brazzersLinks.union(getSceneLinks());
+					//Append the data to the text file
+					appendDataToTextFile(brazzersLinks.join('\r\n'), 'data/bLinks.txt');
 					
 					var timer;
 					
@@ -68,14 +78,14 @@ $(document).ready(function() {
 							var theNextPageLink = $('li.paginationui-nav.next a').attr('href');
 							var currentOrigin = window.location.origin;
 							window.location.href = currentOrigin + theNextPageLink;
-						}, 2000);
+						}, 5000);
 					}
 
-					if ($('li.paginationui-nav.next').length > 0 && window.location.href.indexOf('page/60') < 0) {
-						console.log('clicking next page');
+					if ($('li.paginationui-nav.next').length > 0 && window.location.href.indexOf('page/10') < 0) {
+						console.log('clicking next page!!!');
 						clickNextScene();
 					} else {
-						console.log('not clicking next page');
+						console.log('not clicking next page!!!');
 						clearTimeout(timer);
 						logOutput();
 					}
@@ -85,7 +95,7 @@ $(document).ready(function() {
 					$('div.bg-wrapper').removeClass('bg-wrapper');
 
 					//Get scene data for each link
-					//console.log('\t' + 'NOW get the scene data');
+					console.log('\t' + 'NOW get the scene data');
 					getSceneData(brazzersLinksUnprocessed.first(300));
 					//console.log(brazzersLinksUnprocessed.join('\n'));
 				}
@@ -120,7 +130,7 @@ function getSceneData(unprocessedLinks) {
     
 	var doProcess = true;
 	
-	console.log('unprocessedLinks.length: ' + totalCounter);
+	console.log('----unprocessedLinks.length: ' + totalCounter);
 	
 	if (doProcess) {
 		$.each(unprocessedLinks, function(i, theUrl) {
@@ -225,6 +235,7 @@ function logOutput() {
 // Get scene links from the page
 //////////////////////////////////////////////////////////////////////////////////////////////
 function getSceneLinks() {
+	console.log('getting scene links');
 	var returnData = [];
 	
 	$('div.scene-card-title a').each(function() {

@@ -10,14 +10,20 @@
     <link href="Content/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/css_VerticalNavBar.css" rel="stylesheet" />
     <link href="css/animate.min.css" rel="stylesheet"/>
+    <link href="Content/magnific-popup.css" rel="stylesheet"/>
+    <link href="css/css_MagnificPopup.css" rel="stylesheet"/>
+    <link href="css/remodal.css" rel="stylesheet"/>
+    <link href="css/remodal-default-theme.css" rel="stylesheet" />
 
-    <script src="Scripts/jquery-2.2.3.min.js"></script>
+    <script src="Scripts/jquery-3.1.0.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
 
     <script src="Scripts/handlebars.min.js"></script>
     <script src="Scripts/sugar.min.js"></script>
     <script src="Scripts/moment.min.js"></script>
     <script src="js/jquery.storageapi.min.js"></script>
+    <script src="Scripts/jquery.magnific-popup.min.js"></script>
+    <script src="js/remodal.min.js"></script>
 
     <script id="tab-template" type="text/x-handlebars-template">
         {{#each this}}
@@ -36,8 +42,13 @@
             <div class="panel panel-primary filterable">
                 <div class="panel-heading">
                     <h3 class="panel-title">{{longDescription}}</h3>
-                    <div class="pull-right">
+                    <div class="pull-right" style="padding-left:5px;">
                         <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span></button>
+                    </div>
+                    <div class="btn-group-xs pull-right" role="group" aria-label="...">
+                        <button id="btnAll" type="button" class="btn btn-default" data-quartertype="{{code}}">All</button>
+                        <button id="btnCollected" type="button" class="btn btn-default" data-quartertype="{{code}}">Collected</button>
+                        <button id="btnMissing" type="button" class="btn btn-default" data-quartertype="{{code}}">Missing</button>
                     </div>
                 </div>
                 <table class="table quarter-status" data-quartertype="{{code}}">
@@ -64,14 +75,137 @@
         {{/each}}
     </script>
 
-    <script id="quarter-row-template" type="text/x-handlebars-template">
+<script id="quarter-row-template" type="text/x-handlebars-template">
         {{#each this}}
         <tr data-quartertype="{{QuarterType_Code}}">
             <td>
-                <img class="img-responsive" src="images/quarters/{{QuarterType_Code}}/150x/{{Quarter_ImageFileName}}" alt="{{Location_Name}}" />
+                <a class="img-quarter" href="images/quarters/{{QuarterType_Code}}/750x/{{Quarter_ImageFileName}}">
+                    <img class="img-responsive" src="images/quarters/{{QuarterType_Code}}/150x/{{Quarter_ImageFileName}}" alt="{{Location_Name}}" />
+                </a>
             </td>
             <td>
-                {{Location_Name}}
+                <a href="#div-info-{{Quarter_Id}}">{{Location_Name}}</a>
+                <div class="div-remodal remodal-is-closed" data-remodal-id="div-info-{{Quarter_Id}}">
+                    <button data-remodal-action="close" class="remodal-close"></button>
+                    
+                    <h3 class="text-left">Quarter Statistics</h3>
+                    <dl class="dl-horizontal">
+                        <!-------------------------------------------------------------------------------------->
+                        <!-- Quarter Stats -->
+                        <!-------------------------------------------------------------------------------------->
+                        <!-- release-date -->
+                        <dt class="dt-release-date">Release Date</dt>
+                        <dd class="text-left dd-release-date">{{dateFormat Quarter_ReleaseDate format="YYYY-MM-DD"}}</dd>
+
+                        <!-- release-order -->
+                        <dt class="dt-release-order">Release Order</dt>
+                        <dd class="text-left dd-release-order">{{Quarter_ReleaseOrder}}</dd>
+
+                        <!-- mintage-philadelphia -->
+                        {{#if Quarter_MintagePhiladelphia}}
+                        <dt class="dt-mintage-philadelphia">Mintage (P)</dt>
+                        <dd class="text-left dd-mintage-philadelphia">{{addCommas Quarter_MintagePhiladelphia}}</dd>
+                        {{/if}}
+
+                        <!-- mintage-denver -->
+                        {{#if Quarter_MintageDenver}}
+                        <dt class="dt-mintage-denver">Mintage (D)</dt>
+                        <dd class="text-left dd-mintage-denver">{{addCommas Quarter_MintageDenver}}</dd>
+                        {{/if}}
+
+                        <!-- mintage-total -->
+                        {{#if Quarter_MintageTotal}}
+                        <dt class="dt-mintage-total">Mintage Total</dt>
+                        <dd class="text-left dd-mintage-total">{{addCommas Quarter_MintageTotal}}</dd>
+                        {{/if}}
+                    </dl>
+                    <br />
+
+
+                    <h3 class="text-left">Quarter Design Info</h3>
+                    <dl class="dl-horizontal">
+                        <!-------------------------------------------------------------------------------------->
+                        <!-- Quarter Design Info -->
+                        <!-------------------------------------------------------------------------------------->
+                        <!-- elements-depicted -->
+                        {{#if Quarter_ElementsDepicted}}
+                        <dt class="dt-elements-depicted">Elements Depicted</dt>
+                        <dd class="text-left dd-elements-depicted">{{Quarter_ElementsDepicted}}</dd>
+                        {{/if}}
+
+                        <!-- banner-text -->
+                        {{#if Quarter_BannerText}}
+                        <dt class="dt-banner-text">Banner Text</dt>
+                        <dd class="text-left dd-banner-text">{{Quarter_BannerText}}</dd>
+                        {{/if}}
+
+                        <!-- Caption #1 Text -->
+                        {{#if Quarter_Caption1Text}}
+                        <dt class="dt-caption1text">Caption #1 Text</dt>
+                        <dd class="text-left dd-caption1text">{{Quarter_Caption1Text}}</dd>
+                        {{/if}}
+
+                        <!-- Caption #2 Text -->
+                        {{#if Quarter_Caption2Text}}
+                        <dt class="dt-caption2text">Caption #2 Text</dt>
+                        <dd class="text-left dd-caption2text">{{Quarter_Caption2Text}}</dd>
+                        {{/if}}
+
+                        <!-- engraver -->
+                        {{#if Quarter_Engraver}}
+                        <dt class="dt-engraver">Engraver</dt>
+                        <dd class="text-left dd-engraver">{{Quarter_Engraver}}</dd>
+                        {{/if}}
+                        
+                        <!-- engraver -->
+                        {{#if Quarter_Notes}}
+                        <dt class="dt-notes">Notes</dt>
+                        <dd class="text-left dd-notes">{{Quarter_Notes}}</dd>
+                        {{/if}}
+                    </dl>
+                    <br />
+
+                        
+                    {{#if_eq QuarterType_Code "STT"}}
+                    <h3 class="text-left">State Info</h3>
+                    <dl class="dl-horizontal">
+                        <!-------------------------------------------------------------------------------------->
+                        <!-- State Info -->
+                        <!-------------------------------------------------------------------------------------->
+                        <!-- Location Official-date -->
+                        <dt class="dt-location-official-date">Official Statehood Date</dt>
+                        <dd class="text-left dd-location-official-date">{{dateFormat Location_OfficialDate format="YYYY-MM-DD"}}</dd>
+                    </dl>
+                    {{/if_eq}}
+                        
+                    {{#if_eq QuarterType_Code "TTY"}}
+                    <h3 class="text-left">District/Territory Info</h3>
+                    <dl class="dl-horizontal">
+                        <!-------------------------------------------------------------------------------------->
+                        <!-- District/Territory Info -->
+                        <!-------------------------------------------------------------------------------------->
+                        <!-- Location Official-date -->
+                        <dt class="dt-location-official-date">Official Territory Date</dt>
+                        <dd class="text-left dd-location-official-date">{{dateFormat Location_OfficialDate format="YYYY-MM-DD"}}</dd>
+                    </dl>
+                    {{/if_eq}}
+                        
+                    {{#if_eq QuarterType_Code "ATB"}}
+                    <h3 class="text-left">National Park/Site Info</h3>
+                    <dl class="dl-horizontal">
+                        <!-------------------------------------------------------------------------------------->
+                        <!-- National Park/Site Info -->
+                        <!-------------------------------------------------------------------------------------->
+                        <!-- Location Official-date -->
+                        <dt class="dt-location-official-date">Official Site Date</dt>
+                        <dd class="text-left dd-location-official-date">{{dateFormat Location_OfficialDate format="YYYY-MM-DD"}}</dd>
+
+                        <!-- containing-location-name -->
+                        <dt class="dt-containing-location-name">State</dt>
+                        <dd class="text-left dd-containing-location-name">{{ContainingLocation_Name}}</dd>
+                    {{/if_eq}}
+                    </dl>
+                </div>
             </td>
             <td data-quarterstatustype="P">
                 <div class="material-switch">
@@ -93,7 +227,7 @@
 </head>
 <body>
 
-<div class="container">
+<div class="container remodal-bg">
     <div class="row">
         <div id="divTabs" class="col-xs-2 col-sm-2 col-md-2 col-lg-2 bhoechie-tab-menu">
         </div>

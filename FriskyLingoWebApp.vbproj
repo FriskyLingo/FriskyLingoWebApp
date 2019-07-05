@@ -47,6 +47,10 @@
     <ExcludeGeneratedDebugSymbol>false</ExcludeGeneratedDebugSymbol>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -55,8 +59,36 @@
       <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Google.Apis, Version=1.15.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.1.15.0\lib\net45\Google.Apis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.15.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Auth.1.15.0\lib\net45\Google.Apis.Auth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.15.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Auth.1.15.0\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.15.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Core.1.15.0\lib\net45\Google.Apis.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.15.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.1.15.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Sheets.v4, Version=1.15.0.581, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Sheets.v4.1.15.0.581\lib\portable-net45+netcore45+wpa81+wp8\Google.Apis.Sheets.v4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -70,6 +102,10 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
+    <Reference Include="Zlib.Portable, Version=1.11.0.0, Culture=neutral, PublicKeyToken=431cba815f6a8b5b, processorArchitecture=MSIL">
+      <HintPath>packages\Zlib.Portable.Signed.1.11.0\lib\portable-net4+sl5+wp8+win8+wpa81+MonoTouch+MonoAndroid\Zlib.Portable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="packages\" />
@@ -98,13 +134,18 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="audiojs\audio.min.js" />
+    <Content Include="audiojs\audiojs.swf" />
+    <Content Include="audiojs\player-graphics.gif" />
     <Content Include="Basketball.html" />
+    <Content Include="bmw-search.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\magnific-popup.css" />
     <Content Include="Content\ratchet-theme-android.css" />
     <Content Include="Content\ratchet-theme-android.min.css" />
     <Content Include="Content\ratchet-theme-ios.css" />
@@ -114,10 +155,14 @@
     <Content Include="Content\Site.css" />
     <Content Include="css\animate.min.css" />
     <Content Include="css\css_Custom.css" />
+    <Content Include="css\css_MagnificPopup.css" />
+    <Content Include="css\css_MusicPlaylist.css" />
     <Content Include="css\css_VerticalNavBar.css" />
     <Content Include="css\lfm_master.css" />
     <Content Include="css\lfm_now.css" />
     <Content Include="css\lfm_whittle.css" />
+    <Content Include="css\remodal-default-theme.css" />
+    <Content Include="css\remodal.css" />
     <Content Include="data\babesData.txt" />
     <Content Include="data\babesLinks.txt" />
     <Content Include="data\babesLinksProcessed.txt" />
@@ -136,6 +181,13 @@
     <Content Include="data\ExcludedSceneIds.txt" />
     <Content Include="data\naData.txt" />
     <Content Include="data\rkData.txt" />
+    <Content Include="client_secret.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="data\rkData_v2.txt" />
     <Content Include="data\rkLinks.txt" />
     <Content Include="data\rkLinksProcessed.txt" />
@@ -181,41 +233,11 @@
     <Content Include="images\quarters\ATB\150x\ATB_2016_33_HF_2016-06-06_1944-06-30.png" />
     <Content Include="images\quarters\ATB\150x\ATB_2016_34_TR_2016-08-29_1946-02-25.png" />
     <Content Include="images\quarters\ATB\150x\ATB_2016_35_ML_2016-11-14_1948-04-28.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2010_1_HS_2010-04-19_1832-04-20.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2010_2_YS_2010-06-01_1872-03-01.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2010_3_YT_2010-07-26_1890-10-01.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2010_4_CY_2010-09-20_1893-02-20.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2010_5_MH_2010-11-15_1893-09-28.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2011_10_CS_2011-11-14_1902-07-01.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2011_6_GG_2011-01-24_1895-02-11.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2011_7_GC_2011-04-04_1897-02-22.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2011_8_OL_2011-06-13_1897-02-22.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2011_9_VB_2011-08-29_1899-02-21.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2012_11_EY_2012-01-23_1903-01-17.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2012_12_CC_2012-04-02_1907-03-11.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2012_13_AC_2012-06-11_1916-07-08.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2012_14_HV_2012-08-27_1916-08-01.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2012_15_DL_2012-11-05_1917-02-26.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2013_16_WM_2013-01-28_1918-05-16.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2013_17_PV_2013-04-01_1919-03-03.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2013_18_GB_2013-06-10_1922-01-24.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2013_19_FM_2013-08-26_1925-03-03.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2013_20_MR_2013-11-04_1925-03-03.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2014_21_SM_2014-01-27_1926-05-22.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2014_22_SH_2014-03-31_1926-05-22.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2014_23_AH_2014-06-09_1929-04-12.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2014_24_GS_2014-08-25_1932-03-17.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2014_25_EG_2014-11-03_1934-05-30.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2015_26_HD_2015-02-09_1936-03-19.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2015_27_KE_2015-04-13_1936-06-03.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2015_28_BR_2015-06-08_1936-06-30.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2015_29_BH_2015-09-14_1937-06-22.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2015_30_ST_2015-11-16_1938-06-01.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2016_31_SW_2016-02-01_1939-09-06.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2016_32_CG_2016-04-04_1940-06-11.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2016_33_HF_2016-06-06_1944-06-30.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2016_34_TR_2016-08-29_1946-02-25.png" />
-    <Content Include="images\quarters\ATB\180x\ATB_2016_35_ML_2016-11-14_1948-04-28.png" />
+    <Content Include="images\quarters\ATB\150x\ATB_2017_36_EM_2017-02-06_1949-10-25.png" />
+    <Content Include="images\quarters\ATB\150x\ATB_2017_37_FD_2017-04-03_1962-09-05.png" />
+    <Content Include="images\quarters\ATB\150x\ATB_2017_38_OZ_2017-06-05_1964-08-27.png" />
+    <Content Include="images\quarters\ATB\150x\ATB_2017_39_EI_2017-08-28_1965-05-11.png" />
+    <Content Include="images\quarters\ATB\150x\ATB_2017_40_GR_2017-11-13_1966-07-23.png" />
     <Content Include="images\quarters\ATB\240x\ATB_2010_1_HS_2010-04-19_1832-04-20.png" />
     <Content Include="images\quarters\ATB\240x\ATB_2010_2_YS_2010-06-01_1872-03-01.png" />
     <Content Include="images\quarters\ATB\240x\ATB_2010_3_YT_2010-07-26_1890-10-01.png" />
@@ -251,146 +273,11 @@
     <Content Include="images\quarters\ATB\240x\ATB_2016_33_HF_2016-06-06_1944-06-30.png" />
     <Content Include="images\quarters\ATB\240x\ATB_2016_34_TR_2016-08-29_1946-02-25.png" />
     <Content Include="images\quarters\ATB\240x\ATB_2016_35_ML_2016-11-14_1948-04-28.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2010_1_HS_2010-04-19_1832-04-20.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2010_2_YS_2010-06-01_1872-03-01.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2010_3_YT_2010-07-26_1890-10-01.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2010_4_CY_2010-09-20_1893-02-20.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2010_5_MH_2010-11-15_1893-09-28.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2011_10_CS_2011-11-14_1902-07-01.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2011_6_GG_2011-01-24_1895-02-11.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2011_7_GC_2011-04-04_1897-02-22.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2011_8_OL_2011-06-13_1897-02-22.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2011_9_VB_2011-08-29_1899-02-21.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2012_11_EY_2012-01-23_1903-01-17.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2012_12_CC_2012-04-02_1907-03-11.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2012_13_AC_2012-06-11_1916-07-08.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2012_14_HV_2012-08-27_1916-08-01.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2012_15_DL_2012-11-05_1917-02-26.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2013_16_WM_2013-01-28_1918-05-16.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2013_17_PV_2013-04-01_1919-03-03.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2013_18_GB_2013-06-10_1922-01-24.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2013_19_FM_2013-08-26_1925-03-03.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2013_20_MR_2013-11-04_1925-03-03.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2014_21_SM_2014-01-27_1926-05-22.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2014_22_SH_2014-03-31_1926-05-22.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2014_23_AH_2014-06-09_1929-04-12.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2014_24_GS_2014-08-25_1932-03-17.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2014_25_EG_2014-11-03_1934-05-30.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2015_26_HD_2015-02-09_1936-03-19.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2015_27_KE_2015-04-13_1936-06-03.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2015_28_BR_2015-06-08_1936-06-30.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2015_29_BH_2015-09-14_1937-06-22.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2015_30_ST_2015-11-16_1938-06-01.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2016_31_SW_2016-02-01_1939-09-06.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2016_32_CG_2016-04-04_1940-06-11.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2016_33_HF_2016-06-06_1944-06-30.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2016_34_TR_2016-08-29_1946-02-25.png" />
-    <Content Include="images\quarters\ATB\360x\ATB_2016_35_ML_2016-11-14_1948-04-28.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2010_1_HS_2010-04-19_1832-04-20.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2010_2_YS_2010-06-01_1872-03-01.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2010_3_YT_2010-07-26_1890-10-01.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2010_4_CY_2010-09-20_1893-02-20.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2010_5_MH_2010-11-15_1893-09-28.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2011_10_CS_2011-11-14_1902-07-01.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2011_6_GG_2011-01-24_1895-02-11.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2011_7_GC_2011-04-04_1897-02-22.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2011_8_OL_2011-06-13_1897-02-22.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2011_9_VB_2011-08-29_1899-02-21.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2012_11_EY_2012-01-23_1903-01-17.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2012_12_CC_2012-04-02_1907-03-11.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2012_13_AC_2012-06-11_1916-07-08.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2012_14_HV_2012-08-27_1916-08-01.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2012_15_DL_2012-11-05_1917-02-26.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2013_16_WM_2013-01-28_1918-05-16.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2013_17_PV_2013-04-01_1919-03-03.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2013_18_GB_2013-06-10_1922-01-24.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2013_19_FM_2013-08-26_1925-03-03.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2013_20_MR_2013-11-04_1925-03-03.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2014_21_SM_2014-01-27_1926-05-22.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2014_22_SH_2014-03-31_1926-05-22.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2014_23_AH_2014-06-09_1929-04-12.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2014_24_GS_2014-08-25_1932-03-17.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2014_25_EG_2014-11-03_1934-05-30.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2015_26_HD_2015-02-09_1936-03-19.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2015_27_KE_2015-04-13_1936-06-03.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2015_28_BR_2015-06-08_1936-06-30.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2015_29_BH_2015-09-14_1937-06-22.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2015_30_ST_2015-11-16_1938-06-01.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2016_31_SW_2016-02-01_1939-09-06.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2016_32_CG_2016-04-04_1940-06-11.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2016_33_HF_2016-06-06_1944-06-30.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2016_34_TR_2016-08-29_1946-02-25.png" />
-    <Content Include="images\quarters\ATB\480x\ATB_2016_35_ML_2016-11-14_1948-04-28.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2010_1_HS_2010-04-19_1832-04-20.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2010_2_YS_2010-06-01_1872-03-01.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2010_3_YT_2010-07-26_1890-10-01.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2010_4_CY_2010-09-20_1893-02-20.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2010_5_MH_2010-11-15_1893-09-28.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2011_10_CS_2011-11-14_1902-07-01.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2011_6_GG_2011-01-24_1895-02-11.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2011_7_GC_2011-04-04_1897-02-22.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2011_8_OL_2011-06-13_1897-02-22.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2011_9_VB_2011-08-29_1899-02-21.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2012_11_EY_2012-01-23_1903-01-17.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2012_12_CC_2012-04-02_1907-03-11.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2012_13_AC_2012-06-11_1916-07-08.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2012_14_HV_2012-08-27_1916-08-01.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2012_15_DL_2012-11-05_1917-02-26.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2013_16_WM_2013-01-28_1918-05-16.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2013_17_PV_2013-04-01_1919-03-03.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2013_18_GB_2013-06-10_1922-01-24.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2013_19_FM_2013-08-26_1925-03-03.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2013_20_MR_2013-11-04_1925-03-03.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2014_21_SM_2014-01-27_1926-05-22.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2014_22_SH_2014-03-31_1926-05-22.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2014_23_AH_2014-06-09_1929-04-12.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2014_24_GS_2014-08-25_1932-03-17.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2014_25_EG_2014-11-03_1934-05-30.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2015_26_HD_2015-02-09_1936-03-19.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2015_27_KE_2015-04-13_1936-06-03.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2015_28_BR_2015-06-08_1936-06-30.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2015_29_BH_2015-09-14_1937-06-22.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2015_30_ST_2015-11-16_1938-06-01.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2016_31_SW_2016-02-01_1939-09-06.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2016_32_CG_2016-04-04_1940-06-11.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2016_33_HF_2016-06-06_1944-06-30.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2016_34_TR_2016-08-29_1946-02-25.png" />
-    <Content Include="images\quarters\ATB\500x\ATB_2016_35_ML_2016-11-14_1948-04-28.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2010_1_HS_2010-04-19_1832-04-20.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2010_2_YS_2010-06-01_1872-03-01.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2010_3_YT_2010-07-26_1890-10-01.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2010_4_CY_2010-09-20_1893-02-20.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2010_5_MH_2010-11-15_1893-09-28.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2011_10_CS_2011-11-14_1902-07-01.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2011_6_GG_2011-01-24_1895-02-11.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2011_7_GC_2011-04-04_1897-02-22.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2011_8_OL_2011-06-13_1897-02-22.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2011_9_VB_2011-08-29_1899-02-21.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2012_11_EY_2012-01-23_1903-01-17.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2012_12_CC_2012-04-02_1907-03-11.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2012_13_AC_2012-06-11_1916-07-08.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2012_14_HV_2012-08-27_1916-08-01.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2012_15_DL_2012-11-05_1917-02-26.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2013_16_WM_2013-01-28_1918-05-16.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2013_17_PV_2013-04-01_1919-03-03.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2013_18_GB_2013-06-10_1922-01-24.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2013_19_FM_2013-08-26_1925-03-03.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2013_20_MR_2013-11-04_1925-03-03.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2014_21_SM_2014-01-27_1926-05-22.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2014_22_SH_2014-03-31_1926-05-22.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2014_23_AH_2014-06-09_1929-04-12.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2014_24_GS_2014-08-25_1932-03-17.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2014_25_EG_2014-11-03_1934-05-30.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2015_26_HD_2015-02-09_1936-03-19.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2015_27_KE_2015-04-13_1936-06-03.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2015_28_BR_2015-06-08_1936-06-30.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2015_29_BH_2015-09-14_1937-06-22.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2015_30_ST_2015-11-16_1938-06-01.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2016_31_SW_2016-02-01_1939-09-06.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2016_32_CG_2016-04-04_1940-06-11.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2016_33_HF_2016-06-06_1944-06-30.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2016_34_TR_2016-08-29_1946-02-25.png" />
-    <Content Include="images\quarters\ATB\600x\ATB_2016_35_ML_2016-11-14_1948-04-28.png" />
+    <Content Include="images\quarters\ATB\240x\ATB_2017_36_EM_2017-02-06_1949-10-25.png" />
+    <Content Include="images\quarters\ATB\240x\ATB_2017_37_FD_2017-04-03_1962-09-05.png" />
+    <Content Include="images\quarters\ATB\240x\ATB_2017_38_OZ_2017-06-05_1964-08-27.png" />
+    <Content Include="images\quarters\ATB\240x\ATB_2017_39_EI_2017-08-28_1965-05-11.png" />
+    <Content Include="images\quarters\ATB\240x\ATB_2017_40_GR_2017-11-13_1966-07-23.png" />
     <Content Include="images\quarters\ATB\750x\ATB_2010_1_HS_2010-04-19_1832-04-20.png" />
     <Content Include="images\quarters\ATB\750x\ATB_2010_2_YS_2010-06-01_1872-03-01.png" />
     <Content Include="images\quarters\ATB\750x\ATB_2010_3_YT_2010-07-26_1890-10-01.png" />
@@ -426,6 +313,11 @@
     <Content Include="images\quarters\ATB\750x\ATB_2016_33_HF_2016-06-06_1944-06-30.png" />
     <Content Include="images\quarters\ATB\750x\ATB_2016_34_TR_2016-08-29_1946-02-25.png" />
     <Content Include="images\quarters\ATB\750x\ATB_2016_35_ML_2016-11-14_1948-04-28.png" />
+    <Content Include="images\quarters\ATB\750x\ATB_2017_36_EM_2017-02-06_1949-10-25.png" />
+    <Content Include="images\quarters\ATB\750x\ATB_2017_37_FD_2017-04-03_1962-09-05.png" />
+    <Content Include="images\quarters\ATB\750x\ATB_2017_38_OZ_2017-06-05_1964-08-27.png" />
+    <Content Include="images\quarters\ATB\750x\ATB_2017_39_EI_2017-08-28_1965-05-11.png" />
+    <Content Include="images\quarters\ATB\750x\ATB_2017_40_GR_2017-11-13_1966-07-23.png" />
     <Content Include="images\quarters\STT\150x\STT_1999_1_DE_1999-01-01_1787-12-07.png" />
     <Content Include="images\quarters\STT\150x\STT_1999_2_PA_1999-03-08_1787-12-12.png" />
     <Content Include="images\quarters\STT\150x\STT_1999_3_NJ_1999-05-17_1787-12-18.png" />
@@ -476,56 +368,6 @@
     <Content Include="images\quarters\STT\150x\STT_2008_48_AZ_2008-06-02_1912-02-14.png" />
     <Content Include="images\quarters\STT\150x\STT_2008_49_AK_2008-08-25_1959-01-03.png" />
     <Content Include="images\quarters\STT\150x\STT_2008_50_HI_2008-11-03_1959-08-21.png" />
-    <Content Include="images\quarters\STT\180x\STT_1999_1_DE_1999-01-01_1787-12-07.png" />
-    <Content Include="images\quarters\STT\180x\STT_1999_2_PA_1999-03-08_1787-12-12.png" />
-    <Content Include="images\quarters\STT\180x\STT_1999_3_NJ_1999-05-17_1787-12-18.png" />
-    <Content Include="images\quarters\STT\180x\STT_1999_4_GA_1999-07-19_1788-01-02.png" />
-    <Content Include="images\quarters\STT\180x\STT_1999_5_CT_1999-10-12_1788-01-09.png" />
-    <Content Include="images\quarters\STT\180x\STT_2000_10_VA_2000-10-16_1788-06-25.png" />
-    <Content Include="images\quarters\STT\180x\STT_2000_6_MA_2000-01-03_1788-02-06.png" />
-    <Content Include="images\quarters\STT\180x\STT_2000_7_MD_2000-03-13_1788-04-28.png" />
-    <Content Include="images\quarters\STT\180x\STT_2000_8_SC_2000-05-22_1788-05-23.png" />
-    <Content Include="images\quarters\STT\180x\STT_2000_9_NH_2000-08-07_1788-06-21.png" />
-    <Content Include="images\quarters\STT\180x\STT_2001_11_NY_2001-01-02_1788-07-26.png" />
-    <Content Include="images\quarters\STT\180x\STT_2001_12_NC_2001-03-12_1789-11-21.png" />
-    <Content Include="images\quarters\STT\180x\STT_2001_13_RI_2001-05-21_1790-05-29.png" />
-    <Content Include="images\quarters\STT\180x\STT_2001_14_VT_2001-08-06_1791-03-04.png" />
-    <Content Include="images\quarters\STT\180x\STT_2001_15_KY_2001-10-15_1792-06-01.png" />
-    <Content Include="images\quarters\STT\180x\STT_2002_16_TN_2002-01-02_1796-06-01.png" />
-    <Content Include="images\quarters\STT\180x\STT_2002_17_OH_2002-03-18_1803-03-01.png" />
-    <Content Include="images\quarters\STT\180x\STT_2002_18_LA_2002-05-30_1812-04-30.png" />
-    <Content Include="images\quarters\STT\180x\STT_2002_19_IN_2002-08-08_1816-12-11.png" />
-    <Content Include="images\quarters\STT\180x\STT_2002_20_MS_2002-10-15_1817-12-10.png" />
-    <Content Include="images\quarters\STT\180x\STT_2003_21_IL_2003-01-02_1818-12-03.png" />
-    <Content Include="images\quarters\STT\180x\STT_2003_22_AL_2003-03-17_1819-12-14.png" />
-    <Content Include="images\quarters\STT\180x\STT_2003_23_ME_2003-06-02_1820-03-15.png" />
-    <Content Include="images\quarters\STT\180x\STT_2003_24_MO_2003-08-04_1821-08-10.png" />
-    <Content Include="images\quarters\STT\180x\STT_2003_25_AR_2003-10-20_1836-06-15.png" />
-    <Content Include="images\quarters\STT\180x\STT_2004_26_MI_2004-01-26_1837-01-26.png" />
-    <Content Include="images\quarters\STT\180x\STT_2004_27_FL_2004-03-29_1845-03-03.png" />
-    <Content Include="images\quarters\STT\180x\STT_2004_28_TX_2004-06-01_1845-12-29.png" />
-    <Content Include="images\quarters\STT\180x\STT_2004_29_IA_2004-08-30_1846-12-28.png" />
-    <Content Include="images\quarters\STT\180x\STT_2004_30_WI_2004-10-25_1848-05-29.png" />
-    <Content Include="images\quarters\STT\180x\STT_2005_31_CA_2005-01-31_1850-09-09.png" />
-    <Content Include="images\quarters\STT\180x\STT_2005_32_MN_2005-04-04_1858-05-11.png" />
-    <Content Include="images\quarters\STT\180x\STT_2005_33_OR_2005-06-06_1859-02-14.png" />
-    <Content Include="images\quarters\STT\180x\STT_2005_34_KS_2005-08-29_1861-01-29.png" />
-    <Content Include="images\quarters\STT\180x\STT_2005_35_WV_2005-10-14_1863-06-20.png" />
-    <Content Include="images\quarters\STT\180x\STT_2006_36_NV_2006-01-31_1864-10-31.png" />
-    <Content Include="images\quarters\STT\180x\STT_2006_37_NE_2006-04-03_1867-03-01.png" />
-    <Content Include="images\quarters\STT\180x\STT_2006_38_CO_2006-06-14_1876-08-01.png" />
-    <Content Include="images\quarters\STT\180x\STT_2006_39_ND_2006-08-28_1889-11-02.png" />
-    <Content Include="images\quarters\STT\180x\STT_2006_40_SD_2006-11-06_1889-11-02.png" />
-    <Content Include="images\quarters\STT\180x\STT_2007_41_MT_2007-01-29_1889-11-08.png" />
-    <Content Include="images\quarters\STT\180x\STT_2007_42_WA_2007-04-11_1889-11-11.png" />
-    <Content Include="images\quarters\STT\180x\STT_2007_43_ID_2007-06-05_1890-07-03.png" />
-    <Content Include="images\quarters\STT\180x\STT_2007_44_WY_2007-09-04_1890-07-10.png" />
-    <Content Include="images\quarters\STT\180x\STT_2007_45_UT_2007-11-05_1896-01-04.png" />
-    <Content Include="images\quarters\STT\180x\STT_2008_46_OK_2008-01-28_1907-11-16.png" />
-    <Content Include="images\quarters\STT\180x\STT_2008_47_NM_2008-04-07_1912-01-06.png" />
-    <Content Include="images\quarters\STT\180x\STT_2008_48_AZ_2008-06-02_1912-02-14.png" />
-    <Content Include="images\quarters\STT\180x\STT_2008_49_AK_2008-08-25_1959-01-03.png" />
-    <Content Include="images\quarters\STT\180x\STT_2008_50_HI_2008-11-03_1959-08-21.png" />
     <Content Include="images\quarters\STT\240x\STT_1999_1_DE_1999-01-01_1787-12-07.png" />
     <Content Include="images\quarters\STT\240x\STT_1999_2_PA_1999-03-08_1787-12-12.png" />
     <Content Include="images\quarters\STT\240x\STT_1999_3_NJ_1999-05-17_1787-12-18.png" />
@@ -576,206 +418,6 @@
     <Content Include="images\quarters\STT\240x\STT_2008_48_AZ_2008-06-02_1912-02-14.png" />
     <Content Include="images\quarters\STT\240x\STT_2008_49_AK_2008-08-25_1959-01-03.png" />
     <Content Include="images\quarters\STT\240x\STT_2008_50_HI_2008-11-03_1959-08-21.png" />
-    <Content Include="images\quarters\STT\360x\STT_1999_1_DE_1999-01-01_1787-12-07.png" />
-    <Content Include="images\quarters\STT\360x\STT_1999_2_PA_1999-03-08_1787-12-12.png" />
-    <Content Include="images\quarters\STT\360x\STT_1999_3_NJ_1999-05-17_1787-12-18.png" />
-    <Content Include="images\quarters\STT\360x\STT_1999_4_GA_1999-07-19_1788-01-02.png" />
-    <Content Include="images\quarters\STT\360x\STT_1999_5_CT_1999-10-12_1788-01-09.png" />
-    <Content Include="images\quarters\STT\360x\STT_2000_10_VA_2000-10-16_1788-06-25.png" />
-    <Content Include="images\quarters\STT\360x\STT_2000_6_MA_2000-01-03_1788-02-06.png" />
-    <Content Include="images\quarters\STT\360x\STT_2000_7_MD_2000-03-13_1788-04-28.png" />
-    <Content Include="images\quarters\STT\360x\STT_2000_8_SC_2000-05-22_1788-05-23.png" />
-    <Content Include="images\quarters\STT\360x\STT_2000_9_NH_2000-08-07_1788-06-21.png" />
-    <Content Include="images\quarters\STT\360x\STT_2001_11_NY_2001-01-02_1788-07-26.png" />
-    <Content Include="images\quarters\STT\360x\STT_2001_12_NC_2001-03-12_1789-11-21.png" />
-    <Content Include="images\quarters\STT\360x\STT_2001_13_RI_2001-05-21_1790-05-29.png" />
-    <Content Include="images\quarters\STT\360x\STT_2001_14_VT_2001-08-06_1791-03-04.png" />
-    <Content Include="images\quarters\STT\360x\STT_2001_15_KY_2001-10-15_1792-06-01.png" />
-    <Content Include="images\quarters\STT\360x\STT_2002_16_TN_2002-01-02_1796-06-01.png" />
-    <Content Include="images\quarters\STT\360x\STT_2002_17_OH_2002-03-18_1803-03-01.png" />
-    <Content Include="images\quarters\STT\360x\STT_2002_18_LA_2002-05-30_1812-04-30.png" />
-    <Content Include="images\quarters\STT\360x\STT_2002_19_IN_2002-08-08_1816-12-11.png" />
-    <Content Include="images\quarters\STT\360x\STT_2002_20_MS_2002-10-15_1817-12-10.png" />
-    <Content Include="images\quarters\STT\360x\STT_2003_21_IL_2003-01-02_1818-12-03.png" />
-    <Content Include="images\quarters\STT\360x\STT_2003_22_AL_2003-03-17_1819-12-14.png" />
-    <Content Include="images\quarters\STT\360x\STT_2003_23_ME_2003-06-02_1820-03-15.png" />
-    <Content Include="images\quarters\STT\360x\STT_2003_24_MO_2003-08-04_1821-08-10.png" />
-    <Content Include="images\quarters\STT\360x\STT_2003_25_AR_2003-10-20_1836-06-15.png" />
-    <Content Include="images\quarters\STT\360x\STT_2004_26_MI_2004-01-26_1837-01-26.png" />
-    <Content Include="images\quarters\STT\360x\STT_2004_27_FL_2004-03-29_1845-03-03.png" />
-    <Content Include="images\quarters\STT\360x\STT_2004_28_TX_2004-06-01_1845-12-29.png" />
-    <Content Include="images\quarters\STT\360x\STT_2004_29_IA_2004-08-30_1846-12-28.png" />
-    <Content Include="images\quarters\STT\360x\STT_2004_30_WI_2004-10-25_1848-05-29.png" />
-    <Content Include="images\quarters\STT\360x\STT_2005_31_CA_2005-01-31_1850-09-09.png" />
-    <Content Include="images\quarters\STT\360x\STT_2005_32_MN_2005-04-04_1858-05-11.png" />
-    <Content Include="images\quarters\STT\360x\STT_2005_33_OR_2005-06-06_1859-02-14.png" />
-    <Content Include="images\quarters\STT\360x\STT_2005_34_KS_2005-08-29_1861-01-29.png" />
-    <Content Include="images\quarters\STT\360x\STT_2005_35_WV_2005-10-14_1863-06-20.png" />
-    <Content Include="images\quarters\STT\360x\STT_2006_36_NV_2006-01-31_1864-10-31.png" />
-    <Content Include="images\quarters\STT\360x\STT_2006_37_NE_2006-04-03_1867-03-01.png" />
-    <Content Include="images\quarters\STT\360x\STT_2006_38_CO_2006-06-14_1876-08-01.png" />
-    <Content Include="images\quarters\STT\360x\STT_2006_39_ND_2006-08-28_1889-11-02.png" />
-    <Content Include="images\quarters\STT\360x\STT_2006_40_SD_2006-11-06_1889-11-02.png" />
-    <Content Include="images\quarters\STT\360x\STT_2007_41_MT_2007-01-29_1889-11-08.png" />
-    <Content Include="images\quarters\STT\360x\STT_2007_42_WA_2007-04-11_1889-11-11.png" />
-    <Content Include="images\quarters\STT\360x\STT_2007_43_ID_2007-06-05_1890-07-03.png" />
-    <Content Include="images\quarters\STT\360x\STT_2007_44_WY_2007-09-04_1890-07-10.png" />
-    <Content Include="images\quarters\STT\360x\STT_2007_45_UT_2007-11-05_1896-01-04.png" />
-    <Content Include="images\quarters\STT\360x\STT_2008_46_OK_2008-01-28_1907-11-16.png" />
-    <Content Include="images\quarters\STT\360x\STT_2008_47_NM_2008-04-07_1912-01-06.png" />
-    <Content Include="images\quarters\STT\360x\STT_2008_48_AZ_2008-06-02_1912-02-14.png" />
-    <Content Include="images\quarters\STT\360x\STT_2008_49_AK_2008-08-25_1959-01-03.png" />
-    <Content Include="images\quarters\STT\360x\STT_2008_50_HI_2008-11-03_1959-08-21.png" />
-    <Content Include="images\quarters\STT\480x\STT_1999_1_DE_1999-01-01_1787-12-07.png" />
-    <Content Include="images\quarters\STT\480x\STT_1999_2_PA_1999-03-08_1787-12-12.png" />
-    <Content Include="images\quarters\STT\480x\STT_1999_3_NJ_1999-05-17_1787-12-18.png" />
-    <Content Include="images\quarters\STT\480x\STT_1999_4_GA_1999-07-19_1788-01-02.png" />
-    <Content Include="images\quarters\STT\480x\STT_1999_5_CT_1999-10-12_1788-01-09.png" />
-    <Content Include="images\quarters\STT\480x\STT_2000_10_VA_2000-10-16_1788-06-25.png" />
-    <Content Include="images\quarters\STT\480x\STT_2000_6_MA_2000-01-03_1788-02-06.png" />
-    <Content Include="images\quarters\STT\480x\STT_2000_7_MD_2000-03-13_1788-04-28.png" />
-    <Content Include="images\quarters\STT\480x\STT_2000_8_SC_2000-05-22_1788-05-23.png" />
-    <Content Include="images\quarters\STT\480x\STT_2000_9_NH_2000-08-07_1788-06-21.png" />
-    <Content Include="images\quarters\STT\480x\STT_2001_11_NY_2001-01-02_1788-07-26.png" />
-    <Content Include="images\quarters\STT\480x\STT_2001_12_NC_2001-03-12_1789-11-21.png" />
-    <Content Include="images\quarters\STT\480x\STT_2001_13_RI_2001-05-21_1790-05-29.png" />
-    <Content Include="images\quarters\STT\480x\STT_2001_14_VT_2001-08-06_1791-03-04.png" />
-    <Content Include="images\quarters\STT\480x\STT_2001_15_KY_2001-10-15_1792-06-01.png" />
-    <Content Include="images\quarters\STT\480x\STT_2002_16_TN_2002-01-02_1796-06-01.png" />
-    <Content Include="images\quarters\STT\480x\STT_2002_17_OH_2002-03-18_1803-03-01.png" />
-    <Content Include="images\quarters\STT\480x\STT_2002_18_LA_2002-05-30_1812-04-30.png" />
-    <Content Include="images\quarters\STT\480x\STT_2002_19_IN_2002-08-08_1816-12-11.png" />
-    <Content Include="images\quarters\STT\480x\STT_2002_20_MS_2002-10-15_1817-12-10.png" />
-    <Content Include="images\quarters\STT\480x\STT_2003_21_IL_2003-01-02_1818-12-03.png" />
-    <Content Include="images\quarters\STT\480x\STT_2003_22_AL_2003-03-17_1819-12-14.png" />
-    <Content Include="images\quarters\STT\480x\STT_2003_23_ME_2003-06-02_1820-03-15.png" />
-    <Content Include="images\quarters\STT\480x\STT_2003_24_MO_2003-08-04_1821-08-10.png" />
-    <Content Include="images\quarters\STT\480x\STT_2003_25_AR_2003-10-20_1836-06-15.png" />
-    <Content Include="images\quarters\STT\480x\STT_2004_26_MI_2004-01-26_1837-01-26.png" />
-    <Content Include="images\quarters\STT\480x\STT_2004_27_FL_2004-03-29_1845-03-03.png" />
-    <Content Include="images\quarters\STT\480x\STT_2004_28_TX_2004-06-01_1845-12-29.png" />
-    <Content Include="images\quarters\STT\480x\STT_2004_29_IA_2004-08-30_1846-12-28.png" />
-    <Content Include="images\quarters\STT\480x\STT_2004_30_WI_2004-10-25_1848-05-29.png" />
-    <Content Include="images\quarters\STT\480x\STT_2005_31_CA_2005-01-31_1850-09-09.png" />
-    <Content Include="images\quarters\STT\480x\STT_2005_32_MN_2005-04-04_1858-05-11.png" />
-    <Content Include="images\quarters\STT\480x\STT_2005_33_OR_2005-06-06_1859-02-14.png" />
-    <Content Include="images\quarters\STT\480x\STT_2005_34_KS_2005-08-29_1861-01-29.png" />
-    <Content Include="images\quarters\STT\480x\STT_2005_35_WV_2005-10-14_1863-06-20.png" />
-    <Content Include="images\quarters\STT\480x\STT_2006_36_NV_2006-01-31_1864-10-31.png" />
-    <Content Include="images\quarters\STT\480x\STT_2006_37_NE_2006-04-03_1867-03-01.png" />
-    <Content Include="images\quarters\STT\480x\STT_2006_38_CO_2006-06-14_1876-08-01.png" />
-    <Content Include="images\quarters\STT\480x\STT_2006_39_ND_2006-08-28_1889-11-02.png" />
-    <Content Include="images\quarters\STT\480x\STT_2006_40_SD_2006-11-06_1889-11-02.png" />
-    <Content Include="images\quarters\STT\480x\STT_2007_41_MT_2007-01-29_1889-11-08.png" />
-    <Content Include="images\quarters\STT\480x\STT_2007_42_WA_2007-04-11_1889-11-11.png" />
-    <Content Include="images\quarters\STT\480x\STT_2007_43_ID_2007-06-05_1890-07-03.png" />
-    <Content Include="images\quarters\STT\480x\STT_2007_44_WY_2007-09-04_1890-07-10.png" />
-    <Content Include="images\quarters\STT\480x\STT_2007_45_UT_2007-11-05_1896-01-04.png" />
-    <Content Include="images\quarters\STT\480x\STT_2008_46_OK_2008-01-28_1907-11-16.png" />
-    <Content Include="images\quarters\STT\480x\STT_2008_47_NM_2008-04-07_1912-01-06.png" />
-    <Content Include="images\quarters\STT\480x\STT_2008_48_AZ_2008-06-02_1912-02-14.png" />
-    <Content Include="images\quarters\STT\480x\STT_2008_49_AK_2008-08-25_1959-01-03.png" />
-    <Content Include="images\quarters\STT\480x\STT_2008_50_HI_2008-11-03_1959-08-21.png" />
-    <Content Include="images\quarters\STT\500x\STT_1999_1_DE_1999-01-01_1787-12-07.png" />
-    <Content Include="images\quarters\STT\500x\STT_1999_2_PA_1999-03-08_1787-12-12.png" />
-    <Content Include="images\quarters\STT\500x\STT_1999_3_NJ_1999-05-17_1787-12-18.png" />
-    <Content Include="images\quarters\STT\500x\STT_1999_4_GA_1999-07-19_1788-01-02.png" />
-    <Content Include="images\quarters\STT\500x\STT_1999_5_CT_1999-10-12_1788-01-09.png" />
-    <Content Include="images\quarters\STT\500x\STT_2000_10_VA_2000-10-16_1788-06-25.png" />
-    <Content Include="images\quarters\STT\500x\STT_2000_6_MA_2000-01-03_1788-02-06.png" />
-    <Content Include="images\quarters\STT\500x\STT_2000_7_MD_2000-03-13_1788-04-28.png" />
-    <Content Include="images\quarters\STT\500x\STT_2000_8_SC_2000-05-22_1788-05-23.png" />
-    <Content Include="images\quarters\STT\500x\STT_2000_9_NH_2000-08-07_1788-06-21.png" />
-    <Content Include="images\quarters\STT\500x\STT_2001_11_NY_2001-01-02_1788-07-26.png" />
-    <Content Include="images\quarters\STT\500x\STT_2001_12_NC_2001-03-12_1789-11-21.png" />
-    <Content Include="images\quarters\STT\500x\STT_2001_13_RI_2001-05-21_1790-05-29.png" />
-    <Content Include="images\quarters\STT\500x\STT_2001_14_VT_2001-08-06_1791-03-04.png" />
-    <Content Include="images\quarters\STT\500x\STT_2001_15_KY_2001-10-15_1792-06-01.png" />
-    <Content Include="images\quarters\STT\500x\STT_2002_16_TN_2002-01-02_1796-06-01.png" />
-    <Content Include="images\quarters\STT\500x\STT_2002_17_OH_2002-03-18_1803-03-01.png" />
-    <Content Include="images\quarters\STT\500x\STT_2002_18_LA_2002-05-30_1812-04-30.png" />
-    <Content Include="images\quarters\STT\500x\STT_2002_19_IN_2002-08-08_1816-12-11.png" />
-    <Content Include="images\quarters\STT\500x\STT_2002_20_MS_2002-10-15_1817-12-10.png" />
-    <Content Include="images\quarters\STT\500x\STT_2003_21_IL_2003-01-02_1818-12-03.png" />
-    <Content Include="images\quarters\STT\500x\STT_2003_22_AL_2003-03-17_1819-12-14.png" />
-    <Content Include="images\quarters\STT\500x\STT_2003_23_ME_2003-06-02_1820-03-15.png" />
-    <Content Include="images\quarters\STT\500x\STT_2003_24_MO_2003-08-04_1821-08-10.png" />
-    <Content Include="images\quarters\STT\500x\STT_2003_25_AR_2003-10-20_1836-06-15.png" />
-    <Content Include="images\quarters\STT\500x\STT_2004_26_MI_2004-01-26_1837-01-26.png" />
-    <Content Include="images\quarters\STT\500x\STT_2004_27_FL_2004-03-29_1845-03-03.png" />
-    <Content Include="images\quarters\STT\500x\STT_2004_28_TX_2004-06-01_1845-12-29.png" />
-    <Content Include="images\quarters\STT\500x\STT_2004_29_IA_2004-08-30_1846-12-28.png" />
-    <Content Include="images\quarters\STT\500x\STT_2004_30_WI_2004-10-25_1848-05-29.png" />
-    <Content Include="images\quarters\STT\500x\STT_2005_31_CA_2005-01-31_1850-09-09.png" />
-    <Content Include="images\quarters\STT\500x\STT_2005_32_MN_2005-04-04_1858-05-11.png" />
-    <Content Include="images\quarters\STT\500x\STT_2005_33_OR_2005-06-06_1859-02-14.png" />
-    <Content Include="images\quarters\STT\500x\STT_2005_34_KS_2005-08-29_1861-01-29.png" />
-    <Content Include="images\quarters\STT\500x\STT_2005_35_WV_2005-10-14_1863-06-20.png" />
-    <Content Include="images\quarters\STT\500x\STT_2006_36_NV_2006-01-31_1864-10-31.png" />
-    <Content Include="images\quarters\STT\500x\STT_2006_37_NE_2006-04-03_1867-03-01.png" />
-    <Content Include="images\quarters\STT\500x\STT_2006_38_CO_2006-06-14_1876-08-01.png" />
-    <Content Include="images\quarters\STT\500x\STT_2006_39_ND_2006-08-28_1889-11-02.png" />
-    <Content Include="images\quarters\STT\500x\STT_2006_40_SD_2006-11-06_1889-11-02.png" />
-    <Content Include="images\quarters\STT\500x\STT_2007_41_MT_2007-01-29_1889-11-08.png" />
-    <Content Include="images\quarters\STT\500x\STT_2007_42_WA_2007-04-11_1889-11-11.png" />
-    <Content Include="images\quarters\STT\500x\STT_2007_43_ID_2007-06-05_1890-07-03.png" />
-    <Content Include="images\quarters\STT\500x\STT_2007_44_WY_2007-09-04_1890-07-10.png" />
-    <Content Include="images\quarters\STT\500x\STT_2007_45_UT_2007-11-05_1896-01-04.png" />
-    <Content Include="images\quarters\STT\500x\STT_2008_46_OK_2008-01-28_1907-11-16.png" />
-    <Content Include="images\quarters\STT\500x\STT_2008_47_NM_2008-04-07_1912-01-06.png" />
-    <Content Include="images\quarters\STT\500x\STT_2008_48_AZ_2008-06-02_1912-02-14.png" />
-    <Content Include="images\quarters\STT\500x\STT_2008_49_AK_2008-08-25_1959-01-03.png" />
-    <Content Include="images\quarters\STT\500x\STT_2008_50_HI_2008-11-03_1959-08-21.png" />
-    <Content Include="images\quarters\STT\600x\STT_1999_1_DE_1999-01-01_1787-12-07.png" />
-    <Content Include="images\quarters\STT\600x\STT_1999_2_PA_1999-03-08_1787-12-12.png" />
-    <Content Include="images\quarters\STT\600x\STT_1999_3_NJ_1999-05-17_1787-12-18.png" />
-    <Content Include="images\quarters\STT\600x\STT_1999_4_GA_1999-07-19_1788-01-02.png" />
-    <Content Include="images\quarters\STT\600x\STT_1999_5_CT_1999-10-12_1788-01-09.png" />
-    <Content Include="images\quarters\STT\600x\STT_2000_10_VA_2000-10-16_1788-06-25.png" />
-    <Content Include="images\quarters\STT\600x\STT_2000_6_MA_2000-01-03_1788-02-06.png" />
-    <Content Include="images\quarters\STT\600x\STT_2000_7_MD_2000-03-13_1788-04-28.png" />
-    <Content Include="images\quarters\STT\600x\STT_2000_8_SC_2000-05-22_1788-05-23.png" />
-    <Content Include="images\quarters\STT\600x\STT_2000_9_NH_2000-08-07_1788-06-21.png" />
-    <Content Include="images\quarters\STT\600x\STT_2001_11_NY_2001-01-02_1788-07-26.png" />
-    <Content Include="images\quarters\STT\600x\STT_2001_12_NC_2001-03-12_1789-11-21.png" />
-    <Content Include="images\quarters\STT\600x\STT_2001_13_RI_2001-05-21_1790-05-29.png" />
-    <Content Include="images\quarters\STT\600x\STT_2001_14_VT_2001-08-06_1791-03-04.png" />
-    <Content Include="images\quarters\STT\600x\STT_2001_15_KY_2001-10-15_1792-06-01.png" />
-    <Content Include="images\quarters\STT\600x\STT_2002_16_TN_2002-01-02_1796-06-01.png" />
-    <Content Include="images\quarters\STT\600x\STT_2002_17_OH_2002-03-18_1803-03-01.png" />
-    <Content Include="images\quarters\STT\600x\STT_2002_18_LA_2002-05-30_1812-04-30.png" />
-    <Content Include="images\quarters\STT\600x\STT_2002_19_IN_2002-08-08_1816-12-11.png" />
-    <Content Include="images\quarters\STT\600x\STT_2002_20_MS_2002-10-15_1817-12-10.png" />
-    <Content Include="images\quarters\STT\600x\STT_2003_21_IL_2003-01-02_1818-12-03.png" />
-    <Content Include="images\quarters\STT\600x\STT_2003_22_AL_2003-03-17_1819-12-14.png" />
-    <Content Include="images\quarters\STT\600x\STT_2003_23_ME_2003-06-02_1820-03-15.png" />
-    <Content Include="images\quarters\STT\600x\STT_2003_24_MO_2003-08-04_1821-08-10.png" />
-    <Content Include="images\quarters\STT\600x\STT_2003_25_AR_2003-10-20_1836-06-15.png" />
-    <Content Include="images\quarters\STT\600x\STT_2004_26_MI_2004-01-26_1837-01-26.png" />
-    <Content Include="images\quarters\STT\600x\STT_2004_27_FL_2004-03-29_1845-03-03.png" />
-    <Content Include="images\quarters\STT\600x\STT_2004_28_TX_2004-06-01_1845-12-29.png" />
-    <Content Include="images\quarters\STT\600x\STT_2004_29_IA_2004-08-30_1846-12-28.png" />
-    <Content Include="images\quarters\STT\600x\STT_2004_30_WI_2004-10-25_1848-05-29.png" />
-    <Content Include="images\quarters\STT\600x\STT_2005_31_CA_2005-01-31_1850-09-09.png" />
-    <Content Include="images\quarters\STT\600x\STT_2005_32_MN_2005-04-04_1858-05-11.png" />
-    <Content Include="images\quarters\STT\600x\STT_2005_33_OR_2005-06-06_1859-02-14.png" />
-    <Content Include="images\quarters\STT\600x\STT_2005_34_KS_2005-08-29_1861-01-29.png" />
-    <Content Include="images\quarters\STT\600x\STT_2005_35_WV_2005-10-14_1863-06-20.png" />
-    <Content Include="images\quarters\STT\600x\STT_2006_36_NV_2006-01-31_1864-10-31.png" />
-    <Content Include="images\quarters\STT\600x\STT_2006_37_NE_2006-04-03_1867-03-01.png" />
-    <Content Include="images\quarters\STT\600x\STT_2006_38_CO_2006-06-14_1876-08-01.png" />
-    <Content Include="images\quarters\STT\600x\STT_2006_39_ND_2006-08-28_1889-11-02.png" />
-    <Content Include="images\quarters\STT\600x\STT_2006_40_SD_2006-11-06_1889-11-02.png" />
-    <Content Include="images\quarters\STT\600x\STT_2007_41_MT_2007-01-29_1889-11-08.png" />
-    <Content Include="images\quarters\STT\600x\STT_2007_42_WA_2007-04-11_1889-11-11.png" />
-    <Content Include="images\quarters\STT\600x\STT_2007_43_ID_2007-06-05_1890-07-03.png" />
-    <Content Include="images\quarters\STT\600x\STT_2007_44_WY_2007-09-04_1890-07-10.png" />
-    <Content Include="images\quarters\STT\600x\STT_2007_45_UT_2007-11-05_1896-01-04.png" />
-    <Content Include="images\quarters\STT\600x\STT_2008_46_OK_2008-01-28_1907-11-16.png" />
-    <Content Include="images\quarters\STT\600x\STT_2008_47_NM_2008-04-07_1912-01-06.png" />
-    <Content Include="images\quarters\STT\600x\STT_2008_48_AZ_2008-06-02_1912-02-14.png" />
-    <Content Include="images\quarters\STT\600x\STT_2008_49_AK_2008-08-25_1959-01-03.png" />
-    <Content Include="images\quarters\STT\600x\STT_2008_50_HI_2008-11-03_1959-08-21.png" />
     <Content Include="images\quarters\STT\750x\STT_1999_1_DE_1999-01-01_1787-12-07.png" />
     <Content Include="images\quarters\STT\750x\STT_1999_2_PA_1999-03-08_1787-12-12.png" />
     <Content Include="images\quarters\STT\750x\STT_1999_3_NJ_1999-05-17_1787-12-18.png" />
@@ -832,42 +474,12 @@
     <Content Include="images\quarters\TTY\150x\TTY_2009_54_AS_2009-07-27_1900-04-17.png" />
     <Content Include="images\quarters\TTY\150x\TTY_2009_55_VI_2009-09-28_1917-03-31.png" />
     <Content Include="images\quarters\TTY\150x\TTY_2009_56_MP_2009-11-30_1976-03-24.png" />
-    <Content Include="images\quarters\TTY\180x\TTY_2009_51_DC_2009-01-26_1790-07-16.png" />
-    <Content Include="images\quarters\TTY\180x\TTY_2009_52_PR_2009-03-30_1898-12-10.png" />
-    <Content Include="images\quarters\TTY\180x\TTY_2009_53_GU_2009-05-26_1898-12-10.png" />
-    <Content Include="images\quarters\TTY\180x\TTY_2009_54_AS_2009-07-27_1900-04-17.png" />
-    <Content Include="images\quarters\TTY\180x\TTY_2009_55_VI_2009-09-28_1917-03-31.png" />
-    <Content Include="images\quarters\TTY\180x\TTY_2009_56_MP_2009-11-30_1976-03-24.png" />
     <Content Include="images\quarters\TTY\240x\TTY_2009_51_DC_2009-01-26_1790-07-16.png" />
     <Content Include="images\quarters\TTY\240x\TTY_2009_52_PR_2009-03-30_1898-12-10.png" />
     <Content Include="images\quarters\TTY\240x\TTY_2009_53_GU_2009-05-26_1898-12-10.png" />
     <Content Include="images\quarters\TTY\240x\TTY_2009_54_AS_2009-07-27_1900-04-17.png" />
     <Content Include="images\quarters\TTY\240x\TTY_2009_55_VI_2009-09-28_1917-03-31.png" />
     <Content Include="images\quarters\TTY\240x\TTY_2009_56_MP_2009-11-30_1976-03-24.png" />
-    <Content Include="images\quarters\TTY\360x\TTY_2009_51_DC_2009-01-26_1790-07-16.png" />
-    <Content Include="images\quarters\TTY\360x\TTY_2009_52_PR_2009-03-30_1898-12-10.png" />
-    <Content Include="images\quarters\TTY\360x\TTY_2009_53_GU_2009-05-26_1898-12-10.png" />
-    <Content Include="images\quarters\TTY\360x\TTY_2009_54_AS_2009-07-27_1900-04-17.png" />
-    <Content Include="images\quarters\TTY\360x\TTY_2009_55_VI_2009-09-28_1917-03-31.png" />
-    <Content Include="images\quarters\TTY\360x\TTY_2009_56_MP_2009-11-30_1976-03-24.png" />
-    <Content Include="images\quarters\TTY\480x\TTY_2009_51_DC_2009-01-26_1790-07-16.png" />
-    <Content Include="images\quarters\TTY\480x\TTY_2009_52_PR_2009-03-30_1898-12-10.png" />
-    <Content Include="images\quarters\TTY\480x\TTY_2009_53_GU_2009-05-26_1898-12-10.png" />
-    <Content Include="images\quarters\TTY\480x\TTY_2009_54_AS_2009-07-27_1900-04-17.png" />
-    <Content Include="images\quarters\TTY\480x\TTY_2009_55_VI_2009-09-28_1917-03-31.png" />
-    <Content Include="images\quarters\TTY\480x\TTY_2009_56_MP_2009-11-30_1976-03-24.png" />
-    <Content Include="images\quarters\TTY\500x\TTY_2009_51_DC_2009-01-26_1790-07-16.png" />
-    <Content Include="images\quarters\TTY\500x\TTY_2009_52_PR_2009-03-30_1898-12-10.png" />
-    <Content Include="images\quarters\TTY\500x\TTY_2009_53_GU_2009-05-26_1898-12-10.png" />
-    <Content Include="images\quarters\TTY\500x\TTY_2009_54_AS_2009-07-27_1900-04-17.png" />
-    <Content Include="images\quarters\TTY\500x\TTY_2009_55_VI_2009-09-28_1917-03-31.png" />
-    <Content Include="images\quarters\TTY\500x\TTY_2009_56_MP_2009-11-30_1976-03-24.png" />
-    <Content Include="images\quarters\TTY\600x\TTY_2009_51_DC_2009-01-26_1790-07-16.png" />
-    <Content Include="images\quarters\TTY\600x\TTY_2009_52_PR_2009-03-30_1898-12-10.png" />
-    <Content Include="images\quarters\TTY\600x\TTY_2009_53_GU_2009-05-26_1898-12-10.png" />
-    <Content Include="images\quarters\TTY\600x\TTY_2009_54_AS_2009-07-27_1900-04-17.png" />
-    <Content Include="images\quarters\TTY\600x\TTY_2009_55_VI_2009-09-28_1917-03-31.png" />
-    <Content Include="images\quarters\TTY\600x\TTY_2009_56_MP_2009-11-30_1976-03-24.png" />
     <Content Include="images\quarters\TTY\750x\TTY_2009_51_DC_2009-01-26_1790-07-16.png" />
     <Content Include="images\quarters\TTY\750x\TTY_2009_52_PR_2009-03-30_1898-12-10.png" />
     <Content Include="images\quarters\TTY\750x\TTY_2009_53_GU_2009-05-26_1898-12-10.png" />
@@ -879,13 +491,21 @@
     <Content Include="js\isMobile.min.js" />
     <Content Include="js\itunesSearch.js" />
     <Content Include="js\jquery.storageapi.min.js" />
+    <Content Include="js\js_MusicPlaylist.js" />
+    <Content Include="js\js_BmwSearch.js" />
     <Content Include="js\js_quarters.js" />
+    <Content Include="js\js_VehicleModule.js" />
+    <Content Include="js\js_VinData.js" />
     <Content Include="js\main.js" />
+    <Content Include="js\remodal.js" />
+    <Content Include="js\remodal.min.js" />
     <Content Include="js\tm\js_BabesGetData.js" />
     <Content Include="js\tm\js_Brazzers.js" />
     <Content Include="js\tm\js_BrazzersGetData.js" />
+    <Content Include="js\tm\js_BrazzersHideDownloaded.js" />
     <Content Include="js\tm\js_Data18.js" />
     <Content Include="js\tm\js_GetItunesData.js" />
+    <Content Include="js\tm\js_MetacriticRssUrls.js" />
     <Content Include="js\tm\js_module_scene.js" />
     <Content Include="js\tm\js_NaughtyAmerica.js" />
     <Content Include="js\tm\js_NaughtyAmerica2.js" />
@@ -905,6 +525,17 @@
     <Content Include="libs\store\store.js" />
     <Content Include="libs\themeswitcher\jquery.themeswitcher.min.js" />
     <Content Include="libs\touchpunch\jquery.ui.touch-punch.js" />
+    <Content Include="MediaModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MediaModel.edmx</DependentUpon>
+      <LastGenOutput>MediaModel.Context.vb</LastGenOutput>
+    </Content>
+    <Content Include="MediaModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MediaModel.edmx</DependentUpon>
+      <LastGenOutput>MediaModel.vb</LastGenOutput>
+    </Content>
+    <Content Include="MusicPlaylist.html" />
     <Content Include="other\jQuery.last.fm.html" />
     <Content Include="other\jQuery.last.fm_files\bootstrap-r.css" />
     <Content Include="other\jQuery.last.fm_files\bootstrap.css" />
@@ -915,11 +546,6 @@
     <Content Include="other\jQuery.last.fm_files\lfm.css" />
     <Content Include="other\jQuery.last.fm_files\main.js" />
     <Content Include="other\jQuery.last.fm_files\respond.js" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\fontawesome-webfont.woff2" />
-    <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\ratchicons.eot" />
     <Content Include="fonts\ratchicons.ttf" />
     <Content Include="fonts\ratchicons.woff" />
@@ -935,14 +561,6 @@
     </Content>
     <Content Include="quarters2.html" />
     <Content Include="quarters.html" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="QuartersModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>QuartersModel.edmx</DependentUpon>
@@ -953,8 +571,6 @@
       <DependentUpon>QuartersModel.edmx</DependentUpon>
       <LastGenOutput>QuartersModel.vb</LastGenOutput>
     </Content>
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="QuartersModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>QuartersModel.Designer.vb</LastGenOutput>
@@ -966,6 +582,30 @@
     <Content Include="App_Readme\Handlebarsjs_LICENSE" />
     <Content Include="data\aggregate.json" />
     <Content Include="data\bData.json" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <EntityDeploy Include="MediaModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MediaModel.Designer.vb</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="MediaModel.edmx.diagram">
+      <DependentUpon>MediaModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="data\vehicle_paints.json" />
+    <Content Include="data\vehicle_lines.json" />
+    <Content Include="data\vehicle_packages.json" />
+    <Content Include="data\vehicle_wheels.json" />
+    <Content Include="data\vehicle_tires.json" />
+    <Content Include="data\vehicle_codes.json" />
+    <Content Include="data\vehicle_upholsteries.json" />
+    <Content Include="data\vehicle_basePrices.json" />
     <None Include="My Project\PublishProfiles\PublishProfile.pubxml" />
     <EntityDeploy Include="PDataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -974,7 +614,8 @@
     <Content Include="PDataModel.edmx.diagram">
       <DependentUpon>PDataModel.edmx</DependentUpon>
     </Content>
-    <None Include="Scripts\jquery-2.2.3.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\handlebars.amd.js" />
     <Content Include="Scripts\handlebars.amd.min.js" />
     <Content Include="Scripts\handlebars.js" />
@@ -983,8 +624,13 @@
     <Content Include="Scripts\handlebars.runtime.amd.min.js" />
     <Content Include="Scripts\handlebars.runtime.js" />
     <Content Include="Scripts\handlebars.runtime.min.js" />
-    <Content Include="Scripts\jquery-2.2.3.js" />
-    <Content Include="Scripts\jquery-2.2.3.min.js" />
+    <None Include="Scripts\jquery-3.1.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.1.0.js" />
+    <Content Include="Scripts\jquery-3.1.0.min.js" />
+    <Content Include="Scripts\jquery-3.1.0.slim.js" />
+    <Content Include="Scripts\jquery-3.1.0.slim.min.js" />
+    <Content Include="Scripts\jquery.magnific-popup.js" />
+    <Content Include="Scripts\jquery.magnific-popup.min.js" />
     <Content Include="Scripts\js_Custom.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment-with-locales.js" />
@@ -1005,7 +651,8 @@
     <Content Include="Scripts\sugar.js" />
     <Content Include="Scripts\sugar.min.js" />
     <Content Include="packages.config" />
-    <Content Include="Scripts\jquery-2.2.3.min.map" />
+    <Content Include="Scripts\jquery-3.1.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.0.min.map" />
     <None Include="Scripts\_references.js" />
     <Content Include="test.txt" />
     <Content Include="TrackDataLookup.html" />
@@ -1034,6 +681,21 @@
     </Compile>
     <Compile Include="lu_QuarterType.vb">
       <DependentUpon>QuartersModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MediaModel.Context.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MediaModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MediaModel.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MediaModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="MediaModel.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MediaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -1071,6 +733,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PlaylistMusic.vb">
+      <DependentUpon>MediaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Quarter.vb">
       <DependentUpon>QuartersModel.tt</DependentUpon>
@@ -1146,6 +811,9 @@
     </Compile>
     <Compile Include="sec_Select_NationalSite_Result.vb">
       <DependentUpon>QuartersModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sec_Select_PlaylistMusic_Result.vb">
+      <DependentUpon>MediaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sec_Select_QuarterStatus_Result.vb">
       <DependentUpon>QuartersModel.tt</DependentUpon>
@@ -1299,9 +967,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>22033</DevelopmentServerPort>
+          <DevelopmentServerPort>22034</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:22033/</IISUrl>
+          <IISUrl>http://localhost:22034/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

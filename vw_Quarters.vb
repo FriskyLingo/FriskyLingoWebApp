@@ -23,6 +23,7 @@ Partial Public Class vw_Quarters
     Public Property Quarter_Caption2Text As String
     Public Property Quarter_Engraver As String
     Public Property Quarter_ImageFileName As String
+    Public Property Quarter_Notes As String
     Public Property QuarterType_Id As Nullable(Of Integer)
     Public Property QuarterType_Code As String
     Public Property QuarterType_ShortDescription As String

@@ -111,7 +111,8 @@ var clickThroughScenes = false;
 var justGetLinks = false;
 
 $(document).ready(function () {
-    console.log(new Date().toJSON().slice(0, 10));
+	console.log('FriskyLingoWebApp');
+    //console.log(new Date().toJSON().slice(0, 10));
 
     var theLinks = [];
 
@@ -437,7 +438,7 @@ function createPlexFileName(theSceneId, theDate, theTitle, theType) {
 function getCategories($thePage) {
     var returnData = '';
 
-    var $theCategoriesElements = $thePage.find('div#moviewrap').next('div').find('div:contains("Categories")').find('a:not(:contains("Filter"))');
+    var $theCategoriesElements = $thePage.find('b:contains("Categories")').closest('div').find('a:not(:contains("Filter"))');
     var theCategoriesArray = [];
 
     $theCategoriesElements.each(function () {

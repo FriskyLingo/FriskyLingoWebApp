@@ -24,11 +24,12 @@ Partial Public Class Quarter
     Public Property caption1Text As String
     Public Property caption2Text As String
     Public Property engraver As String
+    Public Property notes As String
     Public Property imageFileName As String
     Public Property lastUpdate As Nullable(Of Date)
 
     Public Overridable Property Location As Location
-    Public Overridable Property QuarterStatus As ICollection(Of QuarterStatus) = New HashSet(Of QuarterStatus)
     Public Overridable Property lu_QuarterType As lu_QuarterType
+    Public Overridable Property QuarterStatus As ICollection(Of QuarterStatus) = New HashSet(Of QuarterStatus)
 
 End Class

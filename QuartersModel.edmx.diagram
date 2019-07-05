@@ -8,17 +8,17 @@
         <EntityTypeShape EntityType="QuartersModel.Location" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="QuartersModel.lu_LocationType" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="QuartersModel.NationalSite" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuartersModel.Quarter" Width="1.5" PointX="8.25" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="QuartersModel.QuarterStatus" Width="1.5" PointX="10.5" PointY="3.75" IsExpanded="true" />
         <AssociationConnector Association="QuartersModel.FK__Location__lu_LocationType" ManuallyRouted="false" />
         <AssociationConnector Association="QuartersModel.FK__NationalSite__Location__containingLocationId" ManuallyRouted="false" />
         <AssociationConnector Association="QuartersModel.FK__NationalSite__Location__locationId" ManuallyRouted="false" />
-        <AssociationConnector Association="QuartersModel.FK__Quarter__Location" ManuallyRouted="false" />
-        <AssociationConnector Association="QuartersModel.FK__QuarterStatus__Quarter" ManuallyRouted="false" />
         <EntityTypeShape EntityType="QuartersModel.lu_QuarterType" Width="1.5" PointX="0.75" PointY="8" />
-        <EntityTypeShape EntityType="QuartersModel.vw_Quarters" Width="1.5" PointX="5.75" PointY="6.75" />
-        <AssociationConnector Association="QuartersModel.FK__Quarter__lu_QuarterType" />
         <EntityTypeShape EntityType="QuartersModel.User" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="QuartersModel.Quarter" Width="1.5" PointX="5.25" PointY="7.5" />
+        <EntityTypeShape EntityType="QuartersModel.vw_Quarters" Width="1.5" PointX="7.375" PointY="0.75" />
+        <AssociationConnector Association="QuartersModel.FK__Quarter__Location" />
+        <AssociationConnector Association="QuartersModel.FK__Quarter__lu_QuarterType" />
+        <AssociationConnector Association="QuartersModel.FK__QuarterStatus__Quarter" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
