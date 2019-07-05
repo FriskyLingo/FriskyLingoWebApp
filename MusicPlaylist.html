@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>audio.js</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!----------------------------------------------------------------------------
+    -- CSS
+    ----------------------------------------------------------------------------->
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/css_MusicPlaylist.css" rel="stylesheet" />
+
+    <!----------------------------------------------------------------------------
+    -- Javascript
+    ----------------------------------------------------------------------------->
+    <script src="Scripts/jquery-3.1.0.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/handlebars.min.js"></script>
+    <script src="Scripts/sugar.min.js"></script>
+    <script src="Scripts/moment.min.js"></script>
+    <script src="js/jquery.storageapi.min.js"></script>
+    <script src="audiojs/audio.min.js"></script>
+    <script src="js/js_MusicPlaylist.js"></script>
+
+    <script id="song-row-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <tr class="song" data-src="audio/{{fileName}}">
+            <td>
+                <span>{{title}}</span>
+            </td>
+            <td>
+                <span>{{artist}}</span>
+            </td>
+            <td>
+                <span>{{album}}</span>
+            </td>
+            <td>
+                <span>{{year}}</span>
+            </td>
+            <td>
+                <span>{{duration}}</span>
+            </td>
+            <td>
+                <span>{{genre}}</span>
+            </td>
+        </tr>
+        {{/each}}
+    </script>
+</head>
+<body>
+
+<div id="wrapper">
+    <audio preload></audio>
+</div>
+
+<div class="panel panel-primary filterable">
+    <table class="table table-hover table-condensed songs">
+        <thead>
+        <tr class="filters">
+            <th>
+                <input type="text" class="form-control" placeholder="Title">
+            </th>
+            <th>
+                <input type="text" class="form-control" placeholder="Artist">
+            </th>
+            <th>
+                <input type="text" class="form-control" placeholder="Album">
+            </th>
+            <th>
+                <input type="text" class="form-control" placeholder="Year">
+            </th>
+            <th>
+                <input type="text" class="form-control" placeholder="Duration">
+            </th>
+            <th>
+                <input type="text" class="form-control" placeholder="Genre">
+            </th>
+        </tr>
+        </thead>
+        <tbody id="tbodySongs"></tbody>
+    </table>
+</div>
+
+<div id="shortcuts" class="container">
+    <div class="row">
+        <h1 class="text-center">Keyboard shortcuts:</h1>
+    </div>
+    <div class="row text-center">
+        <div class="col-md-12">
+            <span class="keyboard-shortcut"><em>&rarr;</em> Next track</span><span class="keyboard-shortcut"><em>&larr;</em> Previous track</span><span class="keyboard-shortcut"><em>Space</em> Play/pause</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

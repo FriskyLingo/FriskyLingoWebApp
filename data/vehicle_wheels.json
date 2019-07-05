@@ -1,0 +1,11 @@
+﻿[
+{"code":"2A4","style":"401","description":"19' light alloy wheels Double-spoke style 401 with mixed tires","diameter":"19","front":"19x8.0, 225/40 R19","rear":"19x8.5, 255/35 R19","tireCode":"ZPT"},
+{"code":"2A5","style":"397","description":"18' light alloy wheels Double-spoke style 397","diameter":"18","front":"18x8.0, 225/45 R18","rear":"18x8.0, 225/45 R18","tireCode":"ZAS,ZPT"},
+{"code":"2DW","style":"393","description":"17' light alloy wheels Star-spoke style 393","diameter":"17","front":"17x7.5, 225/50 R17","rear":"17x7.5, 225/50 R17","tireCode":"ZAS"},
+{"code":"2DY","style":"396","description":"18' light alloy wheels Star-spoke style 396","diameter":"18","front":"18x8.0, 225/45 R18","rear":"18x8.0, 225/45 R18","tireCode":"ZAS"},
+{"code":"2H2","style":"416","description":"18' light alloy wheels Multi-spoke style-416","diameter":"18","front":"18x8.0, 225/45 R18","rear":"18x8.0, 225/45 R18","tireCode":"ZAS"},
+{"code":"2P5","style":"415","description":"18' light alloy wheels turbine styling 415","diameter":"18","front":"18x8.0, 225/45 R18","rear":"18x8.0, 225/45 R18","tireCode":"ZAS"},
+{"code":"2PE","style":"400M","description":"18' M light alloy wheels Star-spoke style 400 M with mixed tyres","diameter":"18","front":"18x8.0, 225/45 R18","rear":"18x8.5, 255/40 R18","tireCode":"ZPT"},
+{"code":"2PF","style":"403M","description":"19' M light alloy wheels Star-spoke style 403 M with mixed tyres","diameter":"19","front":"19x8.0, 225/40 R19","rear":"19x8.5, 255/35 R19","tireCode":"ZPT"},
+{"code":"2PP","style":"400","description":"18' M light alloy wheels Star-spoke style 400 M","diameter":"18","front":"18x8.0, 225/45 R18","rear":"18x8.0, 225/45 R18","tireCode":"ZAS"}
+]

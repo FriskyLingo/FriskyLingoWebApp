@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>BMW Search</title>
+
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/css_VerticalNavBar.css" rel="stylesheet" />
+    <link href="css/animate.min.css" rel="stylesheet" />
+    <link href="Content/magnific-popup.css" rel="stylesheet" />
+    <link href="css/css_MagnificPopup.css" rel="stylesheet" />
+    <link href="css/remodal.css" rel="stylesheet" />
+    <link href="css/remodal-default-theme.css" rel="stylesheet"/>
+    <link href="Content/css/select2.min.css" rel="stylesheet"/>
+    <link href="Content/select2-bootstrap.css" rel="stylesheet" />
+
+    <script src="Scripts/jquery-3.1.0.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+
+    <script src="Scripts/handlebars.min.js"></script>
+    <script src="Scripts/sugar.min.js"></script>
+    <script src="Scripts/moment.min.js"></script>
+    <script src="js/jquery.storageapi.min.js"></script>
+    <script src="Scripts/jquery.magnific-popup.min.js"></script>
+    <script src="js/remodal.min.js"></script>
+    <script src="Scripts/select2.min.js"></script>
+
+    <script id="row-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <tr data-vin="{{VIN}}">
+            <td class="inventory-year">
+                {{Year}}
+            </td>
+            <td class="inventory-model">
+                {{Model}}
+            </td>
+            <td class="inventory-price">
+                {{InternetPrice}}
+            </td>
+            <td class="inventory-mileage">
+                {{Mileage}}
+            </td>
+            <td class="inventory-body-style">
+                {{BodyStyle}}
+            </td>
+            <td class="inventory-exterior">
+                {{ExteriorColorDescription}}
+            </td>
+            <td class="inventory-interior">
+                {{InteriorColorDescription}}
+            </td>
+            <td class="inventory-distance">
+                {{Distance}}
+            </td>
+            <td class="inventory-type">
+                {{Type}}
+            </td>
+            <td class="inventory-model-description">
+                {{ModelDescription}}
+            </td>
+            <td class="inventory-vin-link">
+                <a href="http://cpo.bmwusa.com/vehicle-search?vin={{VIN}}">Click</a>
+            </td>
+            <td class="inventory-hide">
+                <p data-placement="top" data-toggle="tooltip" title="Hide">
+                    <button class="btn btn-danger btn-xs" data-title="Hide" data-vin"{{VIN}}"><span class="glyphicon glyphicon-trash"></span></button>
+                </p>
+            </td>
+        </tr>
+        {{/each}}
+    </script>
+
+    <script src="js/js_BmwSearch.js"></script>
+</head>
+<body>
+
+<div class="container remodal-bg">
+    <div class="row">
+        <div class="col-md-2">
+            <label>
+                Year
+            </label>
+            <select class="select2-me form-control" multiple="multiple">
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label>
+                Model
+            </label>
+            <select class="select2-me form-control" multiple="multiple">
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label>
+                Exterior
+            </label>
+            <select class="select2-me form-control" multiple="multiple">
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label>
+                Interior
+            </label>
+            <select class="select2-me form-control" multiple="multiple">
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="panel panel-primary filterable">
+            <div class="panel-heading">
+                <h3 class="panel-title">Search Results - <strong><span class="spn-total"></span></strong>
+                </h3>
+                <div class="pull-right" style="padding-left: 5px;">
+                    <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                </div>
+            </div>
+            <table class="table search-results">
+                <thead>
+                <tr class="filters">
+                    <th>
+                        <input type="text" class="form-control" placeholder="Year" disabled>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control" placeholder="Model" disabled>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control" placeholder="Price" disabled>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control" placeholder="Mileage" disabled>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control" placeholder="Body Style" disabled>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control" placeholder="Exterior" disabled>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control" placeholder="Interior" disabled>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control" placeholder="Distance" disabled>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control" placeholder="Type" disabled>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control" placeholder="Description" disabled>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control" placeholder="Link" disabled>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control" placeholder="Hide" disabled>
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="tbody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="divLoginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div id="div-login-msg">
+                        <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                        <span id="text-login-msg">Please sign in to make changes</span>
+                    </div>
+                    <br />
+                    <form>
+                        <div class="form-group">
+                            <label class="sr-only" for="userId">Username</label>
+                            <input type="text" class="form-control" id="userId" placeholder="User ID">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="password">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Password">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnCancel" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button id="btnLogin" type="button" class="btn btn-primary">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MediaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Media.dbo.PlaylistMusic' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PlaylistMusic">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="title" />
+            <PropertyRef Name="artist" />
+            <PropertyRef Name="album" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="artist" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="album" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="albumArtist" Type="varchar" MaxLength="1000" />
+          <Property Name="year" Type="int" />
+          <Property Name="genre" Type="varchar" MaxLength="1000" />
+          <Property Name="duration" Type="varchar" MaxLength="5" />
+          <Property Name="fileName" Type="varchar(max)" />
+          <Property Name="lastUpdate" Type="smalldatetime" />
+          <Property Name="updator" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <Function Name="sec_Select_PlaylistMusic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="MediaModelStoreContainer">
+          <EntitySet Name="PlaylistMusic" EntityType="Self.PlaylistMusic" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PlaylistMusic].[id] AS [id], 
+    [PlaylistMusic].[title] AS [title], 
+    [PlaylistMusic].[artist] AS [artist], 
+    [PlaylistMusic].[album] AS [album], 
+    [PlaylistMusic].[albumArtist] AS [albumArtist], 
+    [PlaylistMusic].[year] AS [year], 
+    [PlaylistMusic].[genre] AS [genre], 
+    [PlaylistMusic].[duration] AS [duration], 
+    [PlaylistMusic].[fileName] AS [fileName], 
+    [PlaylistMusic].[lastUpdate] AS [lastUpdate], 
+    [PlaylistMusic].[updator] AS [updator]
+    FROM [dbo].[PlaylistMusic] AS [PlaylistMusic]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MediaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="PlaylistMusic">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="title" />
+            <PropertyRef Name="artist" />
+            <PropertyRef Name="album" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="artist" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="album" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="albumArtist" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="year" Type="Int32" />
+          <Property Name="genre" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="duration" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="fileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
+          <Property Name="updator" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="MediaContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PlaylistMusics" EntityType="Self.PlaylistMusic" />
+          <FunctionImport Name="sec_Select_PlaylistMusic" ReturnType="Collection(MediaModel.sec_Select_PlaylistMusic_Result)" />
+        </EntityContainer>
+        <ComplexType Name="sec_Select_PlaylistMusic_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="title" Nullable="false" MaxLength="1000" />
+          <Property Type="String" Name="artist" Nullable="false" MaxLength="1000" />
+          <Property Type="String" Name="album" Nullable="false" MaxLength="1000" />
+          <Property Type="String" Name="albumArtist" Nullable="true" MaxLength="1000" />
+          <Property Type="Int32" Name="year" Nullable="true" />
+          <Property Type="String" Name="genre" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="duration" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="fileName" Nullable="true" />
+          <Property Type="DateTime" Name="lastUpdate" Nullable="true" Precision="16" />
+          <Property Type="String" Name="updator" Nullable="true" MaxLength="200" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MediaModelStoreContainer" CdmEntityContainer="MediaContext">
+          <EntitySetMapping Name="PlaylistMusics">
+            <EntityTypeMapping TypeName="MediaModel.PlaylistMusic">
+              <MappingFragment StoreEntitySet="PlaylistMusic">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="artist" ColumnName="artist" />
+                <ScalarProperty Name="album" ColumnName="album" />
+                <ScalarProperty Name="albumArtist" ColumnName="albumArtist" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="genre" ColumnName="genre" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+                <ScalarProperty Name="fileName" ColumnName="fileName" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+                <ScalarProperty Name="updator" ColumnName="updator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sec_Select_PlaylistMusic" FunctionName="MediaModel.Store.sec_Select_PlaylistMusic">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MediaModel.sec_Select_PlaylistMusic_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="artist" ColumnName="artist" />
+                <ScalarProperty Name="album" ColumnName="album" />
+                <ScalarProperty Name="albumArtist" ColumnName="albumArtist" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="genre" ColumnName="genre" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+                <ScalarProperty Name="fileName" ColumnName="fileName" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+                <ScalarProperty Name="updator" ColumnName="updator" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
