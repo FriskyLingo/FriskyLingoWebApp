@@ -1,7 +1,7 @@
 /// <reference path="../Scripts/jquery-2.1.4.intellisense.js" />
 /// <reference path="isMobile.min.js" />
 
-var lfmApiRootUrl = 'http://ws.audioscrobbler.com/2.0/?';
+var lfmApiRootUrl = 'https://ws.audioscrobbler.com/2.0/?';
 var userName = 'FriskyLingo';
 var apiKey = 'fc649436b9874100c0615546e3fba578';
 var lfmApiUserInfoUrl = '&user=' + userName + '&api_key=' + apiKey + '&format=json';
@@ -90,7 +90,7 @@ var updateNowPlaying = {
                     howLongAgo = howLongAgo.replace('s', '');
                 }
 
-                $('.scrobbles-subtext-track').html('<a href="http://www.last.fm/user/FriskyLingo/tracks?view=compact&page=1" class="inherit">' + howLongAgo + '</a>');
+                $('.scrobbles-subtext-track').html('<a href="https://www.last.fm/user/FriskyLingo/tracks?view=compact&page=1" class="inherit">' + howLongAgo + '</a>');
             }
 
 
@@ -337,7 +337,7 @@ function setTrackInfo(artist, track) {
                 if (data.track.userplaycount) {
                     var playCount = data.track.userplaycount;
                     $('.scrobbles-subtext-track').html('');
-                    $('.scrobbles-subtext-track').html('<a href="http://www.last.fm/user/FriskyLingo/library/music/' + artist + '/_/' + track + '" class="inherit">Track plays: <b>' + playCount + '</b></a>');
+                    $('.scrobbles-subtext-track').html('<a href="https://www.last.fm/user/FriskyLingo/library/music/' + artist + '/_/' + track + '" class="inherit">Track plays: <b>' + playCount + '</b></a>');
                 }
             } else {
                 amplify.store('trackInfo', '');
@@ -361,7 +361,7 @@ function setArtistInfo(artist) {
                 if (data.artist.stats.userplaycount) {
                     var playCount = data.artist.stats.userplaycount;
                     $('.scrobbles-subtext-artist').html('');
-                    $('.scrobbles-subtext-artist').html('<a href="http://www.last.fm/user/FriskyLingo/library/music/' + artist + '?sortBy=plays&sortOrder=desc" class="inherit">Artist plays: <b>' + playCount + '</b></a>');
+                    $('.scrobbles-subtext-artist').html('<a href="https://www.last.fm/user/FriskyLingo/library/music/' + artist + '?sortBy=plays&sortOrder=desc" class="inherit">Artist plays: <b>' + playCount + '</b></a>');
                 }
             } else {
                 amplify.store('artistInfo', '');
@@ -385,7 +385,7 @@ function setAlbumInfo(artist, album) {
                 if (data.album.userplaycount) {
                     var playCount = data.album.userplaycount;
                     $('.scrobbles-subtext-album').html('');
-                    $('.scrobbles-subtext-album').html('<a href="http://www.last.fm/user/FriskyLingo/library/music/' + artist + '/' + album + '?sortBy=plays&sortOrder=desc" class="inherit">Album plays: <b>' + playCount + '</b></a>');
+                    $('.scrobbles-subtext-album').html('<a href="https://www.last.fm/user/FriskyLingo/library/music/' + artist + '/' + album + '?sortBy=plays&sortOrder=desc" class="inherit">Album plays: <b>' + playCount + '</b></a>');
                 }
             } else {
                 amplify.store('albumInfo', '');
